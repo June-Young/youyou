@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      min-height: 100%;
+      background: red
+    }
+
+    * html #container {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    #container #top {
+      height: 3.8%;
+      width: 100%;
+      position: absolute;
+      background-color: #fee050;
+    }
+
+    #container #header {
+      height: 9.1%;
+      width: 100%;
+      background-color: #1a395f;
+      position: absolute;
+      top: 3.8%;
+    }
+
+    #container #header #weather-status-img {
+      width: 10.3%;
+      height: 62.1%;
+      position: absolute;
+      top: 19%;
+      left: 4.4%
+    }
+
+    #container #header #weather-status-celsius {
+      width: 19.2%;
+      height: 43.1%;
+      position: absolute;
+      top: 25.9%;
+      left: 17.5%;
+      font-family: Futura;
+      font-weight: 500;
+
+      font-size: 200%;
+
+      color: #ffffff;
+      display: table;
+
+    }
+
+    #container #header .weather-status-chance-text {
+      width: 23.1%;
+      height: 17.2%;
+      position: absolute;
+      top: 19%;
+      left: 38.6%;
+      font-family: Futura;
+      font-size: 70%;
+      font-weight: 500;
+      color: #ffffff;
+      display: table;
+    }
+
+    #container #header .weather-status-chance-percent {
+      width: 19.2%;
+      height: 43.1%;
+      position: absolute;
+      top: 27.6%;
+      left: 40.6%;
+      font-family: Futura;
+      font-size: 200%;
+      font-weight: 500;
+      color: #ffffff;
+      display: table;
+    }
+
+    p {
+      display: table-cell;
+      vertical-align: middle;
+      width: 100%;
+      height:100%;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      height: 100%
+    }
+
+    #container #content1 {
+      height: 39.1%;
+      width: 100%;
+      background: skyblue;
+      position: absolute;
+      top: 12.1%
+    }
+
+    #container #content2 {
+      height: 39.1%;
+      width: 100%;
+      background: gray;
+      position: absolute;
+      top: 51.5%
+    }
+
+    #container #footer {
+      height: 9.1%;
+      width: 100%;
+      background-color: #ffffff;
+      position: absolute;
+      top: 90.9%
+    }
+
+    .float {
+      float: left
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="top">
+    맨위
+  </div>
+  <div id="header">
+    <div class="float" id="weather-status-img">
+      <img src="img/sunny.svg">
+    </div>
+    <div id="weather-status-celsius" class="float" style="display: table">
+      <p>
+        23도
+      </p>
+    </div>
+    <div class="float weather-status-chance-text">
+      <p>
+        CHANCE OF RAIN
+      </p>
+    </div>
+    <div class="float weather-status-chance-percent">
+      <p>
+        10%
+      </p>
+    </div>
+  </div>
+
+  <div id="content1">
+    서울
+  </div>
+  <div id="content2">
+    제주
+  </div>
+  <div id="footer">
+    메뉴
+  </div>
+</div>
+</body>
+</html>

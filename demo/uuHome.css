@@ -1,0 +1,15 @@
+.TEXT {
+  width: 82px;
+  height: 37.5px;
+  font-family: NotoSansCJKkr;
+  font-size: 25.5px;
+  letter-spacing: 5.6px;
+  text-align: left;
+  color: #050a10;
+}
+
+.layer {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
