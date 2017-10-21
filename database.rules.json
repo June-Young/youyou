@@ -19,6 +19,18 @@
 			},
 			"messages": {
 				".read": true
+			},
+			"roomList":{
+				"$uid":{
+					".read":"auth.uid === $uid",
+					".indexOn": ".value" 
+				},
+				".write":true
+			},
+			"uncheked":{
+				".read":true,
+				".write":true
 			}
 	}
 }
+

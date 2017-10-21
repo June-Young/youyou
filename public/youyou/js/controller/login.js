@@ -1,6 +1,6 @@
 'use strict';
-var app = angular.module('MobileAngularUiExamples')
-app.controller('login', function ($scope) {
+// var app = angular.module('MobileAngularUiExamples');
+angular.module('MobileAngularUiExamples').controller('login', function ($scope, $location) {
   $scope.signInGoogle = function ($location) {
     console.log('signin google');
 
@@ -14,7 +14,6 @@ app.controller('login', function ($scope) {
   };
   $scope.signInFacebook = function ($location) {
     console.log('signin facebook');
-
     var facebook = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(facebook).then(function () {
       console.log('login : ' + firebase.auth().currentUser);
@@ -24,6 +23,6 @@ app.controller('login', function ($scope) {
   };
 });
 
-app.controller('nickname', function ($scope, $location) {
+angular.module('MobileAngularUiExamples').controller('nickname', function ($scope, $location) {
 });
 
