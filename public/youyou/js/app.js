@@ -18,7 +18,7 @@ var app = angular.module('MobileAngularUiExamples', [
   'mobile-angular-ui.gestures'
 ]);
 
-app.run(function($transform) {
+app.run(function ($transform) {
   window.$transform = $transform;
 });
 
@@ -27,8 +27,12 @@ app.run(function($transform) {
 // feature (i.e. close sidebar on backbutton) you should setup 'reloadOnSearch: false'
 // in order to avoid unwanted routing.
 //
-app.config(function($routeProvider) {
-  $routeProvider.when('/home_weather', {templateUrl: '/youyou/pages/home_weather.html', reloadOnSearch: false});
+app.config(function ($routeProvider) {
+  $routeProvider.when('/home_weather', {
+    templateUrl: '/youyou/pages/home_weather.html',
+    controller: 'WeatherController',
+    reloadOnSearch: false
+  });
   $routeProvider.when('/', {templateUrl: '/youyou/home.html', reloadOnSearch: false, controller: 'MainController'});
   $routeProvider.when('/login', {templateUrl: '/youyou/pages/login.html', controller: 'login', reloadOnSearch: false});
 });
