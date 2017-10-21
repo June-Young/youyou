@@ -1,0 +1,49 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    min-height: 100%;
+    background-color:  #78aef9;
+}
+
+* html #container {
+    height: 100%;
+    width: 100%;
+    background-color:  #78aef9;
+}
+
+.rectangle {
+    width: 72.8%;
+    height: 8.8%;
+    border-radius: 80px;
+    box-shadow: 0 15px 25px 0 rgba(15, 7, 45, 0.1);
+}
+.rectangle-font-size{
+    font-size:350%
+}
+
+.table {
+    display: table;
+}
+.float {
+    float: left
+}
+
+
+
+p {
+
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+img {
+    width: 100%;
+    height: 100%
+}

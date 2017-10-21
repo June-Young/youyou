@@ -1,4 +1,5 @@
-/* eslint no-alert: 0 */
+/*
+/!* eslint no-alert: 0 *!/
 
 'use strict';
 
@@ -352,3 +353,4 @@ app.controller('MainController', function($rootScope, $scope) {
     }
   };
 });
+*/
