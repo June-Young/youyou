@@ -23,7 +23,7 @@ html, body {
     box-shadow: 0 15px 25px 0 rgba(15, 7, 45, 0.1);
 }
 .rectangle-font-size{
-    font-size:350%
+    font-size:150%
 }
 
 .table {
@@ -32,7 +32,6 @@ html, body {
 .float {
     float: left
 }
-
 
 
 p {

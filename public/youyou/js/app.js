@@ -10,6 +10,7 @@ var app = angular.module('MobileAngularUiExamples', [
   'ngRoute',
   'mobile-angular-ui',
 
+
   // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'.
   // This is intended to provide a flexible, integrated and and
   // easy to use alternative to other 3rd party libs like hammer.js, with the
@@ -31,4 +32,6 @@ app.config(function($routeProvider) {
   $routeProvider.when('/home_weather', {templateUrl: '/youyou/pages/home_weather.html', reloadOnSearch: false});
   $routeProvider.when('/', {templateUrl: '/youyou/home.html', reloadOnSearch: false, controller: 'MainController'});
   $routeProvider.when('/login', {templateUrl: '/youyou/pages/login.html', controller: 'login', reloadOnSearch: false});
+  $routeProvider.when('/nickname', {templateUrl: '/youyou/pages/nickname.html', controller: 'nickname', reloadOnSearch: false});
+  $routeProvider.when('/chattinglist', {templateUrl: '/youyou/pages/chattinglist.html', controller: 'chattinglist', reloadOnSearch: false});
 });

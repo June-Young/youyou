@@ -2,12 +2,6 @@
 
 'use strict';
 
-//
-// Here is how to define your module
-// has dependent on mobile-angular-ui
-//
-// var app = angular.module('MobileAngularUiExamples');
-
 angular.module('MobileAngularUiExamples').controller('MainController', function($rootScope, $scope) {
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);

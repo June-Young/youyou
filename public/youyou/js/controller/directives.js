@@ -1,5 +1,4 @@
 'use strict';
-
 var app = angular.module('MobileAngularUiExamples');
 
 app.directive('toucharea', ['$touch', function($touch) {
