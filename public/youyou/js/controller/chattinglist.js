@@ -10,8 +10,7 @@ app.factory('sharedService', function () {
 
 app.controller('chattinglist', function ($scope, $compile, $location, sharedService) {
   $scope.clickRoom = function (event) {
-
-    sharedService.roomName = 'Bvy7KY37gMUXy7CtYddyAIMMtnE2-!-BFC7d31ReVbK22hwBUTuJum5AkE2';
+    sharedService.roomName = event;
     $location.path("chattingroom");
   };
 
@@ -59,9 +58,8 @@ app.controller('chattinglist', function ($scope, $compile, $location, sharedServ
       console.log(container);
       container.innerHTML = templete;
       div = container.firstChild;
-      console.log("div" + div);
       div.setAttribute('id', roomName);
-
+      div.setAttribute('data-ng-click', 'clickRoom("'+roomName+'")');
       $compile(div)($scope);
       messageList.appendChild(div);
     }
