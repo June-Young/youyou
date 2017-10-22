@@ -3,15 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #container #header {
+      width: 100%;
+      height: 8.6%;
+
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 3.8%
+    }
+
+    #container #messages {
+      width: 100%;
+      height: 71.4%;
+      position: absolute;
+      top: 12.4%;
+      overflow: scroll;
+    }
+
+    #container #sender {
+      width: 100%;
+      height: 16.2%;
+      position: absolute;
+      top: 83.8%;
+    }
+
+    .nickname {
+      width: 34.2%;
+      height: 38.2%;
+      color: #000000;
+      font-size: 100%;
+      font-weight: bold;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      position: absolute;
+      top: 30.9%;
+      left: 33.1%;
+    }
+
+    .combined-shape {
+      width: 6.1%;
+      height: 41.8%;
+      font-weight: bold;
+      border-radius: 1.5px;
+      color: #1a395f;
+      font-size: 100%;
+      position: absolute;
+      top: 29.1%;
+      left: 4.1%;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 12.4%;
+    }
+
+    .hr-bottom {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+    }
+
+    #sender .edit {
+      width: 100%;
+      color: #b5b5b5;
+      border: none;
+    }
+
+    .imgs {
+      position: absolute;
+      left: 4.2%;
+      top: 60%;
+    }
+
+    .input-div {
+      width: 90%;
+      position: absolute;
+      left: 4.2%;
+      top: 15%;
+    }
+
+    .senderButton {
+      font-family: Futura;
+      font-size: 100%;
+      font-weight: 500;
+      text-align: left;
+      color: #000000;
+      position: absolute;
+      left: 82.8%;
+      top: 60%;
+    }
+
+    .target-profile {
+      width: 50px;
+      height: 50px;
+      box-shadow: 0 10px 20px 0 rgba(15, 7, 45, 0.1);
+      border-radius: 100%;
+      margin-left: 20px;
+    }
+
+    .target-message {
+      margin-left: 20px;
+    }
+
+    .my-message {
+      margin-right: 20px;
+      float: right;
+    }
+  </style>
 </head>
 <body>
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header" class="table">
+    <div class="nickname">
+      {{nickname}}
+    </div>
 
+    <div class="combined-shape">
+      <
+    </div>
+  </div>
+  <div class="hr-top"></div>
+  <div id="messages">
 
-<div>
-  <input ng-model="input" type="text" id="message">
-  <label for="message">Message...</label>
+    <div ng-repeat="record in records" style="width:100%;height:70px;margin-top:10px">
+      <div id="message">
+
+        <div ng-switch="record.ownership">
+          <div ng-switch-when="true">
+            <div class="my-message">{{record.text}}</div>
+          </div>
+          <div ng-switch-default>
+            <img src="{{record.photourl}}" class="float target-profile">
+            <div class="float target-message">{{record.text}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div id="sender">
+    <div class="hr-bottom"></div>
+    <div class="input-div">
+      <input type="text" ng-keydown="$event.keyCode === 13 && sendMessage()" ng-model="input" required="string"
+             placeholder="typing,,," class="edit">
+    </div>
+    <div>
+      <div class="float imgs">
+        <div class="float">
+          <img src="/youyou/img/camera.svg">
+        </div>
+        <div class="float" style="margin-left:5.5px">
+          <img src="/youyou/img/album.svg">
+        </div>
+      </div>
+      <div class="float">
+        <button ng-click="sendMessage()" class="senderButton">Send</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div ng-click="sendMessage()">클릭해보셈.</div>
-
 </body>
 </html>

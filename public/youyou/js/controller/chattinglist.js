@@ -1,16 +1,10 @@
 var app = angular.module('MobileAngularUiExamples');
 
 
-app.factory('sharedService', function () {
-  var shared = {};
-  shared.roomName = '';
 
-  return shared;
-});
-
-app.controller('chattinglist', function ($scope, $compile, $location, sharedService) {
+app.controller('chattinglist', function ($scope, $compile, $location) {
   $scope.clickRoom = function (event) {
-    sharedService.roomName = event;
+    sessionStorage.setItem("roomName",event);
     $location.path("chattingroom");
   };
 
@@ -41,6 +35,7 @@ app.controller('chattinglist', function ($scope, $compile, $location, sharedServ
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       // $scope.$apply(function () {
+      sessionStorage.setItem("displayname",user.displayName);
       getRoomInfo(user.uid);
     }
     // } else {
@@ -116,8 +111,6 @@ app.controller('chattinglist', function ($scope, $compile, $location, sharedServ
               firebase.database().ref('users/' + target).once('value').then(function (userDetailSnapshot) {
                 detail = userDetailSnapshot.val();
                 if (detail) {
-                  console.log("디스플레이" + detail.displayName);
-
                   nickname.innerHTML = detail.displayName;
                   console.log(detail.photoURL);
                   photoUrl.src = detail.photoURL;
