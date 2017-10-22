@@ -1,36 +1,55 @@
 var app = angular.module('MobileAngularUiExamples');
-app.controller('chattinglist', function ($scope) {
 
-  var templete = '<div>' +
-    '<div class="nickname"></div>' +
-    '<div class="photoUrl"></div>' +
-    '<div class="lastMessage"></div>' +
-    '<div class="lastModified"></div>' +
-    '<div class="uncheked"></div>' +
-    '</div>';
 
-  var aa =
-    '<li>' +
-    '    <div class="roomlist-container" style="background-color: #ffffff;width: 91.7%;height: 20%;border-radius: 80px;box-shadow: 0 15px 25px 0 rgba(15, 7, 45, 0.1);position: static;">' +
-    '      <div class="photoUrl" style="position: relative;float:left; width:19.1%; height:64.3% ; top:20.4%;left:2.1%"></div>' +
-    '      <div class="nickname" style="float:left;font-family: ProximaNovaSoft;font-size: 200%;font-weight: bold;text-align: left;color: #000000;width:30.8%;height:16.3%;position: relative; top:20.4%;left:7%">ggaburio</div>' +
-    '      <div class="lastModified" style="float:left;font-family: Futura;color: #1a395f;opacity: 0.5;font-size: 200%;font-weight: bold;text-align: left;color: #000000;width:20.8%;height:16.3%;position: relative; top:20.4%;left:25%">2017-10-26</div>' +
-    '      <div class="lastMessage" style="font-size:120%;opacity: 0.5;float:left;width:40%;height:27.6%;position:relative;top:46.9%;left:7%">Message</div>' +
-    '      <div class="uncheked" style="width:7%;height:22%;float:left;position:relative;top:41.8%;left:25.9%;background-color:#ff7171;  border-radius: 100%;display:table"><p style="display: table-cell;vertical-align: middle;text-align: center;color:#ffffff">1</p></div>' +
-    '    </div>' +
-    '</li>';
+app.factory('sharedService', function () {
+  var shared = {};
+  shared.roomName = '';
+
+  return shared;
+});
+
+app.controller('chattinglist', function ($scope, $compile, $location, sharedService) {
+  $scope.clickRoom = function (event) {
+
+    sharedService.roomName = 'Bvy7KY37gMUXy7CtYddyAIMMtnE2-!-BFC7d31ReVbK22hwBUTuJum5AkE2';
+    $location.path("chattingroom");
+  };
+
+  var templete =
+    '<div data-ng-click="clickRoom(ddddddkdkdkdk)"> ' +
+    '    <div class="roomlist-container"> ' +
+    '      <div> ' +
+    '        <div class="imgSection"> ' +
+    '          <div class="photoUrl"><img class="imgUrl" src=\'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg\'></div> ' +
+    '        </div> ' +
+    '        <div class="otherSection"> ' +
+    '          <div class="name-modified"> ' +
+    '            <div class="nickname">nickname</div> ' +
+    '            <div class="lastModified">lastModified</div> ' +
+    '          </div> ' +
+    '          <div class="message-uncheked"> ' +
+    '            <div class="lastMessage">lastMessage</div> ' +
+    '            <div class="uncheked"><p class="uncheked-val">1</p></div> ' +
+    '          </div> ' +
+    '        </div> ' +
+    '      </div> ' +
+    '    </div> ' +
+    '  </div>';
+
+
   var messageList = document.getElementById('rooms');
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      $scope.$apply(function () {
-        getRoomInfo(user.uid);
-      });
-    } else {
-      console.log('NONE');
-      // No user is signed in.
+      // $scope.$apply(function () {
+      getRoomInfo(user.uid);
     }
+    // } else {
+    //   console.log('NONE');
+    //   No user is signed in.
+    // }
   });
+
 
   let dynamicView = function (roomName) {
     var div = document.getElementById(roomName);
@@ -38,26 +57,28 @@ app.controller('chattinglist', function ($scope) {
     if (!div) {
       var container = document.createElement('div');
       console.log(container);
-      container.innerHTML = aa;
+      container.innerHTML = templete;
       div = container.firstChild;
       console.log("div" + div);
       div.setAttribute('id', roomName);
-      console.log(div);
+
+      $compile(div)($scope);
       messageList.appendChild(div);
     }
     return div;
   };
 
   let getRoomInfo = function (uid) {
-
-
     // 방 정보 가져오기 시작
     var roomListRef = firebase.database().ref('roomList/' + uid);
 
     // Make sure we remove all previous listeners.
     roomListRef.off();
 
+
     setRoom = function (roomlist) {
+
+
       // 접속한 유저가 가지고 있는 방 리스트를 불러옴
       var roomName = roomlist.key;
       var modifiedTime = roomlist.val();
@@ -67,6 +88,7 @@ app.controller('chattinglist', function ($scope) {
       firebase.database().ref('rooms/' + roomName).once('value').then(function (roomSnapshot) {
         // 방 정보를 가져온다.
         if (roomSnapshot.val()) {
+
           var res = roomName.split("-!-");
           if (res.length === 2) {
             var my;
@@ -83,11 +105,12 @@ app.controller('chattinglist', function ($scope) {
 
               var rv = roomSnapshot.val();
               var div = dynamicView(roomName);
+              console.log(div);
               var nickname = div.querySelector('.nickname');
-              var photoUrl = div.querySelector('.photoUrl');
+              var photoUrl = div.querySelector('.imgUrl');
               var lastMessage = div.querySelector('.lastMessage');
               var lastModified = div.querySelector('.lastModified');
-              var uncheked = div.querySelector('.uncheked');
+              var uncheked = div.querySelector('.uncheked-val');
 
               lastMessage.innerHTML = rv.lastMessage;
               lastModified.innerHTML = modifiedTime;
@@ -99,10 +122,10 @@ app.controller('chattinglist', function ($scope) {
 
                   nickname.innerHTML = detail.displayName;
                   console.log(detail.photoURL);
-                  photoUrl.style.backgroundImage = 'url(' + detail.photoURL + ')';
+                  photoUrl.src = detail.photoURL;
                 } else {
                   nickname.innerHTML = '알수없음';
-                  photoUrl.style.backgroundImage = 'url("https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg")';
+                  photoUrl.src = '"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"';
                 }
               });
 

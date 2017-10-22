@@ -38,4 +38,5 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/login', {templateUrl: '/youyou/pages/login.html', controller: 'login', reloadOnSearch: false});
   $routeProvider.when('/nickname', {templateUrl: '/youyou/pages/nickname.html', controller: 'nickname', reloadOnSearch: false});
   $routeProvider.when('/chattinglist', {templateUrl: '/youyou/pages/chatting-list.html', controller: 'chattinglist', reloadOnSearch: false});
+  $routeProvider.when('/chattingroom', {templateUrl: '/youyou/pages/chatting-room.html', controller: 'chattingroom', reloadOnSearch: false});
 });
