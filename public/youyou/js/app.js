@@ -41,4 +41,7 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/chattingroom', {templateUrl: '/youyou/pages/chatting-room.html', controller: 'chattingroom', reloadOnSearch: false});
   $routeProvider.when('/skMap', {templateUrl: '/youyou/pages/skMap.html', controller: 'SkMapController', reloadOnSearch: false});
   $routeProvider.when('/home_weather', {templateUrl: '/youyou/pages/home_weather.html', controller: 'WeatherController', reloadOnSearch: false});
+  $routeProvider.when('/language', {templateUrl: '/youyou/pages/language.html', controller: 'LanguageController', reloadOnSearch: false});
+  $routeProvider.when('/welcome', {templateUrl: '/youyou/pages/welcome.html', controller: 'WelcomeController', reloadOnSearch: false});
+  $routeProvider.when('/country', {templateUrl: '/youyou/pages/country.html', controller: 'CountryController', reloadOnSearch: false});
 });

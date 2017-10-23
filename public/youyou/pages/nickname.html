@@ -1,80 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>youyou</title>
-    <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
-    <style>
+  <meta charset="UTF-8">
+  <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
 
 
-        #container .nickname-text {
-            width: 48.1%;
-            height: 6.7%;
-            font-family: ProximaNovaSoft;
+    #container .nickname-text {
+      width: 48.1%;
+      height: 6.7%;
+      font-family: ProximaNovaSoft;
 
-            position: absolute;
-            top: 12.8%;
-            left: 26.1%;
+      position: absolute;
+      top: 12.8%;
+      left: 26.1%;
 
-            font-size: 200%;
-            font-weight: bold;
-            color: #ffffff;
-        }
-/*
-        #container .nickname-edit-box {
-            width: 72.8%;
-            height: 8.8%;
-            border-radius: 66px;
-            background-color: #ffffff;
-            box-shadow: 0 1px 2px 0 rgba(45, 45, 7, 0.1);
+      font-size: 200%;
+      font-weight: bold;
+      color: #ffffff;
+    }
 
-            position: absolute;
-            top: 32.6%;
-            left: 13.6%;
-        }*/
+    /*
+            #container .nickname-edit-box {
+                width: 72.8%;
+                height: 8.8%;
+                border-radius: 66px;
+                background-color: #ffffff;
+                box-shadow: 0 1px 2px 0 rgba(45, 45, 7, 0.1);
 
-        #container .nickname-edit-shadow {
-            width: 75%;
-            height: 10%;
-            position: absolute;
-            top: 32.3%;
-            left: 12.5%;
+                position: absolute;
+                top: 32.6%;
+                left: 13.6%;
+            }*/
 
-        }
-
-
-        #container .nickname-submit-button {
-
-            position: absolute;
-            top: 85.8%;
-            left: 13.6%
-        }
-
-        #container .nickname-edit-shadow p {
-            font-family: AppleSDGothicNeo;
-            font-weight: 500;
-            color: #1a395f;
-        }
-        #container .nickname-submit-button p {
-            font-family: ProximaNovaSoft;
-            font-weight: 500;
-            color: #1a395f;
-        }
+    #container .nickname-edit-shadow {
+      width: 75%;
+      height: 10%;
+      position: absolute;
+      top: 32.3%;
+      left: 12.5%;
 
 
-        .nickname-button{
-            opacity: 0.5;
-            background-color: #ffffff;
-        }
+    }
 
-    </style>
+    #container .nickname-submit-button {
+
+      border:none;
+      position: absolute;
+      top: 85.8%;
+      left: 13.6%;
+      background-color:#ffffff;
+      opacity: 0.5;
+    }
+
+    #container .nickname-edit-shadow p {
+      font-family: AppleSDGothicNeo;
+      font-weight: 500;
+      color: #1a395f;
+    }
+
+    #container .nickname-submit-button p {
+      font-family: ProximaNovaSoft;
+      font-weight: 500;
+      color: #1a395f;
+    }
+
+    .nickname-bottom-line {
+      width: 61.7%;
+      height: 3px;
+      border-radius: 0.8px;
+      background-color: #ffffff;
+      opacity: 0.5;
+      position: absolute;
+      top: 40%;
+      left: 19.2%;
+    }
+
+    .editbox {
+      width: 100%;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      color: #ffffff;
+      border: none;
+      background-color: #78aef9;
+      opacity: 0.5;
+      font-size: 120%;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+    }
+
+    ::-webkit-input-placeholder { /* Chrome */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    :-moz-placeholder { /* Firefox 4 - 18 */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 <body>
-<div id="container">
-    <div class="nickname-text table"><p>Nickname</p></div>
-    <div class="nickname-edit-shadow rectangle nickname-button rectangle-font-size table"><p>Enter your nickname</p></div>
 
-    <div class="nickname-submit-button rectangle nickname-button rectangle-font-size table"><p>OK</p></div>
+<div id="container">
+
+  <form name="myForm" ng-click="focus={opacity:1}">
+    <div class="nickname-text table"><p>Nickname</p></div>
+    <div id="insert-form" ng-model="contain" >
+      <div class="nickname-edit-shadow nickname-button table">
+        <input type="text" ng-model="edit" class="editbox" placeholder="Enter your nickname" ng-style="focus" watcher
+               required>
+      </div>
+      <div ng-model="bottomline" class="nickname-bottom-line" ng-style="focus">
+      </div>
+    </div>
+    <div>
+      <input ng-model="submitBtn" id="smbtn" type="submit"
+             class="nickname-submit-button rectangle rectangle-font-size table" ng-click="clickSubmit()" value="OK">
+    </div>
+  </form>
 </div>
 
 </body>

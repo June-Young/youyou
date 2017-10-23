@@ -1,27 +1,26 @@
 var app = angular.module('MobileAngularUiExamples');
 
 
-
 app.controller('chattinglist', function ($scope, $compile, $location) {
   $scope.clickRoom = function (event) {
-    sessionStorage.setItem("roomName",event);
+    sessionStorage.setItem("roomName", event);
     $location.path("chattingroom");
   };
 
   var templete =
     '<div> ' +
-    '    <div class="roomlist-container"> ' +
+    '    <div class="roomlist-container" ng-style="backStyle"> ' +
     '      <div> ' +
     '        <div class="imgSection"> ' +
     '          <div class="photoUrl"><img class="imgUrl" src=\'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg\'></div> ' +
     '        </div> ' +
     '        <div class="otherSection"> ' +
     '          <div class="name-modified"> ' +
-    '            <div class="nickname">nickname</div> ' +
-    '            <div class="lastModified">lastModified</div> ' +
+    '            <div class="nickname" ng-style="fontStyle">nickname</div> ' +
+    '            <div class="lastModified" ng-style="fontStyle">lastModified</div> ' +
     '          </div> ' +
     '          <div class="message-uncheked"> ' +
-    '            <div class="lastMessage">lastMessage</div> ' +
+    '            <div class="lastMessage" ng-style="fontStyle">lastMessage</div> ' +
     '            <div class="uncheked"><p class="uncheked-val">1</p></div> ' +
     '          </div> ' +
     '        </div> ' +
@@ -34,14 +33,9 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      // $scope.$apply(function () {
-      sessionStorage.setItem("displayname",user.displayName);
+      sessionStorage.setItem("displayname", user.displayName);
       getRoomInfo(user.uid);
     }
-    // } else {
-    //   console.log('NONE');
-    //   No user is signed in.
-    // }
   });
 
 
@@ -54,7 +48,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       container.innerHTML = templete;
       div = container.firstChild;
       div.setAttribute('id', roomName);
-      div.setAttribute('data-ng-click', 'clickRoom("'+roomName+'")');
+      div.setAttribute('data-ng-click', 'backStyle={"background-color":"#fee050","box-shadow": "0 1px #666"};fontStyle={"color":"#ffffff"};clickRoom("' + roomName + '")');
       $compile(div)($scope);
       messageList.appendChild(div);
     }

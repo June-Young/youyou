@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>youyou</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
     <style>
         #language {
             width: 46.1%;
             height: 5.8%;
             font-family: ProximaNovaSoft;
-            font-size: 550%;
+            font-size: 250%;
             font-weight: bold;
             text-align: center;
             color: #ffffff;
@@ -62,7 +62,7 @@
 
 <div id="container">
     <div id="language">Language</div>
-    <div id="english" class="rectangle  rectangle-font-size unselected-button table"><p class="unselected-text">
+    <div id="english" ng-click="backStyle={'background-color':'#fee050'}; fontStyle={'color':'#ffffff'}; clickedEnglish()" ng-style="backStyle" class="rectangle  rectangle-font-size unselected-button table"><p ng-style="fontStyle" class="unselected-text">
         English</p></div>
     <div id="japanese" class="rectangle rectangle-font-size unselected-button table"><p class="unselected-text">
         Japanese</p></div>
