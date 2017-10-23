@@ -40,4 +40,5 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/chattinglist', {templateUrl: '/youyou/pages/chatting-list.html', controller: 'chattinglist', reloadOnSearch: false});
   $routeProvider.when('/chattingroom', {templateUrl: '/youyou/pages/chatting-room.html', controller: 'chattingroom', reloadOnSearch: false});
   $routeProvider.when('/skMap', {templateUrl: '/youyou/pages/skMap.html', controller: 'SkMapController', reloadOnSearch: false});
+  $routeProvider.when('/home_weather', {templateUrl: '/youyou/pages/home_weather.html', controller: 'WeatherController', reloadOnSearch: false});
 });

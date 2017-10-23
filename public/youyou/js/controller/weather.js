@@ -13,9 +13,35 @@ angular.module('MobileAngularUiExamples').controller('WeatherController', ['$sco
   function showPosition(position) {
     console.log("latitude : " + position.coords.latitude + " , longtitude : " + position.coords.longitude);
     getWeatherInfo(position.coords.longitude, position.coords.latitude);
+    getDustInfo(position.coords.longitude, position.coords.latitude);
+    getCurrentWeather(position.coords.longitude, position.coords.latitude);
   }
 
   function getWeatherInfo(longtude, latitude) {
+    var req = {
+      method: 'GET',
+      url: 'http://apis.skplanetx.com/weather/summary?version=1&lat=' + latitude + '&lon=' + longtude,
+      headers: {
+        'appKey': "54c99cf9-dd09-3934-9707-b60bf42f45be",
+        'Accept': "application/json"
+      }
+    }
+
+    $http(req).then(function (response) {
+
+      console.info(response);
+      // $scope.humidity = response.data;
+      $scope.todaySky = response.data.weather.summary[0].today.sky.name;
+      $scope.todayTemperatureMax = response.data.weather.summary[0].today.temperature.tmax;
+      $scope.todayTemperatureMin = response.data.weather.summary[0].today.temperature.tmin;
+      $scope.tomorrowSky = response.data.weather.summary[0].tomorrow.sky.name;
+      // $scope.weatherInfo = response.data;
+    }, function () {
+      console.info("hello");
+    });
+  }
+
+  function getCurrentWeather(longtude, latitude) {
     var req = {
       method: 'GET',
       url: 'http://apis.skplanetx.com/weather/current/minutely?version=1&lat=' + latitude + '&lon=' + longtude,
@@ -28,19 +54,32 @@ angular.module('MobileAngularUiExamples').controller('WeatherController', ['$sco
     $http(req).then(function (response) {
 
       console.info(response);
-      console.info("Test[0]   " + response.data.weather.minutely[0].humidity);
-      console.info("Test[0]   " + response.data.weather.minutely[0].sky.name);
-      console.info("Test[0]   " + response.data.weather.minutely[0].temperature.tmax);
-      console.info("Test[0]   " + response.data.weather.minutely[0].temperature.tmin);
-
-      $scope.humidity = response.data.weather.minutely[0].humidity;
-      $scope.sky = response.data.weather.minutely[0].sky.name;
-      $scope.tmax = response.data.weather.minutely[0].temperature.tmax;
-      $scope.tmin = response.data.weather.minutely[0].temperature.tmin;
-      $scope.weatherInfo = response.data;
+      // $scope.humidity = response.data;
+      $scope.temperatureCurrent = response.data.weather.minutely[0].temperature.tc;
+      // $scope.weatherInfo = response.data;
     }, function () {
       console.info("hello");
     });
   }
+
+  function getDustInfo(longtude, latitude) {
+    var req = {
+      method: 'GET',
+      url: 'http://apis.skplanetx.com/weather/dust?version=1&lat=' + latitude + '&lon=' + longtude,
+      headers: {
+        'appKey': "54c99cf9-dd09-3934-9707-b60bf42f45be",
+        'Accept': "application/json"
+      }
+    }
+
+    $http(req).then(function (response) {
+
+      console.info(response.data);
+      $scope.dustGrade = response.data.weather.dust[0].pm10.grade;
+    }, function () {
+      console.info("hello");
+    });
+  }
+
   getLocation();
 }]);
