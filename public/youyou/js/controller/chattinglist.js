@@ -9,7 +9,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
   };
 
   var templete =
-    '<div data-ng-click="clickRoom(ddddddkdkdkdk)"> ' +
+    '<div> ' +
     '    <div class="roomlist-container"> ' +
     '      <div> ' +
     '        <div class="imgSection"> ' +

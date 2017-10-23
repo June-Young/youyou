@@ -122,16 +122,41 @@
       height: 50px;
       box-shadow: 0 10px 20px 0 rgba(15, 7, 45, 0.1);
       border-radius: 100%;
-      margin-left: 20px;
     }
 
     .target-message {
       margin-left: 20px;
+      margin-right: 30%;
+      float: left;
+      clear: left;
+      word-wrap: break-word;
     }
 
     .my-message {
       margin-right: 20px;
+      margin-left: 30%;
+      color: #ffffff;
+      word-wrap: break-word;
       float: right;
+      clear: right;
+    }
+
+    .ninepatch-my {
+      /*float:right;*/
+      border-image: url('/youyou/img/mesbyme.9.png')  0.5 fill;
+      padding-left: 20px;
+      padding-right: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .ninepatch-target {
+      /*float:right;*/
+      border-image: url('/youyou/img/mes.9.png')  0.5 fill;
+      padding-left: 45px;
+      padding-right: 30px;
+      padding-top: 5px;
+      padding-bottom: 10px;
     }
   </style>
 </head>
@@ -144,29 +169,36 @@
       {{nickname}}
     </div>
 
-    <div class="combined-shape">
+    <div class="combined-shape" ng-click="goback()">
       <
     </div>
   </div>
   <div class="hr-top"></div>
   <div id="messages">
 
-    <div ng-repeat="record in records" style="width:100%;height:70px;margin-top:10px">
-      <div id="message">
+    <div>
+      <div ng-repeat="record in records">
+        <div id="message" style="margin-top:10px;/*position:relative;*/">
 
-        <div ng-switch="record.ownership">
-          <div ng-switch-when="true">
-            <div class="my-message">{{record.text}}</div>
-          </div>
-          <div ng-switch-default>
-            <img src="{{record.photourl}}" class="float target-profile">
-            <div class="float target-message">{{record.text}}</div>
+          <div ng-switch="record.ownership">
+            <div ng-switch-when="true">
+              <div class="my-message">
+                <p class="ninepatch-my">
+                  {{record.text}}
+                </p>
+              </div>
+            </div>
+            <div ng-switch-default>
+              <div class="target-message">
+                <img src="{{record.photourl}}" class="float target-profile">
+                <p class="ninepatch-target">{{record.text}}</p>
+                <!--15글자..-->
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
   <div id="sender">
     <div class="hr-bottom"></div>
