@@ -2,8 +2,8 @@ var app = angular.module('MobileAngularUiExamples');
 
 
 app.controller('YouyouListController', function ($scope, $location) {
-  var myid = '';
-  $scope.clickRoom = function (targetId) {
+  // var myid = '';
+  /*$scope.clickRoom = function (targetId) {
     //대화시작
     console.log(targetId);
 
@@ -37,8 +37,20 @@ app.controller('YouyouListController', function ($scope, $location) {
     } else {
       console.log("내 정보 또는 상대 정보가 없습니다.." + myid);
     }
-  };
+  };*/
+  $scope.clickRoom = function (targetId) {
+    //대화시작
+    console.log(targetId);
 
+    if (targetId) {
+
+      sessionStorage.setItem("youyou_profile", targetId);
+      $location.path("youyouprofile");
+
+    } else {
+      console.log("상대 정보가 없습니다.." + targetId);
+    }
+  };
   pad2 = function (n) {
     return n < 10 ? '0' + n : n
   };
@@ -62,12 +74,14 @@ app.controller('YouyouListController', function ($scope, $location) {
     }
   };
 
+  /*
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      myid = user.uid;
-    }
-  });
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        myid = user.uid;
+      }
+    });
+  */
 
   var getYouyouList = function () {
     // 방 정보 가져오기 시작
@@ -93,4 +107,12 @@ app.controller('YouyouListController', function ($scope, $location) {
   };
 
   getYouyouList();
+});
+
+
+app.controller('YouyouProfileController', function ($scope, $location) {
+  console.log(sessionStorage.getItem("youyou_profile"));
+  $scope.goback = function () {
+    history.back();
+  };
 });

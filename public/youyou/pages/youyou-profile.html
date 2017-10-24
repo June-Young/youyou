@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+
+  <style>
+
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #container #header {
+      width: 100%;
+      height: 8.6%;
+
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 3.8%
+    }
+
+    #container #contents {
+      width: 100%;
+      height: 31.6%;
+      position: absolute;
+      top: 12.4%;
+
+    }
+
+    #container #photo {
+      width: 100%;
+      height: 56.2%;
+      background-color: #000000;
+      position: absolute;
+      top: 44%;
+    }
+
+    .nickname {
+      width: 34.2%;
+      height: 38.2%;
+      color: #000000;
+      font-size: 100%;
+      font-weight: bold;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      position: absolute;
+      top: 30.9%;
+      left: 33.1%;
+    }
+
+    .combined-shape {
+      width: 6.1%;
+      height: 41.8%;
+      font-weight: bold;
+      border-radius: 1.5px;
+      color: #1a395f;
+      font-size: 100%;
+      position: absolute;
+      top: 29.1%;
+      left: 4.1%;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 12.4%;
+    }
+
+    /*후에 media태그로  해상도별 위치 다르게 잡아줘야함*/
+    .profile_image {
+      width: 70px;
+      height: 70px;
+
+      box-shadow: 0 15px 25px 0 rgba(15, 7, 45, 0.1);
+      border-radius: 100%;
+      position: absolute;
+      top: 15%;
+      left: 41.4%;
+    }
+
+    .profile_image > img {
+      width: 100%;
+      height: 100%;
+
+    }
+
+    .buttons {
+      width: 100%;
+      height: 7%;
+      position: absolute;
+      top: 65%;
+
+    }
+
+    .chats {
+      float: left;
+      position: absolute;
+      left: 25%;
+    }
+
+    .block {
+      float: left;
+      position: absolute;
+      left: 46%;
+    }
+
+    .likes {
+      float: left;
+      position: absolute;
+      left: 66%;
+    }
+
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="top">
+
+  </div>
+  <div id="header" class="table">
+    <div class="nickname">
+      nickname
+      <!--{{nickname}}-->
+    </div>
+    <div class="combined-shape" ng-click="goback()">
+      <
+    </div>
+  </div>
+  <div class="hr-top"></div>
+
+  <div id="contents">
+    <div class="profile_image"><img src="/youyou/img/profile_placeholder.png"></div>
+    <div class="buttons">
+      <div class="chats">
+        <img class="icon" src="/youyou/img/chats.svg">
+      </div>
+      <div class="block">
+        <img class="icon" src="/youyou/img/block-b.svg">
+      </div>
+      <div class="likes">
+        <img class="icon" src="/youyou/img/like.svg">
+      </div>
+    </div>
+  </div>
+  <div id="photo"></div>
+</div>
+
+
+</body>
+</html>
