@@ -15,25 +15,31 @@
 				}
 			},
 			"rooms":{
-				".read": true
+				".read": true,
+				".write":true
 			},
 			"messages": {
-        "$roomname":{
-          ".read":true
-        },
+				"$roomname":{
+					".read":true
+				},
 				".read": false,
 				".write":true
 			},
-      "roomList":{
-        "$uid":{
-          ".read":"auth.uid === $uid",
-          ".indexOn": ".value" 
-        },
-        ".write":true
-      },
-        "uncheked":{
-          ".read":true,
-            ".write":true
-        }
+			"roomList":{
+				"$uid":{
+					".read":"auth.uid === $uid",
+					".indexOn": ".value" 
+				},
+				".write":true
+			},
+			"uncheked":{
+				".read":true,
+				".write":true
+			},
+			"youyou":{
+				".read":true,
+				".write":true
+			}
 	}
 }
+

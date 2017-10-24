@@ -76,6 +76,17 @@ angular.module('MobileAngularUiExamples').controller('LanguageController', funct
   }
 });
 
+
+angular.module('MobileAngularUiExamples').controller('LogoutController', function ($scope, $location) {
+
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      firebase.auth().signOut();
+    } else {
+    }
+  });
+});
+
 angular.module('MobileAngularUiExamples').directive('watcher', [function () {
   return {
     restrict: 'A',

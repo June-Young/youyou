@@ -48,7 +48,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       container.innerHTML = templete;
       div = container.firstChild;
       div.setAttribute('id', roomName);
-      div.setAttribute('data-ng-click', 'backStyle={"background-color":"#fee050","box-shadow": "0 1px #666"};fontStyle={"color":"#ffffff"};clickRoom("' + roomName + '")');
+      div.setAttribute('data-ng-click', 'backStyle={"background-color":"#fee050","box-shadow": "10 15px #666"};fontStyle={"color":"#ffffff"};clickRoom("' + roomName + '")');
       $compile(div)($scope);
       messageList.appendChild(div);
     }

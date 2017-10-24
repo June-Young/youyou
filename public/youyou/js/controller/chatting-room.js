@@ -26,7 +26,13 @@ app.controller('chattingroom', function ($scope) {
           $scope.records = data;
         });
       }
+      setScrollTop();
     }
+  };
+
+  setScrollTop = function () {
+    var objDiv = document.getElementById("messages");
+    objDiv.scrollTop = objDiv.scrollHeight;
   };
 
   cutter = function (text) {
@@ -58,6 +64,7 @@ app.controller('chattingroom', function ($scope) {
         ownership = false;
       }
       addText(message.photourl, message.text, ownership);
+
     };
     messagesRef.on('child_added', setMessage);
   };
@@ -96,10 +103,7 @@ app.controller('chattingroom', function ($scope) {
         firebase.database().ref("uncheked/" + target + '/' + roomName).set(count.val() + 1);
       });
 
-
-      var objDiv = document.getElementById("messages");
-      objDiv.scrollTop = objDiv.scrollHeight;
-
+      setScrollTop();
 
     }.bind(this)).catch(function (error) {
       console.error('Error writing new message to Firebase Database', error);
@@ -129,7 +133,7 @@ app.controller('chattingroom', function ($scope) {
       }
       firebase.database().ref('users/' + target).once('value').then(function (userDetailSnapshot) {
         $scope.$apply(function () {
-          $scope.nickname = userDetailSnapshot.val().displayName;
+          $scope.nickname = (userDetailSnapshot.val() && userDetailSnapshot.val().displayName) || 'Anonymous';
         });
       });
     } else {

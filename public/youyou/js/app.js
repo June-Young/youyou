@@ -44,4 +44,6 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/language', {templateUrl: '/youyou/pages/language.html', controller: 'LanguageController', reloadOnSearch: false});
   $routeProvider.when('/welcome', {templateUrl: '/youyou/pages/welcome.html', controller: 'WelcomeController', reloadOnSearch: false});
   $routeProvider.when('/country', {templateUrl: '/youyou/pages/country.html', controller: 'CountryController', reloadOnSearch: false});
+  $routeProvider.when('/logout', {templateUrl: '/youyou/pages/logout.html', controller: 'LogoutController', reloadOnSearch: false});
+  $routeProvider.when('/youyoulist', {templateUrl: '/youyou/pages/youyou-list.html', controller: 'YouyouListController', reloadOnSearch: false});
 });

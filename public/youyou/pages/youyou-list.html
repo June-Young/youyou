@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #header {
+      width: 100%;
+      height: 10.9%;
+      position: absolute;
+      top: 3.8%;
+
+      background-color: #ffffff;
+    }
+
+    .chats {
+      font-size: 200%;
+      font-weight: bold;
+      text-align: left;
+      color: #000000;
+
+      position: absolute;
+      top: 24.3%;
+      left: 4.2%
+    }
+
+    #youyoulist {
+      width: 100%;
+      height: 76.2%;
+      background-color: #ffffff;
+      position: absolute;
+      top: 14.7%;
+      overflow: scroll
+    }
+
+    #footer {
+      width: 100%;
+      height: 9.1%;
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 90.9%;
+    }
+
+    .hr-bottom {
+      width: 100%;
+      height: 0.5px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 90.9%;
+    }
+
+    .roomlist-container {
+      margin-top: 2.3%;
+      margin-bottom: 2.3%;
+      margin-left: 4.2%;
+
+      background-color: #ffffff;
+      /*width: 91.7%;*/
+      /*height: 20%;*/
+      width: 91.7%;
+      height: 80px;
+      border-radius: 80px;
+      box-shadow: 0 15px 25px 0 rgba(15, 7, 45, 0.1);
+    }
+
+    .photoUrl {
+      margin-left: 10px;
+      margin-right: 20px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+
+      width: 50px;
+      height: 50px;
+      float: left;
+    }
+
+    .imgUrl {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+
+    .nickname-div {
+      width: 40%;
+      height: 80px;
+      float: left
+    }
+
+    .nickname {
+      float: left;
+      font-family: ProximaNovaSoft;
+      font-size: 110%;
+      font-weight: bold;
+      text-align: left;
+      color: #000000;
+      width: 100%;
+      height: 20px;
+      margin-top: 28px;
+      margin-bottom: 28px;
+    }
+
+    .response-like {
+      width: 60%;
+      height: 80px;
+      float: left
+    }
+
+    .response {
+      font-size: 90%;
+      width: 80%;
+      height: 20px;
+      margin-top: 20px;
+    }
+
+    .response-text {
+      color: #9b9b9b;
+      float: left;
+    }
+
+    .likes {
+      font-size: 90%;
+      width: 80%;
+      height: 20px;
+    }
+
+    .likes-text {
+      color: #9b9b9b;
+      float: left;
+      margin-left: 50px;
+    }
+
+    .rate {
+      font-family: ProximaNovaSoft;
+      font-weight: bold;
+      /*text-align: right;*/
+      color: #78aef9;
+      margin-left: 5px;
+      float: left;
+    }
+
+    .imgSection {
+      float: left;
+      width: 24.2%
+    }
+
+    .otherSection {
+      float: left;
+      height: 80px;
+      width: 75%;
+    }
+
+  </style>
+</head>
+<body>
+<div id="container">
+
+  <div id="top"></div>
+  <div id="header">
+    <div class="chats">
+      YouYou List
+    </div>
+  </div>
+  <div id="youyoulist">
+
+    <div>
+      <div ng-repeat="record in records">
+        <div id="message" style="margin-top:10px;/*position:relative;*/">
+
+          <div>
+            <div class="roomlist-container"  data-ng-click='backStyle={"background-color":"#fee050","box-shadow": "10 15px #666"};fontStyle={"color":"#ffffff"};clickRoom(record.key)' ng-style="backStyle">
+              <!--   data-ng-click='clickRoom({{record.key}})'
+                 ng-style="backStyle">-->
+              <div>
+                <div class="imgSection">
+                  <div class="photoUrl"><img class="imgUrl"
+                                             src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg">
+                  </div>
+                </div>
+                <div class="otherSection">
+
+                  <div class="nickname-div float">
+                    <div class="nickname" ng-style="fontStyle">{{record.nickname}}</div>
+                  </div>
+
+                  <div class="response-like float">
+                    <div class="response">
+                      <div class="response-text" ng-style="fontStyle">Response rate</div>
+                      <div class="rate" ng-style="fontStyle">{{record.response}}%</div>
+                    </div>
+
+                    <div class="likes">
+                      <div class="likes-text" ng-style="fontStyle">Likes</div>
+                      <div class="rate" ng-style="fontStyle">{{record.likes}}</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hr-bottom">
+  </div>
+  <div id="footer">
+
+  </div>
+</div>
+</body>
+</html>
