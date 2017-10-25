@@ -47,4 +47,5 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/logout', {templateUrl: '/youyou/pages/logout.html', controller: 'LogoutController', reloadOnSearch: false});
   $routeProvider.when('/youyoulist', {templateUrl: '/youyou/pages/youyou-list.html', controller: 'YouyouListController', reloadOnSearch: false});
   $routeProvider.when('/youyouprofile', {templateUrl: '/youyou/pages/youyou-profile.html', controller: 'YouyouProfileController', reloadOnSearch: false});
+  $routeProvider.when('/home', {templateUrl: '/youyou/pages/home.html', controller: 'HomeController', reloadOnSearch: false});
 });

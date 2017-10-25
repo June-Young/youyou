@@ -2,42 +2,18 @@ var app = angular.module('MobileAngularUiExamples');
 
 
 app.controller('YouyouListController', function ($scope, $location) {
-  // var myid = '';
-  /*$scope.clickRoom = function (targetId) {
-    //대화시작
-    console.log(targetId);
-
-    if (myid !== '' && targetId) {
-      var roomName = '';
-      if (myid > targetId) {
-        roomName = myid + '-!-' + targetId
-      } else {
-        roomName = targetId + '-!-' + myid
-      }
-      console.log("ROOMNAME");
-      firebase.database().ref('rooms/' + roomName).once('value').then(function (roomIsValid) {
-        if (roomIsValid.val()) {
-          sessionStorage.setItem("roomName", roomName);
-        } else {
-
-          //roomList에 방 생성
-          firebase.database().ref('rooms/' + roomName).set({lastMessage: ''});
-
-          //나와 상대방 계정에 방 추가
-          var roomObj = {};
-          roomObj[roomName] = getCurrentTime();
-          firebase.database().ref('roomList/' + myid).set(roomObj);
-          firebase.database().ref('roomList/' + targetId).set(roomObj);
-        }
-        $scope.$apply(function () {
-          $location.path("chattingroom");
-        });
-      });
-
-    } else {
-      console.log("내 정보 또는 상대 정보가 없습니다.." + myid);
-    }
-  };*/
+  $scope.clickedFooterHome = function () {
+    $location.path("home");
+  };
+  $scope.clickedFooterChats = function () {
+    $location.path("chattinglist");
+  };
+  $scope.clickedFooterUUList = function () {
+    $location.path("youyoulist");
+  };
+  $scope.clickedFooterProfile = function () {
+    $location.path("profile");
+  };
   $scope.clickRoom = function (targetId) {
     //대화시작
     console.log(targetId);
@@ -111,8 +87,8 @@ app.controller('YouyouListController', function ($scope, $location) {
 
 
 app.controller('YouyouProfileController', function ($scope, $location) {
-  var target = sessionStorage.getItem("youyou_profile");
-  var youyouList = firebase.database().ref('youyou/' + target);
+  var targetId = sessionStorage.getItem("youyou_profile");
+  var youyouList = firebase.database().ref('youyou/' + targetId);
   var myid = '';
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -131,14 +107,39 @@ app.controller('YouyouProfileController', function ($scope, $location) {
     });
   });
   $scope.chatting = function () {
-    var roomName = '';
-    if (myid > target) {
-      roomName = myid + '-!-' + target;
+    //대화시작
+    console.log(targetId);
+
+    if (myid !== '' && targetId) {
+      var roomName = '';
+      if (myid > targetId) {
+        roomName = myid + '-!-' + targetId
+      } else {
+        roomName = targetId + '-!-' + myid
+      }
+      console.log("ROOMNAME");
+      firebase.database().ref('rooms/' + roomName).once('value').then(function (roomIsValid) {
+        if (roomIsValid.val()) {
+          sessionStorage.setItem("roomName", roomName);
+        } else {
+
+          //roomList에 방 생성
+          firebase.database().ref('rooms/' + roomName).set({lastMessage: ''});
+
+          //나와 상대방 계정에 방 추가
+          var roomObj = {};
+          roomObj[roomName] = getCurrentTime();
+          firebase.database().ref('roomList/' + myid).set(roomObj);
+          firebase.database().ref('roomList/' + targetId).set(roomObj);
+        }
+        $scope.$apply(function () {
+          $location.path("chattingroom");
+        });
+      });
+
     } else {
-      roomName = target + '-!-' + myid;
+      console.log("내 정보 또는 상대 정보가 없습니다.." + myid);
     }
-    sessionStorage.setItem("roomName", roomName);
-    $location.path("chattingroom");
   };
 
   $scope.goback = function () {

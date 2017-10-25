@@ -7,6 +7,19 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
     $location.path("chattingroom");
   };
 
+  $scope.clickedFooterHome = function () {
+    $location.path("home");
+  };
+  $scope.clickedFooterChats = function () {
+    $location.path("chattinglist");
+  };
+  $scope.clickedFooterUUList = function () {
+    $location.path("youyoulist");
+  };
+  $scope.clickedFooterProfile = function () {
+    $location.path("profile");
+  };
+
   var templete =
     '<div> ' +
     '    <div class="roomlist-container" ng-style="backStyle"> ' +

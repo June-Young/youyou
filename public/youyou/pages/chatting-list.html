@@ -44,7 +44,7 @@
       background-color: #ffffff;
       position: absolute;
       top: 14.7%;
-      overflow: scroll
+      overflow: scroll;
     }
 
     #footer {
@@ -201,10 +201,42 @@
       padding: .1em .3em;
     }
 
-   /* .roomlist-container:active {
-      background-color: #fee050;
-      box-shadow: 0 1px #666;
-    }*/
+    .footer_home {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 6.4%;
+    }
+
+    .footer_chats {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 31.3%;
+    }
+
+    .footer_youyoulist {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 56.2%;
+    }
+
+    .footer_profile {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 81.1%;
+    }
+
 
   </style>
 </head>
@@ -219,10 +251,20 @@
   </div>
   <div id="hr" class="hr-top"></div>
   <div id="rooms"></div>
-  <div class="hr-bottom">
-  </div>
+  <div class="hr-bottom"></div>
   <div id="footer">
-
+    <div class="footer_home">
+      <img src="/youyou/img/home.svg" ng-click="clickedFooterHome()">
+    </div>
+    <div class="footer_chats" ng-click="clickedFooterChats()">
+      <img src="/youyou/img/chats-y.svg">
+    </div>
+    <div class="footer_youyoulist" ng-click="clickedFooterUUList()">
+      <img src="/youyou/img/uu-list.svg">
+    </div>
+    <div class="footer_profile">
+      <img src="/youyou/img/profile.svg" ng-click="clickedFooterProfile()">
+    </div>
   </div>
 </div>
 </body>
