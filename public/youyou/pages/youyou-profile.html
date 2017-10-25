@@ -138,8 +138,7 @@
   </div>
   <div id="header" class="table">
     <div class="nickname">
-      nickname
-      <!--{{nickname}}-->
+      {{nickname}}
     </div>
     <div class="combined-shape" ng-click="goback()">
       <
@@ -150,11 +149,11 @@
   <div id="contents">
     <div class="profile_image"><img src="/youyou/img/profile_placeholder.png"></div>
     <div class="buttons">
-      <div class="chats">
+      <div class="chats" ng-click="chatting()">
         <img class="icon" src="/youyou/img/chats.svg">
       </div>
       <div class="block">
-        <img class="icon" src="/youyou/img/block-b.svg">
+        <img class="icon" src="/youyou/img/block.svg">
       </div>
       <div class="likes">
         <img class="icon" src="/youyou/img/like.svg">

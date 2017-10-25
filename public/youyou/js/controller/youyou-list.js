@@ -111,7 +111,36 @@ app.controller('YouyouListController', function ($scope, $location) {
 
 
 app.controller('YouyouProfileController', function ($scope, $location) {
-  console.log(sessionStorage.getItem("youyou_profile"));
+  var target = sessionStorage.getItem("youyou_profile");
+  var youyouList = firebase.database().ref('youyou/' + target);
+  var myid = '';
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+
+      myid = user.uid;
+    }
+  });
+  // Make sure we remove all previous listeners.
+  youyouList.once('value').then(function (users) {
+
+    var username = (users.val() && users.val().nickname) || 'Anonymous';
+    console.log(username);
+    $scope.$apply(function () {
+      $scope.nickname = username;
+
+    });
+  });
+  $scope.chatting = function () {
+    var roomName = '';
+    if (myid > target) {
+      roomName = myid + '-!-' + target;
+    } else {
+      roomName = target + '-!-' + myid;
+    }
+    sessionStorage.setItem("roomName", roomName);
+    $location.path("chattingroom");
+  };
+
   $scope.goback = function () {
     history.back();
   };
