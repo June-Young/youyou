@@ -3,7 +3,7 @@ var app = angular.module('MobileAngularUiExamples');
 
 app.controller('chattingroom', function ($scope) {
   var roomName = sessionStorage.getItem("roomName");
-  var myDisplayName = sessionStorage.getItem("displayname");
+  // var myDisplayName = sessionStorage.getItem("displayname");
   var auth = firebase.auth();
   var messagesRef = firebase.database().ref("messages/" + roomName);
   var target = '';

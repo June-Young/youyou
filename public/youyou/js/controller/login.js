@@ -24,6 +24,7 @@ app.controller('login', function ($scope, $location) {
 
       var uid = user.uid;
       var userRef = firebase.database().ref('users/' + uid);
+      console.log("login. " + uid);
       //정보 가져오거나 넣거나해야지
 
       userRef.once('value').then(function (data) {
