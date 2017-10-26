@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope', '$http', function ($scope, $http, $event) {
+angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope', '$http' ,"angular-screenshot", function ($scope, $http, $event) {
   $scope.posCount = 0;
   function init() {
     $scope.map = new Tmap.Map({div: "map_div", width: '100%', height: '100%'});
