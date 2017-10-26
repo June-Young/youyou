@@ -125,6 +125,7 @@
     }
 
     .target-message {
+      margin-top: 10px;
       margin-left: 20px;
       margin-right: 30%;
       float: left;
@@ -133,17 +134,21 @@
     }
 
     .my-message {
+      margin-top: 10px;
       margin-right: 20px;
       margin-left: 30%;
       color: #ffffff;
       word-wrap: break-word;
       float: right;
       clear: right;
+      /*display: table;*/
     }
 
     .ninepatch-my {
       /*float:right;*/
-      border-image: url('/youyou/img/mesbyme.9.png')  0.5 fill;
+      background-color: #78aef9;
+      box-shadow: 0 5px 10px 0 rgba(15, 7, 45, 0.1);
+      border-radius: 15px 15px;
       padding-left: 20px;
       padding-right: 30px;
       padding-top: 10px;
@@ -152,11 +157,33 @@
 
     .ninepatch-target {
       /*float:right;*/
-      border-image: url('/youyou/img/mes.9.png')  0.5 fill;
-      padding-left: 45px;
-      padding-right: 30px;
-      padding-top: 5px;
+      background-color: #ffffff;
+      box-shadow: 0 5px 10px 0 rgba(45, 45, 7, 0.1);
+      border-radius: 15px 15px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
       padding-bottom: 10px;
+    }
+
+    .triangle_target {
+      float: left;
+      border-radius: 0px 1px 1px 0px;
+      margin-top: 15px;
+      border-top: 5px solid transparent;
+      border-right: 5px solid #ffffff;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+
+    .triangle_my {
+      float: right;
+      border-radius: 0px 1px 1px 0px;
+      margin-top: 15px;
+      border-top: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid #78aef9;
     }
   </style>
 </head>
@@ -183,6 +210,7 @@
           <div ng-switch="record.ownership">
             <div ng-switch-when="true">
               <div class="my-message">
+                <div class="triangle_my"></div>
                 <p class="ninepatch-my">
                   {{record.text}}
                 </p>
@@ -191,6 +219,7 @@
             <div ng-switch-default>
               <div class="target-message">
                 <img src="{{record.photourl}}" class="float target-profile">
+                <div class="triangle_target"></div>
                 <p class="ninepatch-target">{{record.text}}</p>
                 <!--15글자..-->
               </div>
