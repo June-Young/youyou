@@ -49,4 +49,6 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/youyouprofile', {templateUrl: '/youyou/pages/youyou-profile.html', controller: 'YouyouProfileController', reloadOnSearch: false});
   $routeProvider.when('/home', {templateUrl: '/youyou/pages/home.html', controller: 'HomeController', reloadOnSearch: false});
   $routeProvider.when('/profile', {templateUrl: '/youyou/pages/profile.html', controller: 'ProfileController', reloadOnSearch: false});
+  $routeProvider.when('/tourApi', {templateUrl: '/youyou/pages/tourApi.html', controller: 'TourApiController', reloadOnSearch: false});
+  $routeProvider.when('/gallery', {templateUrl: '/youyou/pages/gallery.html', controller: 'GalleryController', reloadOnSearch: false});
 });

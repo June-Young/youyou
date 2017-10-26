@@ -1,0 +1,20 @@
+<style>
+  .thumb {
+    width: 100px;
+    margin: 5px;
+    float: left;
+  }
+
+  .uploader {
+    clear: both;
+  }
+</style>
+<div>
+
+  <div ng-repeat="step in stepsModel">
+    <img class="thumb" ng-src="{{step}}"/>
+  </div>
+
+  <input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple/>
+
+</div>
