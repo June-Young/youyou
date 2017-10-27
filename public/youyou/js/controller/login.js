@@ -18,6 +18,11 @@ app.controller('login', function ($scope, $location) {
     });
   };
 
+  var pageChange = function (path) {
+    $scope.$apply(function () {
+      $location.path(path);
+    });
+  };
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -31,7 +36,7 @@ app.controller('login', function ($scope, $location) {
         var info = data.val();
         if (info) {
           sessionStorage.setItem("myid", uid);
-          pageChange("home_weather");
+          pageChange("home");
 
           //가입된 유저
         } else {
@@ -43,13 +48,6 @@ app.controller('login', function ($scope, $location) {
       });
     }
   });
-
-
-  var pageChange = function (path) {
-    $scope.$apply(function () {
-      $location.path(path);
-    });
-  }
 });
 
 angular.module('MobileAngularUiExamples').controller('nickname', function ($scope, $location) {
@@ -291,17 +289,18 @@ angular.module('MobileAngularUiExamples').controller('CountryController', functi
 
 angular.module('MobileAngularUiExamples').controller('LogoutController', function ($scope, $location) {
 
-  firebase.auth().onAuthStateChanged(function (user) {
+  var unsubscirbe = firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       firebase.auth().signOut();
     } else {
     }
   });
+  unsubscirbe();
 });
 angular.module('MobileAngularUiExamples').controller('WelcomeController', function ($scope, $location) {
   setTimeout(function () {
     $scope.$apply(function () {
-      $location.path("home_weather")
+      $location.path("home")
     });
   }, 2000);
 });

@@ -58,7 +58,7 @@
     <script src="js/controller/login.js"></script>
     <script src="js/controller/weather.js"></script>
     <script src="js/controller/youyou.js"></script>
-    <script src="js/controller/chattinglist.js"></script>
+    <script src="js/controller/chatting-list.js"></script>
     <script src="js/controller/chatting-room.js"></script>
     <script src="js/controller/skMap.js"></script>
     <script src="js/controller/youyou-list.js"></script>
@@ -73,33 +73,34 @@
     ng-app="MobileAngularUiExamples"
     ng-controller="MainController"
     ui-prevent-touchmove-defaults
-    >
+  >
 
-    <!-- Sidebars -->
-    <div ng-include="'sidebar.html'"
-            ui-track-as-search-param="true"
-            class="sidebar sidebar-left"></div>
+  <!--    &lt;!&ndash; Sidebars &ndash;&gt;
+      <div ng-include="'sidebar.html'"
+              ui-track-as-search-param="true"
+              class="sidebar sidebar-left"></div>
 
-    <div ng-include="'sidebarRight.html'"
-            class="sidebar sidebar-right"></div>
+      <div ng-include="'sidebarRight.html'"
+              class="sidebar sidebar-right"></div>-->
 
-    <!--Swipe left Event -->
-    <div class="app"
-         ui-swipe-right="Ui.turnOn('uiSidebarLeft')"
-         ui-swipe-left="Ui.turnOff('uiSidebarLeft')">
+  <!--Swipe left Event -->
+  <div class="app">
+    <!--ui-swipe-right="Ui.turnOn('uiSidebarLeft')"-->
+    <!--ui-swipe-left="Ui.turnOff('uiSidebarLeft')">-->
 
-      <!-- App Body -->
-      <div class="app-body" ng-class="{loading: loading}">
-        <div ng-show="loading" class="app-content-loading">
+    <!-- App Body -->
+    <!--<div class="app-body" ng-class="{loading: loading}">-->
+    <div class="app-body">
+      <!--  <div ng-show="loading" class="app-content-loading">
           <i class="fa fa-spinner fa-spin loading-spinner"></i>
-        </div>
-        <div class="app-content">
-          <ng-view></ng-view>
-        </div>
+        </div>-->
+      <div class="app-content">
+        <ng-view></ng-view>
       </div>
+    </div>
 
-    </div><!-- ~ .app -->
+  </div><!-- ~ .app -->
 
-    <div ui-yield-to="modals"></div>
+  <!--<div ui-yield-to="modals"></div>-->
   </body>
 </html>

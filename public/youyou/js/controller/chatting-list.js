@@ -61,6 +61,12 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
     return div;
   };
 
+  let timeFormat = function (time) {
+    var yyyy = time.substring(0, 4);
+    var mm = time.substring(4, 6);
+    var dd = time.substring(6, 8);
+    return yyyy + '-' + mm + '-' + dd;
+  };
   let getRoomInfo = function (uid) {
     // 방 정보 가져오기 시작
     var roomListRef = firebase.database().ref('roomList/' + uid);
@@ -106,8 +112,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
               var uncheked = div.querySelector('.uncheked-val');
 
               lastMessage.innerHTML = rv.lastMessage;
-              lastModified.innerHTML = modifiedTime;
-
+              lastModified.innerHTML = timeFormat(modifiedTime);
               firebase.database().ref('users/' + target).once('value').then(function (userDetailSnapshot) {
                 detail = userDetailSnapshot.val();
                 if (detail) {
@@ -123,7 +128,6 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
               firebase.database().ref('uncheked/' + my + '/' + roomName).on('value', function (unchekedSnapshot) {
                 if (unchekedSnapshot.val()) {
                   uncheked.innerHTML = unchekedSnapshot.val();
-                  console.log("언첵 val " + unchekedSnapshot.val());
                 } else {
                   uncheked.innerHTML = 0;
                 }
@@ -145,10 +149,12 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
     roomListRef.orderByValue().limitToLast(30).on('child_changed', setRoom);
   };
 
-  var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      getRoomInfo(user.uid);
-    }
-  });
-  unsubscribe();
+  var user = firebase.auth().currentUser;
+  if (user) {
+    getRoomInfo(user.uid);
+  } else {
+    console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
+    $location.path("login");
+  }
+
 });

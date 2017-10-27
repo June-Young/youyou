@@ -10,17 +10,6 @@ app.controller('HomeController', function ($scope, $location) {
     console.log("question click");
   };
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      firebase.database().ref('users/' + user.uid).once('value').then(function (userDetailSnapshot) {
-        var displayName = userDetailSnapshot.val() && userDetailSnapshot.val().displayName || 'Unknown';
-        $scope.$apply(function () {
-          $scope.nickname = displayName;
-        });
-      });
-    }
-  });
-
 
   $scope.clickedFooterHome = function () {
     $location.path("home");
@@ -34,4 +23,18 @@ app.controller('HomeController', function ($scope, $location) {
   $scope.clickedFooterProfile = function () {
     $location.path("profile");
   };
+
+
+  var user = firebase.auth().currentUser;
+  if (user) {
+    firebase.database().ref('users/' + user.uid).once('value').then(function (userDetailSnapshot) {
+      var displayName = userDetailSnapshot.val() && userDetailSnapshot.val().displayName || 'Unknown';
+      $scope.$apply(function () {
+        $scope.nickname = displayName;
+      });
+    });
+  }else{
+    console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
+    $location.path("login");
+  }
 });

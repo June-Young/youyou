@@ -12,34 +12,33 @@
 
     #container #top {
       width: 100%;
-      height: 3.8%;
-
+      height:25px;
       position: absolute;
       background-color: #78aef9;
     }
 
     #container #header {
       width: 100%;
-      height: 8.6%;
+      height: 60px;
 
       background-color: #fcfcfc;
       position: absolute;
-      top: 3.8%
+      top: 25px;
     }
 
     #container #messages {
       width: 100%;
-      height: 71.4%;
       position: absolute;
-      top: 12.4%;
+      top: 85px;
+      bottom:100px;
       overflow: scroll;
     }
 
     #container #sender {
       width: 100%;
-      height: 16.2%;
+      height: 100px;
       position: absolute;
-      top: 83.8%;
+      bottom: 0px;
     }
 
     .nickname {
@@ -75,7 +74,7 @@
 
       background-color: #d8d8d8;
       position: absolute;
-      top: 12.4%;
+      top: 85px;
     }
 
     .hr-bottom {
@@ -96,14 +95,14 @@
     .imgs {
       position: absolute;
       left: 4.2%;
-      top: 60%;
+      top: 60px;
     }
 
     .input-div {
       width: 90%;
       position: absolute;
       left: 4.2%;
-      top: 15%;
+      top: 20px;
     }
 
     .senderButton {
@@ -114,7 +113,7 @@
       color: #000000;
       position: absolute;
       left: 82.8%;
-      top: 60%;
+      top: 60px;
     }
 
     .target-profile {
@@ -146,6 +145,7 @@
 
     .ninepatch-my {
       /*float:right;*/
+      text-align:left;
       background-color: #78aef9;
       box-shadow: 0 5px 10px 0 rgba(15, 7, 45, 0.1);
       border-radius: 15px 15px;
@@ -157,6 +157,7 @@
 
     .ninepatch-target {
       /*float:right;*/
+      text-align:left;
       background-color: #ffffff;
       box-shadow: 0 5px 10px 0 rgba(45, 45, 7, 0.1);
       border-radius: 15px 15px;
@@ -168,6 +169,7 @@
 
     .triangle_target {
       float: left;
+      text-align:left;
       border-radius: 0px 1px 1px 0px;
       margin-top: 15px;
       border-top: 5px solid transparent;
@@ -218,7 +220,7 @@
             </div>
             <div ng-switch-default>
               <div class="target-message">
-                <img src="{{record.photourl}}" class="float target-profile">
+                <img ng-src="{{record.photourl}}" class="float target-profile">
                 <div class="triangle_target"></div>
                 <p class="ninepatch-target">{{record.text}}</p>
                 <!--15글자..-->

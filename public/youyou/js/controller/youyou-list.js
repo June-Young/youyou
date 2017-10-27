@@ -50,15 +50,6 @@ app.controller('YouyouListController', function ($scope, $location) {
     }
   };
 
-  /*
-
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        myid = user.uid;
-      }
-    });
-  */
-
   var getYouyouList = function () {
     // 방 정보 가져오기 시작
     var youyouList = firebase.database().ref('youyou/');
@@ -117,7 +108,6 @@ app.controller('YouyouProfileController', function ($scope, $location) {
       } else {
         roomName = targetId + '-!-' + myid
       }
-      console.log("ROOMNAME");
       firebase.database().ref('rooms/' + roomName).once('value').then(function (roomIsValid) {
         if (roomIsValid.val()) {
           sessionStorage.setItem("roomName", roomName);
