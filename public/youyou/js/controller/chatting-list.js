@@ -44,13 +44,6 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
 
   var messageList = document.getElementById('rooms');
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      sessionStorage.setItem("displayname", user.displayName);
-      getRoomInfo(user.uid);
-    }
-  });
-
 
   let dynamicView = function (roomName) {
     var div = document.getElementById(roomName);
@@ -150,5 +143,12 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
 
     roomListRef.orderByValue().limitToLast(30).on('child_added', setRoom);
     roomListRef.orderByValue().limitToLast(30).on('child_changed', setRoom);
-  }
+  };
+
+  var unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      getRoomInfo(user.uid);
+    }
+  });
+  unsubscribe();
 });
