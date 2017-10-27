@@ -12,11 +12,14 @@
     <link rel="stylesheet" href="/dist/css/mobile-angular-ui-hover.min.css" />
     <link rel="stylesheet" href="/dist/css/mobile-angular-ui-base.min.css" />
     <link rel="stylesheet" href="/dist/css/mobile-angular-ui-desktop.min.css" />
+    <link rel="stylesheet" href="/dist/css/angular-screenshot.css" />
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
     <script src="/dist/js/mobile-angular-ui.min.js"></script>
     <!-- Required to use $touch, $swipe, $drag and $translate services -->
     <script src="/dist/js/mobile-angular-ui.gestures.min.js"></script>
+    <script src="/dist/js/angular-screenshot.js"></script>
+    <script src="/dist/js/jquery-3.2.1.js"></script>
     <script language="javascript" src="https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=54c99cf9-dd09-3934-9707-b60bf42f45be"></script>
 
 
@@ -63,40 +66,41 @@
     <script src="js/controller/profile.js"></script>
     <script src="js/controller/tourApi.js"></script>
     <script src="js/controller/gallery.js"></script>
+    <script src="js/controller/screenshot.js"></script>
   </head>
 
   <body
     ng-app="MobileAngularUiExamples"
     ng-controller="MainController"
     ui-prevent-touchmove-defaults
-    >
+  >
 
-<!--    &lt;!&ndash; Sidebars &ndash;&gt;
-    <div ng-include="'sidebar.html'"
-            ui-track-as-search-param="true"
-            class="sidebar sidebar-left"></div>
+  <!--    &lt;!&ndash; Sidebars &ndash;&gt;
+      <div ng-include="'sidebar.html'"
+              ui-track-as-search-param="true"
+              class="sidebar sidebar-left"></div>
 
-    <div ng-include="'sidebarRight.html'"
-            class="sidebar sidebar-right"></div>-->
+      <div ng-include="'sidebarRight.html'"
+              class="sidebar sidebar-right"></div>-->
 
-    <!--Swipe left Event -->
-    <div class="app">
-         <!--ui-swipe-right="Ui.turnOn('uiSidebarLeft')"-->
-         <!--ui-swipe-left="Ui.turnOff('uiSidebarLeft')">-->
+  <!--Swipe left Event -->
+  <div class="app">
+    <!--ui-swipe-right="Ui.turnOn('uiSidebarLeft')"-->
+    <!--ui-swipe-left="Ui.turnOff('uiSidebarLeft')">-->
 
-      <!-- App Body -->
-      <!--<div class="app-body" ng-class="{loading: loading}">-->
-      <div class="app-body">
+    <!-- App Body -->
+    <!--<div class="app-body" ng-class="{loading: loading}">-->
+    <div class="app-body">
       <!--  <div ng-show="loading" class="app-content-loading">
           <i class="fa fa-spinner fa-spin loading-spinner"></i>
         </div>-->
-        <div class="app-content">
-          <ng-view></ng-view>
-        </div>
+      <div class="app-content">
+        <ng-view></ng-view>
       </div>
+    </div>
 
-    </div><!-- ~ .app -->
+  </div><!-- ~ .app -->
 
-    <!--<div ui-yield-to="modals"></div>-->
+  <!--<div ui-yield-to="modals"></div>-->
   </body>
 </html>
