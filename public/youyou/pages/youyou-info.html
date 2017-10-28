@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #container #header {
+      width: 100%;
+      height: 8.6%;
+
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 3.8%;
+    }
+
+    #container #contents {
+      width: 100%;
+      height: 87.6%;
+      position: absolute;
+      top: 12.4%;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 12.4%;
+    }
+
+    .combined-shape {
+      width: 6.1%;
+      height: 41.8%;
+      font-weight: bold;
+      border-radius: 1.5px;
+      color: #1a395f;
+      font-size: 100%;
+      position: absolute;
+      top: 29.1%;
+      left: 4.1%;
+    }
+
+    .youyou {
+      width: 34.2%;
+      height: 38.2%;
+      color: #000000;
+      font-family: Roboto;
+      font-size: 120%;
+      font-weight: bold;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      position: absolute;
+      top: 32.9%;
+      left: 33.1%;
+    }
+
+    .img-div {
+      width: 17.5%;
+      height: 9.8%;
+      position: absolute;
+      left: 41.4%;
+      top: 4.7%;
+    }
+
+    .info {
+      width: 91.8%;
+      height: 40%;
+      position: absolute;
+      top: 26.9%;
+      left: 4.2%;
+    }
+
+    .name {
+      font-family: Roboto;
+      font-size: 100%;
+      text-align: left;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    .text {
+      font-family: Roboto;
+      font-size: 140%;
+      text-align: left;
+      color: #9b9b9b;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header" class="table">
+    <div class="youyou">
+      YOUYOU
+    </div>
+
+    <div class="combined-shape" ng-click="goback()">
+      <img src="/youyou/img/back.svg">
+    </div>
+  </div>
+  <div class="hr-top"></div>
+  <div id="contents">
+    <div class="img-div">
+      <img ng-src="/youyou/img/logo.svg" class="profile-img">
+    </div>
+    <div class="info">
+      <div class="name">
+        Facebook
+        <div class="text">
+          YOUYOU
+        </div>
+      </div>
+      <div class="name">
+        Line
+        <div class="text">
+          youyoujeju
+        </div>
+      </div>
+      <div class="name">
+        Whats app
+        <div class="text">
+          +8210-9590-6211
+        </div>
+      </div>
+      <div class="name">
+        Tel
+        <div class="text">
+          +82 2-2272-1025
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -166,56 +166,59 @@
 
     .settings {
       width: 91.7%;
-      height: 20%;
-      display: table;
       position: absolute;
-
+      top:10%;
+      display: table;
     }
 
     .settings > p {
       display: table-cell;
+      width: 94%;
       vertical-align: middle;
       font-family: ProximaNovaSoft;
       font-size: 130%;
       font-weight: 500;
       text-align: left;
       color: #000000;
+      float: left;
     }
 
     .customer_service {
       width: 91.7%;
-      height: 20%;
       position: absolute;
-      top: 20%;
+      top: 30%;
       display: table;
     }
 
     .customer_service > p {
       display: table-cell;
+      width: 94%;
       vertical-align: middle;
       font-family: ProximaNovaSoft;
       font-size: 130%;
       font-weight: 500;
       text-align: left;
       color: #000000;
+      float: left;
     }
 
     .agreement_of_utilization {
       width: 91.7%;
-      height: 20%;
       position: absolute;
-      top: 40%;
+      top: 50%;
       display: table;
     }
 
     .agreement_of_utilization > p {
       display: table-cell;
+      width: 94%;
       vertical-align: middle;
       font-family: ProximaNovaSoft;
       font-size: 130%;
       font-weight: 500;
       text-align: left;
       color: #000000;
+      float: left;
     }
 
     .hr_1 {
@@ -241,6 +244,11 @@
       position: absolute;
       top: 60%;
     }
+
+    .icons {
+      width: 5%;
+      float: left;
+    }
   </style>
 </head>
 <body>
@@ -264,11 +272,18 @@
     </div>
 
     <div class="services">
-      <div class="settings" ng-click="setting()"><p>Settings</p></div>
+      <div class="settings" ng-click="setting()">
+        <p>Settings</p>
+        <div><img class="icons" ng-src="/youyou/img/settings.svg"></div>
+      </div>
       <div class="hr_1"></div>
-      <div class="customer_service" ng-click="customerService()"><p>Customer Service</p></div>
+      <div class="customer_service" ng-click="customerService()"><p>Customer Service</p>
+        <div><img class="icons" ng-src="/youyou/img/cs.svg"></div>
+      </div>
       <div class="hr_2"></div>
-      <div class="agreement_of_utilization" ng-click="agreement()"><p>Agreement of Utilization</p></div>
+      <div class="agreement_of_utilization" ng-click="agreement()"><p>Agreement of Utilization</p>
+        <div><img class="icons" ng-src="/youyou/img/agree.svg"></div>
+      </div>
       <div class="hr_3"></div>
     </div>
   </div>

@@ -4,14 +4,13 @@ var app = angular.module('MobileAngularUiExamples');
 app.controller('ProfileController', function ($scope, $location) {
 
   $scope.setting = function () {
-    console.log("Setting");
+    $location.path("settings");
   };
   $scope.customerService = function () {
-    console.log("customerService");
+    $location.path("youyou-info");
   };
-
   $scope.agreement = function () {
-    console.log("agreement");
+    $location.path("agreement");
   };
   $scope.clickedFooterHome = function () {
     $location.path("home");
@@ -42,4 +41,19 @@ app.controller('ProfileController', function ($scope, $location) {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
     $location.path("login");
   }
+});
+app.controller('YouyouInfoController', function ($scope) {
+  $scope.goback = function () {
+    history.back();
+  };
+});
+app.controller('AgreementController', function ($scope) {
+  $scope.goback = function () {
+    history.back();
+  };
+});
+app.controller('SettingsController', function ($scope) {
+  $scope.goback = function () {
+    history.back();
+  };
 });

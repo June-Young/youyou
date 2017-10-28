@@ -52,4 +52,7 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/gallery', {templateUrl: '/youyou/pages/gallery.html', controller: 'GalleryController', reloadOnSearch: false});
   $routeProvider.when('/question', {templateUrl: '/youyou/pages/question.html', controller: 'QuestionController', reloadOnSearch: false});
   $routeProvider.when('/thankyou', {templateUrl: '/youyou/pages/thankyou.html', controller: 'ThankyouController', reloadOnSearch: false});
+  $routeProvider.when('/youyou-info', {templateUrl: '/youyou/pages/youyou-info.html', controller: 'YouyouInfoController', reloadOnSearch: false});
+  $routeProvider.when('/agreement', {templateUrl: '/youyou/pages/agreement.html', controller: 'AgreementController', reloadOnSearch: false});
+  $routeProvider.when('/settings', {templateUrl: '/youyou/pages/settings.html', controller: 'SettingsController', reloadOnSearch: false});
 });
