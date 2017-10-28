@@ -7,7 +7,7 @@ app.controller('HomeController', function ($scope, $location) {
   };
 
   $scope.questionClick = function () {
-    console.log("question click");
+    $location.path("question");
   };
 
 
@@ -51,21 +51,6 @@ app.controller('HomeController', function ($scope, $location) {
         }
       });
   };
-
-
-/*  if ('serviceWorker' in navigator && 'PushManager' in window) {
-    console.log('Service Worker and Push is supported');
-
-    navigator.serviceWorker.register('/firebase-messaging-sw.js')
-      .then(function (swReg) {
-        console.log('Service Worker is registered', swReg);
-      })
-      .catch(function (error) {
-        console.error('Service Worker Error', error);
-      });
-  } else {
-    console.warn('Push messaging is not supported');
-  }*/
 
   var user = firebase.auth().currentUser;
   if (user) {

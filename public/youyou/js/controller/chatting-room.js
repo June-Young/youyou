@@ -1,7 +1,8 @@
 var app = angular.module('MobileAngularUiExamples');
 
 
-app.controller('chattingroom', function ($scope, $location) {
+app.controller('chattingroom', function ($scope, $location, $routeParams) {
+
     var roomName = sessionStorage.getItem("roomName");
     var myDisplayName = '';
     var auth = firebase.auth();
@@ -29,6 +30,7 @@ app.controller('chattingroom', function ($scope, $location) {
         setScrollTop();
       }
     };
+
 
     setScrollTop = function () {
       var objDiv = document.getElementById("messages");
@@ -75,7 +77,7 @@ app.controller('chattingroom', function ($scope, $location) {
 
       var messageVal = {};
       messageVal[myid] = {
-        name: currentUser.displayName,
+        name: currentUser.displayName || 'Anonymous',
         photourl: currentUser.photoURL || '/youyou/img/profile_placeholder.png',
         text: text
       };
@@ -85,7 +87,6 @@ app.controller('chattingroom', function ($scope, $location) {
         $scope.$apply(function () {
           $scope.input = '';
         });
-
 
         // unchecked 갱신
         firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);

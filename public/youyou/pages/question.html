@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 25px;
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #container #header {
+      width: 100%;
+      height: 60px;
+
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 25px;
+    }
+
+    #container #messages {
+      width: 100%;
+      position: absolute;
+      top: 85px;
+      bottom: 50px;
+      overflow: scroll;
+    }
+
+    #container #sender {
+      width: 100%;
+      height: 50px;
+      position: fixed;
+      bottom: 0px;
+
+    }
+
+    .combined-shape {
+      width: 6.1%;
+      height: 41.8%;
+      font-weight: bold;
+      border-radius: 1.5px;
+      color: #1a395f;
+      font-size: 100%;
+      position: absolute;
+      top: 29.1%;
+      left: 4.1%;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 85px;
+    }
+
+
+    .imgs {
+      position: absolute;
+      top:10px;
+      left: 4.2%;
+    }
+
+    .input-div {
+      width: 90%;
+      height:85%;
+      position: absolute;
+      left: 4.2%;
+      top: 20px;
+    }
+    .edit {
+      width: 100%;
+      height:100%;
+      color: #b5b5b5;
+      border: none;
+    }
+
+    .senderButton {
+      font-size: 130%;
+      text-align: left;
+
+      font-family: ProximaNovaSoft;
+      font-weight: 500;
+      color: #fee050;
+      position: absolute;
+      left: 82.8%;
+      top: 30%;
+    }
+
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header" class="table">
+    <div class="combined-shape" ng-click="goback()">
+      <img src="/youyou/img/back.svg">
+    </div>
+    <div class="float">
+      <div ng-click="sendMessage()" class="senderButton">Send</div>
+    </div>
+  </div>
+  <div class="hr-top"></div>
+  <div id="messages">
+    <div class="input-div">
+      <textarea ng-model="input" required="string" placeholder="typing,,," class="edit"></textarea>
+    </div>
+  </div>
+  <div id="sender">
+    <div>
+      <div class="float imgs">
+        <div class="float">
+          <img src="/youyou/img/camera.svg">
+        </div>
+        <div class="float" style="margin-left:15px">
+          <img src="/youyou/img/album.svg">
+        </div>
+        <div class="float" style="margin-left:15px">
+          <img src="/youyou/img/map.svg">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
