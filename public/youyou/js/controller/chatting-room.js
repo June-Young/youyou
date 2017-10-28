@@ -11,6 +11,11 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     var myid = '';
 
 
+    $scope.map = function(){
+
+      $location.path("skMap");
+      console.log("map clicked");
+    };
     var mapChecker=function(){
       console.log('mapChecker');
       console.log($routeParams.type);
