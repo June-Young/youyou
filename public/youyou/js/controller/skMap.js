@@ -16,12 +16,14 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
 
   function initializeWithShare(startX, startY) {
     // ?type=share&sx=14152221.255693141&sy=4496551.406476195
-    makeMarker(new Tmap.LonLat(startX, startY));
+    // makeMarker(new Tmap.LonLat(startX, startY));
+    shareParam1();
   }
 
   function initializeWithRoute(startX, startY, endX, endY) {
     // ?type=route&sx=14152221.255693141&sy=4496551.406476195&ex=14135016.577353&ey=4518074.1072027
-    getRouteWithLocations(new Tmap.LonLat(startX, startY), new Tmap.LonLat(endX, endY));
+    // getRouteWithLocations(new Tmap.LonLat(startX, startY), new Tmap.LonLat(endX, endY));
+    shareParam2();
   }
 
   function getParameters() {
@@ -221,6 +223,14 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     }
   }
 
+  function shareParam1() {
+    $location.path("chattingroom").search({type: "share" , sx: 14152221.255693141, sy: 4496551.406476195});
+  }
+
+  function shareParam2() {
+    $location.path("chattingroom").search({type: "route" , sx: 14152221.255693141, sy: 4496551.406476195 , ex:14135016.577353,ey:4518074.1072027});
+  }
+
   function popupTest(index, lonlat) {
     var popup = new Tmap.Popup("p1", lonlat, new Tmap.Size(100, 150),
       "<div id='popupID'>index" +
@@ -246,6 +256,8 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
   $scope.touchClick = function () {
     console.log("touchClick invoke");
   };
+
+
 });
 
 function popupProxyMethod1() {
