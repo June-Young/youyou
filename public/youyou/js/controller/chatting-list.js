@@ -29,12 +29,12 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
     '        </div> ' +
     '        <div class="otherSection"> ' +
     '          <div class="name-modified"> ' +
-    '            <div class="nickname" ng-style="fontStyle">nickname</div> ' +
-    '            <div class="lastModified" ng-style="fontStyle">lastModified</div> ' +
+    '            <div class="nickname" ng-style="fontStyle"></div> ' +
+    '            <div class="lastModified" ng-style="fontStyle"></div> ' +
     '          </div> ' +
     '          <div class="message-uncheked"> ' +
-    '            <div class="lastMessage" ng-style="fontStyle">lastMessage</div> ' +
-    '            <div class="uncheked"><p class="uncheked-val">1</p></div> ' +
+    '            <div class="lastMessage" ng-style="fontStyle"></div> ' +
+    '            <div class="uncheked"><p class="uncheked-val"></p></div> ' +
     '          </div> ' +
     '        </div> ' +
     '      </div> ' +
@@ -110,6 +110,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
               var lastMessage = div.querySelector('.lastMessage');
               var lastModified = div.querySelector('.lastModified');
               var uncheked = div.querySelector('.uncheked-val');
+              var unchekedDiv = div.querySelector('.uncheked');
 
               lastMessage.innerHTML = rv.lastMessage;
               lastModified.innerHTML = timeFormat(modifiedTime);
@@ -126,10 +127,14 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
               });
 
               firebase.database().ref('uncheked/' + my + '/' + roomName).on('value', function (unchekedSnapshot) {
-                if (unchekedSnapshot.val()) {
-                  uncheked.innerHTML = unchekedSnapshot.val();
+                var count = unchekedSnapshot.val();
+                console.log('illi' + count);
+                if (count === 0) {
+                  console.log('hidden' + count);
+                  unchekedDiv.style.visibility = "hidden";
                 } else {
-                  uncheked.innerHTML = 0;
+                  unchekedDiv.style.visibility = "visible";
+                  uncheked.innerHTML = count;
                 }
               });
 
