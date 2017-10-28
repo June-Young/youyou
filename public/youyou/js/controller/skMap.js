@@ -224,11 +224,17 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
   }
 
   function shareParam1() {
-    $location.path("chattingroom").search({type: "share" , sx: 14152221.255693141, sy: 4496551.406476195});
+    $location.path("chattingroom").search({type: "share", sx: 14152221.255693141, sy: 4496551.406476195});
   }
 
   function shareParam2() {
-    $location.path("chattingroom").search({type: "route" , sx: 14152221.255693141, sy: 4496551.406476195 , ex:14135016.577353,ey:4518074.1072027});
+    $location.path("chattingroom").search({
+      type: "route",
+      sx: 14152221.255693141,
+      sy: 4496551.406476195,
+      ex: 14135016.577353,
+      ey: 4518074.1072027
+    });
   }
 
   function popupTest(index, lonlat) {

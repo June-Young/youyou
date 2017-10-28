@@ -19,6 +19,8 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     var mapChecker=function(){
       console.log('mapChecker');
       console.log($routeParams.type);
+      console.log($routeParams.sx);
+      console.log($routeParams.sy);
     };
     mapChecker();
 
