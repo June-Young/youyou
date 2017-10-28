@@ -109,18 +109,16 @@ app.controller('YouyouProfileController', function ($scope, $location) {
         roomName = targetId + '-!-' + myid
       }
       firebase.database().ref('rooms/' + roomName).once('value').then(function (roomIsValid) {
-        if (roomIsValid.val()) {
-          sessionStorage.setItem("roomName", roomName);
-        } else {
-
+        sessionStorage.setItem("roomName", roomName);
+        if (!roomIsValid.val()) {
           //roomList에 방 생성
           firebase.database().ref('rooms/' + roomName).set({lastMessage: ''});
 
           //나와 상대방 계정에 방 추가
-          var roomObj = {};
-          roomObj[roomName] = getCurrentTime();
-          firebase.database().ref('roomList/' + myid).set(roomObj);
-          firebase.database().ref('roomList/' + targetId).set(roomObj);
+          // var roomObj = {};
+          // roomObj[roomName] = getCurrentTime();
+          firebase.database().ref('roomList/' + myid + '/' + roomName).set(getCurrentTime());
+          firebase.database().ref('roomList/' + targetId + '/' + roomName).set(getCurrentTime());
         }
         $scope.$apply(function () {
           $location.path("chattingroom");

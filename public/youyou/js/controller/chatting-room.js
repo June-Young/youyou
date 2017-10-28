@@ -96,12 +96,13 @@ app.controller('chattingroom', function ($scope, $location) {
 
         setScrollTop();
 
-      }.bind(this)).catch(function (error) {
+      }).catch(function (error) {
         console.error('Error writing new message to Firebase Database', error);
       });
     };
 
     $scope.goback = function () {
+      messagesRef.off();
       history.back();
     };
 
@@ -132,6 +133,10 @@ app.controller('chattingroom', function ($scope, $location) {
       }
     };
 
+
+    firebase.messaging().onMessage(function (payload) {
+      console.log('onMessage : ' + payload);
+    });
     var user = firebase.auth().currentUser;
     if (user) {
       if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {

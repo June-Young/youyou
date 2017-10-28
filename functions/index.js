@@ -33,8 +33,13 @@ exports.sendNotification = functions.database.ref('/messages/{roomName}/{message
   if (!event.data.val()) {
     return console.log('event has not data.' + roomName + ' , ' + message);
   }
-  console.log('new message roomName:', roomName, 'message:', message, 'senderId: ',senderId);
+  console.log('new message roomName:', roomName, 'message:', message, 'senderId: ', senderId);
 
+
+  var eventVal=event.data.val();
+  var senderName = eventVal.name;
+  var senderText = eventVal.text;
+  var senderPhoto = eventVal.photourl;
   var splited = roomName.split('-!-');
   var targetId = '';
   if (splited[0] === senderId) {
@@ -46,12 +51,9 @@ exports.sendNotification = functions.database.ref('/messages/{roomName}/{message
   // Get the list of device notification tokens.
   const getDeviceTokensPromise = admin.database().ref(`/users/${targetId}/notifications`).once('value');
   // Get the follower profile.
-  const getSenderProfilePromise = admin.database().ref(`/users/${senderId}`).once('value');
 
-  return Promise.all([getDeviceTokensPromise, getSenderProfilePromise]).then(results => {
+  return Promise.all([getDeviceTokensPromise]).then(results => {
     const tokensSnapshot = results[0];
-    const sender = results[1];
-
     // Check if there are any device tokens.
     if (!tokensSnapshot.hasChildren()) {
       return console.log('There are no notification tokens to send to.');
@@ -64,9 +66,10 @@ exports.sendNotification = functions.database.ref('/messages/{roomName}/{message
     // Notification details.
     const payload = {
       notification: {
-        title: `${sender.displayName}`,
-        body: 'new message!',
-        icon: `${sender.photoURL}`,
+        title: senderName,
+        body: senderText,
+        icon: senderPhoto,
+        click_action:"https://youyou-2e8cf.firebaseapp.com/#/login"
       }
     };
 
