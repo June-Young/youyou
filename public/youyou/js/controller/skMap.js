@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope', '$http' ,"angular-screenshot", function ($scope, $http, $event) {
+angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope', '$http', function ($scope) {
   $scope.posCount = 0;
   function init() {
     $scope.map = new Tmap.Map({div: "map_div", width: '100%', height: '100%'});
@@ -42,18 +42,13 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(processLocation);
     } else {
-      // x.innerHTML = "Geolocation is not supported by this browser.";
       alert("Geolocation is not supported by this browser");
     }
   }
 
   function processLocation(position) {
-
     console.log("latitude : " + position.coords.latitude + " , longtitude : " + position.coords.longitude);
     $scope.myLonLat = transformLonLat(position.coords.longitude, position.coords.latitude);
-    // makeMarker($scope.myLonLat);
-    // addEventExample();
-    popupTest($scope.myLonLat);
   }
 
   function makeMarker(lonlat) {
@@ -125,6 +120,7 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
     // 위처럼 소스를 입력하면 마커가 생김
     // 아래 소스를 넣으면 센터 위치변경
     marker.events.register("click", marker, onMouseMarkerEvent);
+    marker.events.register("touchend", marker, onMouseMarkerEvent);
     marker.events.register("mouseover", marker, onMouseMarkerEvent);
     marker.events.register("mouseout", marker, onMouseMarkerEvent);
   }
@@ -139,41 +135,36 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
     return resultLonLat;
   }
 
-  // map.setCenter(new Tmap.LonLat(14135893.887852, 4518348.1852606), 14);
-
-  function addPolyLine() {
-    var pointList = [];
-    pointList.push(new Tmap.Geometry.Point(14132077.76641, 4520441.6071475));
-    pointList.push(new Tmap.Geometry.Point(14133147.884806, 4519180.3961808));
-    pointList.push(new Tmap.Geometry.Point(14134982.373485, 4519132.6230381));
-    pointList.push(new Tmap.Geometry.Point(14136644.87885, 4519209.0600664));
-    pointList.push(new Tmap.Geometry.Point(14136797.752907, 4517603.8824724));
-    pointList.push(new Tmap.Geometry.Point(14134533.305944, 4516906.3945893));
-    pointList.push(new Tmap.Geometry.Point(14134370.877259, 4515377.6540236));
-    pointList.push(new Tmap.Geometry.Point(14134370.877259, 4514919.0318539));
-    pointList.push(new Tmap.Geometry.Point(14132498.170066, 4513476.282945));
-
-    var lineString = new Tmap.Geometry.LineString(pointList);
-
-    var style_bold = {strokeWidth: 6};
-    var mLineFeature = new Tmap.Feature.Vector(lineString, null, style_bold);
-
-    var vectorLayer = new Tmap.Layer.Vector("vectorLayerID");
-    $scope.map.addLayer(vectorLayer);
-
-    vectorLayer.addFeatures([mLineFeature]);
-
-  }
-
   function addMapEvent() {
-    $scope.map.events.register("click", $scope.map, onClickMap)
+    // $scope.map.events.register("click", $scope.map, onClickMap);
+    $scope.map.events.register("touchstart", $scope.map, onTouchStart);
+    $scope.map.events.register("touchend", $scope.map, onTouchEnd);
+    $scope.map.events.register("touchmove", $scope.map, onTouchMove);
+    $scope.map.events.register("touchcancel", $scope.map, onTouchCancel);
   }
 
-  function onClickMap(evt) {
-    console.log("click event location : " + evt.clientX, evt.clientY);
-    if (evt.type == "click") {
-      makeMarker(getLonLatFromMapLocation(evt.clientX, evt.clientY));
+  function onTouchCancel(evt) {
+    console.log("onTouchCancel event location " + evt);
+  }
+
+  function onTouchStart(evt) {
+    console.log("onTouchStart event location " + evt);
+  }
+
+  $scope.touchMoveCount = 0;
+  function onTouchMove(evt) {
+    console.log("onTouchMove event location : " + evt);
+    $scope.touchMoveCount++;
+  }
+
+  function onTouchEnd(evt) {
+    console.log("onTouchEnd event location : " + evt.xy.x + ", " + evt.xy.y);
+    if ($scope.touchMoveCount > 3) {
+      console.log("it might just move action");
+    } else {
+      makeMarker(getLonLatFromMapLocation(evt.xy.x, evt.xy.y));
     }
+    $scope.touchMoveCount = 0;
   }
 
   function getLonLatFromMapLocation(clientX, clientY) {
@@ -183,18 +174,15 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
   }
 
   function onMouseMarkerEvent(evt) {
-
+    console.log("evt type : " + evt.type);
     if (evt.type == "mouseover") {
-      // this.show();
     } else if (evt.type == "click") {
       $scope.markerFlag = false;
-      // addEventExample();
       this.destroy();
       if ($scope.posCount == 1) $scope.posCount = 0;
       else if ($scope.posCount == 2) $scope.posCount = 1;
       console.log("onMouseMarkerEvent");
     } else if (evt.type == "mouseout") {
-      // this.hide();
     }
   }
 
@@ -211,9 +199,6 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
 
   function onComplete() {
     routeLayerInit();
-    // 여기서 return 된 feature 들을 vector layer 에 출력
-    // console.log("response : " + response);
-    // jQuery('#loading').css('display', "block");
     var kmlForm = new Tmap.Format.KML().read(this.responseXML);
     for (var i = 0; i < kmlForm.length; i++) {
       console.log("kmlForm[ " + i + " ]  : " + kmlForm[i].data.distance + " , description = " + kmlForm[i].data.name + " , " + kmlForm[i].data.description);
@@ -226,12 +211,10 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
     var popup = new Tmap.Popup("p1", lonlat, new Tmap.Size(100, 150),
       "<div id='popupID'>index" +
       "<button onclick='popupProxyMethod1()'>Button1</button><br/>" +
-      "<button onclick='popupProxyMethod2()'>Button2</button><br/>" +
-      "<button onclick='popupProxyMethod3()'>Button3</button></div>"
+      "<button ng-click='proxyMethod()'>Button4</button></div>"
     );
     $scope.map.addPopup(popup);
     popup.show();
-
   }
 
   function onProgress() {
@@ -250,13 +233,16 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', ['$scope
       "<div id='popupID'>1<button onclick='popButtonClick()'>Button</button></div>"
     );
     $scope.map.addPopup(popup);
-    // popup.show();
-    // popup.hide();
   }
 
   init();
   getCurrentLocation($scope.map);
   addMapEvent();
+
+  $scope.proxyMethod = function () {
+    $scope.markerFlag = false;
+    console.log("proxy Method Call . ");
+  }
 
   $scope.proxyMethod = function (eventName) {
     $scope.markerFlag = false;

@@ -20,13 +20,15 @@ angular.module('MobileAngularUiExamples').controller('WeatherController', ['$sco
   function getWeatherInfo(longtude, latitude) {
     var req = {
       method: 'GET',
-      url: 'http://apis.skplanetx.com/weather/summary?version=1&lat=' + latitude + '&lon=' + longtude,
+      url: 'https://cors-anywhere.herokuapp.com/http://apis.skplanetx.com/weather/summary?version=1&lat=' + latitude + '&lon=' + longtude,
       headers: {
         'appKey': "54c99cf9-dd09-3934-9707-b60bf42f45be",
-        'Accept': "application/json"
+        'Accept': "application/json",
+        'x-requested-with' : "XMLHTTPREQUEST"
       }
     }
 
+    console.log("getWeatherInfo req : "+ req.url);
     $http(req).then(function (response) {
 
       console.info(response);
@@ -44,13 +46,14 @@ angular.module('MobileAngularUiExamples').controller('WeatherController', ['$sco
   function getCurrentWeather(longtude, latitude) {
     var req = {
       method: 'GET',
-      url: 'http://apis.skplanetx.com/weather/current/minutely?version=1&lat=' + latitude + '&lon=' + longtude,
+      url: 'https://cors-anywhere.herokuapp.com/http://apis.skplanetx.com/weather/current/minutely?version=1&lat=' + latitude + '&lon=' + longtude,
       headers: {
         'appKey': "54c99cf9-dd09-3934-9707-b60bf42f45be",
-        'Accept': "application/json"
+        'Accept': "application/json",
+        'x-requested-with' : "XMLHTTPREQUEST"
       }
     }
-
+    console.log("getCurrentWeather req : "+ req.url);
     $http(req).then(function (response) {
 
       console.info(response);
@@ -65,13 +68,15 @@ angular.module('MobileAngularUiExamples').controller('WeatherController', ['$sco
   function getDustInfo(longtude, latitude) {
     var req = {
       method: 'GET',
-      url: 'http://apis.skplanetx.com/weather/dust?version=1&lat=' + latitude + '&lon=' + longtude,
+      url: 'https://cors-anywhere.herokuapp.com/http://apis.skplanetx.com/weather/dust?version=1&lat=' + latitude + '&lon=' + longtude,
       headers: {
         'appKey': "54c99cf9-dd09-3934-9707-b60bf42f45be",
-        'Accept': "application/json"
+        'Accept': "application/json",
+        'x-requested-with' : "XMLHTTPREQUEST"
       }
     }
 
+    console.log("getDustInfo req : "+ req.url);
     $http(req).then(function (response) {
 
       console.info(response.data);
