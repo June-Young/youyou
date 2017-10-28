@@ -119,9 +119,8 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     // 아래 소스를 넣으면 센터 위치변경
     $scope.map.setCenter(lonlat, 16);
 
-    marker.events.register("click", marker, onMouseMarkerEvent);
-    marker.events.register("mouseover", marker, onMouseMarkerEvent);
-    marker.events.register("mouseout", marker, onMouseMarkerEvent);
+    marker.events.register("touchend", marker, onMouseMarkerEvent);
+    marker.events.register("touchstart", marker, onMouseMarkerEvent);
   }
 
   function getTourInfoFromFireBase() {
@@ -184,14 +183,13 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
 
   function onMouseMarkerEvent(evt) {
     console.log("evt type : " + evt.type);
-    if (evt.type == "mouseover") {
-    } else if (evt.type == "click") {
+    if (evt.type == "touchstart") {
+    } else if (evt.type == "touchend") {
       $scope.markerFlag = false;
       this.destroy();
       if ($scope.posCount == 1) $scope.posCount = 0;
       else if ($scope.posCount == 2) $scope.posCount = 1;
       console.log("onMouseMarkerEvent");
-    } else if (evt.type == "mouseout") {
     }
   }
 
@@ -227,7 +225,8 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     var popup = new Tmap.Popup("p1", lonlat, new Tmap.Size(100, 150),
       "<div id='popupID'>index" +
       "<button onclick='popupProxyMethod1()'>Button1</button><br/>" +
-      "<button ng-click='proxyMethod()'>Button4</button></div>"
+      "<button data-ng-click='popupProxyMethod1()'>Button1</button><br/>" +
+      "<button data-ng-click='touchClick()'>Button4</button></div>"
     );
     $scope.map.addPopup(popup);
     popup.show();
@@ -244,7 +243,9 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
   }
 
   initialize();
-
+  $scope.touchClick = function () {
+    console.log("touchClick invoke");
+  };
 });
 
 function popupProxyMethod1() {
