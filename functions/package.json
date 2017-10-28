@@ -1,0 +1,8 @@
+{
+  "name": "sendNotification",
+  "description": "This function is send pushing message",
+  "dependencies": {
+    "firebase-admin": "^4.1.2",
+    "firebase-functions": "^0.5.1"
+  }
+}
