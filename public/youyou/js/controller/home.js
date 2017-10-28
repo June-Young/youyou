@@ -24,16 +24,60 @@ app.controller('HomeController', function ($scope, $location) {
     $location.path("profile");
   };
 
+  const messaging = firebase.messaging();
+  let permission = function () {
+    messaging.requestPermission()
+      .then(function () {
+        console.log("permission grated");
+        getToken();
+      }).catch(function (err) {
+      console.log('Unable to get permission to notify.' + err);
+    });
+  };
+
+  let getToken = function (id) {
+    messaging.getToken()
+      .then(function (currentToken) {
+        //DB확인하고 없으면 넣는다.
+        var device = navigator.userAgent || 'Unknown';
+        var data = [];
+        data[currentToken] = device;
+        firebase.database().ref('users/' + id + '/notifications').set(data);
+        console.log(navigator.userAgent);
+        if (currentToken) {
+          console.log('current ' + currentToken);
+        } else {
+          permission();
+        }
+      });
+  };
+
+
+/*  if ('serviceWorker' in navigator && 'PushManager' in window) {
+    console.log('Service Worker and Push is supported');
+
+    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+      .then(function (swReg) {
+        console.log('Service Worker is registered', swReg);
+      })
+      .catch(function (error) {
+        console.error('Service Worker Error', error);
+      });
+  } else {
+    console.warn('Push messaging is not supported');
+  }*/
 
   var user = firebase.auth().currentUser;
   if (user) {
-    firebase.database().ref('users/' + user.uid).once('value').then(function (userDetailSnapshot) {
+    const uid = user.uid;
+    firebase.database().ref('users/' + uid).once('value').then(function (userDetailSnapshot) {
       var displayName = userDetailSnapshot.val() && userDetailSnapshot.val().displayName || 'Unknown';
       $scope.$apply(function () {
         $scope.nickname = displayName;
       });
     });
-  }else{
+    getToken(uid);
+  } else {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
     $location.path("login");
   }

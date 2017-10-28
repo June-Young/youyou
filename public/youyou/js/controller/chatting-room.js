@@ -13,11 +13,8 @@ app.controller('chattingroom', function ($scope, $location) {
 
     addText = function (photourl, text, ownership) {
       if (text) {
-
-        // console.log(cutter(text));
         var obj = {
           photourl: photourl,
-          // text: cutter(text),
           text: text,
           ownership: ownership
         };
@@ -43,15 +40,17 @@ app.controller('chattingroom', function ($scope, $location) {
     let loadMessage = function () {
       messagesRef.off();
       setMessage = function (messages) {
-        var message = messages.val();
-        var ownership = false;
-        if (myDisplayName === message.name) {
-          ownership = true;
-        } else {
-          ownership = false;
-        }
-        addText(message.photourl, message.text, ownership);
 
+        messages.forEach(function (snapshot) {
+          var message = snapshot.val();
+          var ownership = false;
+          if (myDisplayName === message['name']) {
+            ownership = true;
+          } else {
+            ownership = false;
+          }
+          addText(message['photourl'], message['text'], ownership);
+        });
       };
       messagesRef.on('child_added', setMessage);
     };
@@ -72,12 +71,16 @@ app.controller('chattingroom', function ($scope, $location) {
       var currentUser = auth.currentUser;
       var text = $scope.input;
       console.log("Current User" + currentUser);
+      console.log("myid" + myid);
 
-      messagesRef.push({
+      var messageVal = {};
+      messageVal[myid] = {
         name: currentUser.displayName,
         photourl: currentUser.photoURL || '/youyou/img/profile_placeholder.png',
         text: text
-      }).then(function () {
+      };
+
+      messagesRef.push(messageVal).then(function () {
         // Clear message text field and SEND button state.
         $scope.$apply(function () {
           $scope.input = '';
@@ -93,12 +96,13 @@ app.controller('chattingroom', function ($scope, $location) {
 
         setScrollTop();
 
-      }.bind(this)).catch(function (error) {
+      }).catch(function (error) {
         console.error('Error writing new message to Firebase Database', error);
       });
     };
 
     $scope.goback = function () {
+      messagesRef.off();
       history.back();
     };
 
@@ -129,6 +133,10 @@ app.controller('chattingroom', function ($scope, $location) {
       }
     };
 
+
+    firebase.messaging().onMessage(function (payload) {
+      console.log('onMessage : ' + payload);
+    });
     var user = firebase.auth().currentUser;
     if (user) {
       if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
