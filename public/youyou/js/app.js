@@ -51,4 +51,5 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/tourApi', {templateUrl: '/youyou/pages/tourApi.html', controller: 'TourApiController', reloadOnSearch: false});
   $routeProvider.when('/gallery', {templateUrl: '/youyou/pages/gallery.html', controller: 'GalleryController', reloadOnSearch: false});
   $routeProvider.when('/question', {templateUrl: '/youyou/pages/question.html', controller: 'QuestionController', reloadOnSearch: false});
+  $routeProvider.when('/thankyou', {templateUrl: '/youyou/pages/thankyou.html', controller: 'ThankyouController', reloadOnSearch: false});
 });

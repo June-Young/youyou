@@ -32,15 +32,24 @@ app.controller('QuestionController', function ($scope, $location) {
       youyouList.forEach(function (youyou) {
 
         var targetId = youyou.key;
-        console.log('key' + targetId);
-        console.log('val' + youyou.val());
-
         var roomName = '';
         if (myid > targetId) {
           roomName = myid + '-!-' + targetId
         } else {
           roomName = targetId + '-!-' + myid
         }
+
+
+        firebase.database().ref('rooms/' + roomName).once('value').then(function (roomIsValid) {
+          if (!roomIsValid.val()) {
+            //roomList에 방 생성
+            firebase.database().ref('rooms/' + roomName).set({lastMessage: ''});
+
+            //나와 상대방 계정에 방 추가
+            firebase.database().ref('roomList/' + myid + '/' + roomName).set(getCurrentTime());
+            firebase.database().ref('roomList/' + targetId + '/' + roomName).set(getCurrentTime());
+          }
+        });
 
 
         firebase.database().ref("messages/" + roomName).push(messageVal).then(function () {
@@ -57,7 +66,7 @@ app.controller('QuestionController', function ($scope, $location) {
           });
 
           $scope.$apply(function () {
-            $location.path("home");
+            $location.path("thankyou");
           });
         }).catch(function (error) {
           console.error('Error writing new message to Firebase Database', error);
@@ -65,16 +74,23 @@ app.controller('QuestionController', function ($scope, $location) {
       });
 
     });
-    //방을 만든다. 방이 있으면 메시지만 보낸다.
-
   };
-  checkSignedInWithMessage = function () {
+  let checkSignedInWithMessage = function () {
     // Return true if the user is signed in Firebase
     if (auth.currentUser) {
       return true;
     } else {
       return false;
     }
+  };
+
+  let pad2 = function (n) {
+    return n < 10 ? '0' + n : n
+  };
+
+  let getCurrentTime = function () {
+    var date = new Date();
+    return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
   };
 
   currentUser = auth.currentUser;
@@ -84,4 +100,11 @@ app.controller('QuestionController', function ($scope, $location) {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
     $location.path("login");
   }
+});
+app.controller('ThankyouController', function ($scope, $location) {
+  setTimeout(function () {
+    $scope.$apply(function () {
+      $location.path("home")
+    });
+  }, 2000);
 });

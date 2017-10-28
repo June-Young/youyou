@@ -115,8 +115,6 @@ app.controller('YouyouProfileController', function ($scope, $location) {
           firebase.database().ref('rooms/' + roomName).set({lastMessage: ''});
 
           //나와 상대방 계정에 방 추가
-          // var roomObj = {};
-          // roomObj[roomName] = getCurrentTime();
           firebase.database().ref('roomList/' + myid + '/' + roomName).set(getCurrentTime());
           firebase.database().ref('roomList/' + targetId + '/' + roomName).set(getCurrentTime());
         }

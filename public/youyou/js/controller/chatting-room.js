@@ -10,8 +10,14 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     var target = '';
     var myid = '';
 
-    var data = [];
 
+    var mapChecker=function(){
+      console.log('mapChecker');
+      console.log($routeParams.type);
+    };
+    mapChecker();
+
+    var data = [];
     addText = function (photourl, text, ownership) {
       if (text) {
         var obj = {
