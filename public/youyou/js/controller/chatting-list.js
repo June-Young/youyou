@@ -74,6 +74,13 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
     // Make sure we remove all previous listeners.
     roomListRef.off();
 
+   /* roomListRef.once('value').then(function (rooms) {
+      rooms.forEach(function (room) {
+
+        var roomName=room.key;
+        var lastModified = room.val();
+      });
+    });*/
 
     setRoom = function (roomlist) {
 
@@ -150,8 +157,8 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       });
     };
 
-    roomListRef.orderByValue().limitToLast(30).on('child_added', setRoom);
-    roomListRef.orderByValue().limitToLast(30).on('child_changed', setRoom);
+    roomListRef.orderByValue().on('child_added', setRoom);
+    roomListRef.orderByValue().on('child_changed', setRoom);
   };
 
   var user = firebase.auth().currentUser;
