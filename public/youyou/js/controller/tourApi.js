@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('TourApiController', ['$scope', '$http', function ($scope, $http) {
+angular.module('YouyouWebapp').controller('TourApiController', ['$scope', '$http', function ($scope, $http) {
 
   var xhr = new XMLHttpRequest();
   var url = 'http://api.visitkorea.or.kr/openapi/service/rest/EngService/areaBasedList';

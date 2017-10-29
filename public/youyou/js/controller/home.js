@@ -1,4 +1,4 @@
-var app = angular.module('MobileAngularUiExamples');
+var app = angular.module('YouyouWebapp');
 
 
 app.controller('HomeController', function ($scope, $location) {

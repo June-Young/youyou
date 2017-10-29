@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('MobileAngularUiExamples');
+var app = angular.module('YouyouWebapp');
 
 app.directive('toucharea', ['$touch', function($touch) {
   // Runs during compile

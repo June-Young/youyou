@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MobileAngularUiExamples').controller('WeatherController', ['$scope', '$http', function ($scope, $http) {
+angular.module('YouyouWebapp').controller('WeatherController', ['$scope', '$http', function ($scope, $http) {
 
   function getLocation() {
     if (navigator.geolocation) {

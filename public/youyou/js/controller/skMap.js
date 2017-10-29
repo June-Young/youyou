@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('SkMapController', function ($scope, $location) {
+angular.module('YouyouWebapp').controller('SkMapController', function ($scope, $location) {
 
   function initialize() {
     //route flag

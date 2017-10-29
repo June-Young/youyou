@@ -6,7 +6,7 @@
 // Here is how to define your module
 // has dependent on mobile-angular-ui
 //
-var app = angular.module('MobileAngularUiExamples', [
+var app = angular.module('YouyouWebapp', [
   'ngRoute',
   'mobile-angular-ui',
   // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'.

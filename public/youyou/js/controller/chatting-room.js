@@ -1,4 +1,4 @@
-var app = angular.module('MobileAngularUiExamples');
+var app = angular.module('YouyouWebapp');
 
 
 app.controller('chattingroom', function ($scope, $location, $routeParams) {
