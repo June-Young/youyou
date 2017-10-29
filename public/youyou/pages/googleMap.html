@@ -1,0 +1,29 @@
+<style>
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+
+  .float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 999;
+  }
+
+  .my-float {
+    margin-top: 22px;
+  }
+</style>
+<div id="map"></div>
+<div>
+  <div id="floatingLocation" ng-show="floatingLocationStatus" class="float" style="right: 30%;"><i class="fa my-float"  data-ng-click="touchClick('location')">위치공유</i></div>
+  <div id="floatingRoute" data-ng-click="touchClick('route')" ng-show="floatingRouteStatus" class="float" style="right: 50%;"><i class="fa my-float" >루트공유</i></div>
+  <div class="float" data-ng-click="touchClick('myPosition')" style="right: 10%;"><i class="fa fa-arrow-down my-float" ></i>내 위치</div>
+</div>
