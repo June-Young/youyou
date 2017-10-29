@@ -25,9 +25,10 @@ app.controller('ProfileController', function ($scope, $location) {
     $location.path("profile");
   };
 
-  var user = firebase.auth().currentUser;
+  // var user = firebase.auth().currentUser;
+  var user = sessionStorage.getItem("myid");
   if (user) {
-    firebase.database().ref('users/' + user.uid).once('value').then(function (userDetailSnapshot) {
+    firebase.database().ref('users/' + user).once('value').then(function (userDetailSnapshot) {
       var displayName = userDetailSnapshot.val() && userDetailSnapshot.val().displayName || 'Anonymous';
       var photoURL = userDetailSnapshot.val() && userDetailSnapshot.val().photoURL || '/youyou/img/profile_placeholder.png';
       var country = userDetailSnapshot.val() && userDetailSnapshot.val().country || 'Unknown';
@@ -57,9 +58,10 @@ app.controller('SettingsController', function ($scope, $location) {
   $scope.switchYouyou = function () {
     //유저 정보 읽는다
     //youyou에 넣는다
-    var currentUser = firebase.auth().currentUser;
+    // var currentUser = firebase.auth().currentUser;
+    var currentUser = sessionStorage.getItem("myid");
     if (currentUser) {
-      var uid = currentUser.uid;
+      var uid = currentUser;
 
       firebase.database().ref('users/' + uid).once('value').then(function (userData) {
         var userVal = userData.val();
@@ -68,7 +70,7 @@ app.controller('SettingsController', function ($scope, $location) {
         var photo = userVal.photoURL;
 
         var obj = {likes: 0, response: 0, nickname: name, photoURL: photo};
-        firebase.database().ref('youyou/' + currentUser.uid).set(obj);
+        firebase.database().ref('youyou/' + currentUser).set(obj);
         $scope.$apply(function () {
           console.log("switch success");
           $location.path("home");

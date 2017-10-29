@@ -80,13 +80,7 @@ app.controller('YouyouListController', function ($scope, $location) {
 app.controller('YouyouProfileController', function ($scope, $location) {
   var targetId = sessionStorage.getItem("youyou_profile");
   var youyouList = firebase.database().ref('youyou/' + targetId);
-  var myid = '';
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-
-      myid = user.uid;
-    }
-  });
+  var myid = sessionStorage.getItem("myid");
   // Make sure we remove all previous listeners.
   youyouList.once('value').then(function (users) {
 

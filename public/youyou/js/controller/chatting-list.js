@@ -54,7 +54,8 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       container.innerHTML = templete;
       div = container.firstChild;
       div.setAttribute('id', roomName);
-      div.setAttribute('data-ng-click', 'backStyle={"background-color":"#fee050","box-shadow": "10 15px #666"};fontStyle={"color":"#ffffff"};clickRoom("' + roomName + '")');
+      // div.setAttribute('data-ng-click', 'backStyle={"background-color":"#fee050","box-shadow": "10 15px #666"};fontStyle={"color":"#ffffff"};clickRoom("' + roomName + '")');
+      div.setAttribute('data-ng-click', 'clickRoom("' + roomName + '")');
       $compile(div)($scope);
       messageList.appendChild(div);
     }
@@ -70,7 +71,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
   let getRoomInfo = function (uid) {
     // 방 정보 가져오기 시작
     var roomListRef = firebase.database().ref('roomList/' + uid);
-
+    console.log('mymy hiroom  . '+uid);
     // Make sure we remove all previous listeners.
     roomListRef.off();
 
@@ -82,9 +83,7 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       });
     });*/
 
-    setRoom = function (roomlist) {
-
-
+    loadRoom = function (roomlist) {
       // 접속한 유저가 가지고 있는 방 리스트를 불러옴
       var roomName = roomlist.key;
       var modifiedTime = roomlist.val();
@@ -135,7 +134,6 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
 
               firebase.database().ref('uncheked/' + my + '/' + roomName).on('value', function (unchekedSnapshot) {
                 var count = unchekedSnapshot.val();
-                console.log('illi' + count);
                 if (count === 0) {
                   console.log('hidden' + count);
                   unchekedDiv.style.visibility = "hidden";
@@ -157,16 +155,17 @@ app.controller('chattinglist', function ($scope, $compile, $location) {
       });
     };
 
-    roomListRef.orderByValue().on('child_added', setRoom);
-    roomListRef.orderByValue().on('child_changed', setRoom);
+    roomListRef.orderByValue().on('child_added', loadRoom);
+    roomListRef.orderByValue().on('child_changed', loadRoom);
   };
 
-  var user = firebase.auth().currentUser;
+  // var user = firebase.auth().currentUser;
+  var user = sessionStorage.getItem("myid");
   if (user) {
-    getRoomInfo(user.uid);
+    console.log('user id!! '+user);
+    getRoomInfo(user);
   } else {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
     $location.path("login");
   }
-
 });

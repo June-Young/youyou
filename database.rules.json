@@ -3,17 +3,9 @@
 		"users": {
 			".read": true,
 				"$uid": {
-					".write": "auth.uid === $uid"
+					".write": true
 				}
 		},
-			"followers": {
-				"$followedUid": {
-					"$followerUid": {
-						".read": "auth.uid === $followerUid",
-						".write": "auth.uid === $followerUid"
-					}		
-				}
-			},
 			"rooms":{
 				".read": true,
 				".write":true
@@ -27,7 +19,7 @@
 			},
 			"roomList":{
 				"$uid":{
-					".read":"auth.uid === $uid",
+					".read":true,
 					".indexOn": ".value" 
 				},
 				".write":true
@@ -42,4 +34,5 @@
 			}
 	}
 }
+
 

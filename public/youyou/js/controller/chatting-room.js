@@ -5,51 +5,51 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
 
     var roomName = sessionStorage.getItem("roomName");
     var myDisplayName = '';
-    var auth = firebase.auth();
+    var myPhotoURL = '';
     var messagesRef = firebase.database().ref("messages/" + roomName);
     var target = '';
     var myid = '';
 
 // modal to image upload start
-  $scope.name = "Select Files to Upload";
-  $scope.images = [];
-  $scope.display = $scope.images[$scope.images.length - 1];
-
-  $scope.shareImage = function(){
-    console.log("shareImage");
-    for( var index = 0 ; index < $scope.images.length ; index ++){
-      console.log($scope.images[index]);
-    }
-  }
-  $scope.setImage = function (ix) {
-    $scope.display = $scope.images[ix];
-  }
-  $scope.clearAll = function () {
-    $scope.display = '';
+    $scope.name = "Select Files to Upload";
     $scope.images = [];
-  }
-  $scope.upload = function (obj) {
-    var elem = obj.target || obj.srcElement;
-    for (i = 0; i < elem.files.length; i++) {
-      var file = elem.files[i];
-      var reader = new FileReader();
+    $scope.display = $scope.images[$scope.images.length - 1];
 
-      reader.onload = function (e) {
-        $scope.images.push(e.target.result);
-        $scope.display = e.target.result;
-        $scope.$apply();
+    $scope.shareImage = function () {
+      console.log("shareImage");
+      for (var index = 0; index < $scope.images.length; index++) {
+        console.log($scope.images[index]);
       }
-      reader.readAsDataURL(file);
-    }
-  }
-  // modal to image upload end
+    };
+    $scope.setImage = function (ix) {
+      $scope.display = $scope.images[ix];
+    };
+    $scope.clearAll = function () {
+      $scope.display = '';
+      $scope.images = [];
+    };
+    $scope.upload = function (obj) {
+      var elem = obj.target || obj.srcElement;
+      for (i = 0; i < elem.files.length; i++) {
+        var file = elem.files[i];
+        var reader = new FileReader();
 
-  $scope.map = function(){
+        reader.onload = function (e) {
+          $scope.images.push(e.target.result);
+          $scope.display = e.target.result;
+          $scope.$apply();
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    // modal to image upload end
+
+    $scope.map = function () {
 
       $location.path("skMap");
       console.log("map clicked");
     };
-    var mapChecker=function(){
+    var mapChecker = function () {
       console.log('mapChecker');
       console.log($routeParams.type);
       console.log($routeParams.sx);
@@ -90,14 +90,15 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       setMessage = function (messages) {
 
         messages.forEach(function (snapshot) {
-          var message = snapshot.val();
+          var message = snapshot.key;
+          var messageVal = snapshot.val();
           var ownership = false;
-          if (myDisplayName === message['name']) {
+          if (myid === message) {
             ownership = true;
           } else {
             ownership = false;
           }
-          addText(message['photourl'], message['text'], ownership);
+          addText(messageVal['photourl'], messageVal['text'], ownership);
         });
       };
       messagesRef.on('child_added', setMessage);
@@ -116,15 +117,13 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
         console.log("not log in");
       }
 
-      var currentUser = auth.currentUser;
       var text = $scope.input;
-      console.log("Current User" + currentUser);
       console.log("myid" + myid);
 
       var messageVal = {};
       messageVal[myid] = {
-        name: currentUser.displayName || 'Anonymous',
-        photourl: currentUser.photoURL || '/youyou/img/profile_placeholder.png',
+        name: myDisplayName || 'Anonymous',
+        photourl: myPhotoURL || '/youyou/img/profile_placeholder.png',
         text: text
       };
 
@@ -155,8 +154,10 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
 
     checkSignedInWithMessage = function () {
       // Return true if the user is signed in Firebase
-      if (auth.currentUser) {
+      if (myid) {
         return true;
+      } else {
+        return false;
       }
     };
 
@@ -165,7 +166,6 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       var res = roomName.split("-!-");
       if (res.length === 2) {
         if (myid === res[0]) {
-          console.log("내 아이디");
           target = res[1];
         } else {
           target = res[0];
@@ -184,18 +184,26 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     firebase.messaging().onMessage(function (payload) {
       console.log('onMessage : ' + payload);
     });
-    var user = firebase.auth().currentUser;
+    // var user = firebase.auth().currentUser;
+    var user = sessionStorage.getItem("myid");
     if (user) {
+
+      firebase.database().ref("users/" + user).once('value').then(function (userInfo) {
+        var userVal = userInfo.val();
+        if (userVal) {
+          myDisplayName = userVal.displayName;
+          myPhotoURL = userVal.photoURL;
+        }
+      });
+
       if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
-        myid = user.uid;
-        myDisplayName = user.displayName;
+        myid = user;
         roomNameParser(myid);
         loadMessage();
         firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);
       } else {
         $scope.$apply(function () {
-          myid = user.uid;
-          myDisplayName = user.displayName;
+          myid = user;
           roomNameParser(myid);
           loadMessage();
         });
