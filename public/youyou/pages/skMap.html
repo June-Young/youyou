@@ -6,7 +6,6 @@
     width: 60px;
     height: 60px;
     bottom: 40px;
-    right: 40px;
     background-color: #0C9;
     color: #FFF;
     border-radius: 50px;
@@ -19,6 +18,8 @@
     margin-top: 22px;
   }
 </style>
-<div class="float">
-  <i class="fa fa-plus my-float" data-ng-click="touchClick()"></i>
+<div>
+  <div id="floatingLocation" ng-show="floatingLocationStatus" class="float" style="right: 30%;"><i class="fa my-float"  data-ng-click="touchClick('location')">위치공유</i></div>
+  <div id="floatingRoute" ng-show="floatingRouteStatus" class="float" style="right: 50%;"><i class="fa my-float" data-ng-click="touchClick('route')">루트공유</i></div>
+  <div class="float" style="right: 10%;"><i class="fa fa-arrow-down my-float" data-ng-click="touchClick('myPosition')"></i>내 위치</div>
 </div>
