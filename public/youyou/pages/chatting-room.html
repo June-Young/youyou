@@ -244,7 +244,9 @@
           <img src="/youyou/img/camera.svg">
         </div>
         <div class="float" style="margin-left:15px">
-          <img src="/youyou/img/album.svg">
+          <a href=""
+             ui-turn-on="modal1"
+             class="btn btn-default"><img src="/youyou/img/album.svg"></a>
         </div>
         <div class="float" ng-click="map()" style="margin-left:15px">
           <img src="/youyou/img/map.svg">
@@ -255,6 +257,9 @@
       </div>
     </div>
   </div>
+</div>
+<div ui-content-for="modals">
+  <div ng-include="'/youyou/pages/imageLoadModal.html'"></div>
 </div>
 </body>
 </html>

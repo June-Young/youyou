@@ -10,8 +10,41 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     var target = '';
     var myid = '';
 
+// modal to image upload start
+  $scope.name = "Select Files to Upload";
+  $scope.images = [];
+  $scope.display = $scope.images[$scope.images.length - 1];
 
-    $scope.map = function(){
+  $scope.shareImage = function(){
+    console.log("shareImage");
+    for( var index = 0 ; index < $scope.images.length ; index ++){
+      console.log($scope.images[index]);
+    }
+  }
+  $scope.setImage = function (ix) {
+    $scope.display = $scope.images[ix];
+  }
+  $scope.clearAll = function () {
+    $scope.display = '';
+    $scope.images = [];
+  }
+  $scope.upload = function (obj) {
+    var elem = obj.target || obj.srcElement;
+    for (i = 0; i < elem.files.length; i++) {
+      var file = elem.files[i];
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $scope.images.push(e.target.result);
+        $scope.display = e.target.result;
+        $scope.$apply();
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+  // modal to image upload end
+
+  $scope.map = function(){
 
       $location.path("skMap");
       console.log("map clicked");
@@ -52,7 +85,7 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
 
     $scope.records = data;
 
-    let loadMessage = function () {
+    var loadMessage = function () {
       messagesRef.off();
       setMessage = function (messages) {
 

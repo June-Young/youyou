@@ -1,0 +1,56 @@
+<div class="modal" ui-if="modal1" ui-shared-state="modal1">
+  <div class="modal-backdrop in"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close"
+                ui-turn-off="modal1">&times;
+        </button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <!--Body-->
+        <!-- We are going to display it in an <img> tag, so we will only accept image files -->
+        <div class="container">
+          <div class="row">
+            <button class="btn btn-primary pull-right" ng-hide="images.length == 0" ng-click="clearAll()">Clear All
+            </button>
+            <h3 ng-bind="name"></h3>
+            <input type="file" ng-click="$event = $event" ng-model="display" multiple
+                   onchange="angular.element(this).scope().upload(event)" accept="image/*"/>
+            <div class="row">
+              <div class="col-md-12"> <span ng-repeat='img in images'> <a href="#" ng-click="setImage($index)">
+                 <img ng-src="{{img}}"
+                      alt="Generic placeholder thumbnail" style="max-height:100px;" class="thumbnail"/>
+              </a>
+            </span>
+              </div>
+            </div>
+            <img ng-src="{{display}}" ng-hide="!display"/>
+            <h4>You have upload {{images.length}} images this session.
+            </h4>
+          </div>
+        </div>
+        <!--Body-->
+      </div>
+      <div class="modal-footer">
+        <button ui-turn-off="modal1" class="btn btn-default">Close</button>
+        <button ui-turn-off="modal1" data-ng-click="shareImage()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .row > img {
+    max-width: 10%;
+    max-height: 20%;
+    background-size: cover;
+  }
+  .thumbnail {
+    max-width: 100px;
+    display: inline;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
