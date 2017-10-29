@@ -1,4 +1,4 @@
-var app = angular.module('MobileAngularUiExamples');
+var app = angular.module('YouyouWebapp');
 
 
 app.controller('ProfileController', function ($scope, $location) {
@@ -52,7 +52,38 @@ app.controller('AgreementController', function ($scope) {
     history.back();
   };
 });
-app.controller('SettingsController', function ($scope) {
+app.controller('SettingsController', function ($scope, $location) {
+
+  $scope.switchYouyou = function () {
+    //유저 정보 읽는다
+    //youyou에 넣는다
+    var currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      var uid = currentUser.uid;
+
+      firebase.database().ref('users/' + uid).once('value').then(function (userData) {
+        var userVal = userData.val();
+
+        var name = userVal.displayName;
+        var photo = userVal.photoURL;
+
+        var obj = {likes: 0, response: 0, nickname: name, photoURL: photo};
+        firebase.database().ref('youyou/' + currentUser.uid).set(obj);
+        $scope.$apply(function () {
+          console.log("switch success");
+          $location.path("home");
+        });
+      });
+    } else {
+      console.log("로그인 정보가 없습니다..");
+      $scope.$apply(function () {
+        $location.path("login");
+      });
+    }
+
+
+
+  };
   $scope.goback = function () {
     history.back();
   };

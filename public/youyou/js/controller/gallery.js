@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('GalleryController', ['$scope', function ($scope) {
+angular.module('YouyouWebapp').controller('GalleryController', ['$scope', function ($scope) {
 
   console.log("gallery");
   $scope.stepsModel = [];

@@ -55,50 +55,51 @@
       left: 4.1%;
     }
 
-    .youyou {
-      width: 34.2%;
-      height: 38.2%;
-      color: #000000;
-      font-family: Roboto;
-      font-size: 120%;
-      font-weight: bold;
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
+    .alert-div {
+
+      width: 91.7%;
+      height: 12.7%;
       position: absolute;
-      top: 32.9%;
-      left: 33.1%;
+      left: 4.2%;
+      margin-top:7%;
     }
 
-    .img-div {
-      width: 17.5%;
-      height: 9.8%;
+    .switch-div {
+
+      width: 91.7%;
+      height: 12.7%;
       position: absolute;
-      left: 41.4%;
-      top: 4.7%;
+      top: 12.7%;
+      left: 4.2%;
+      margin-top:7%;
     }
 
-    .info {
-      width: 91.8%;
-      height: 40%;
+    .hr_1 {
+      width: 91.7%;
+      height: 2px;
+      background-color: #d8d8d8;
       position: absolute;
-      top: 26.9%;
+      top: 12.7%;
       left: 4.2%;
     }
 
-    .name {
-      font-family: Roboto;
-      font-size: 100%;
-      text-align: left;
-      color: #000000;
-      margin-bottom: 20px;
+    .hr_2 {
+      width: 91.7%;
+      height: 2px;
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 25.4%;
+      left: 4.2%;
     }
 
-    .text {
+    .text{
       font-family: Roboto;
-      font-size: 140%;
+      font-size: 120%;
       text-align: left;
-      color: #9b9b9b;
+    }
+
+    .float_right{
+      float:right
     }
   </style>
 </head>
@@ -113,7 +114,11 @@
   </div>
   <div class="hr-top"></div>
   <div id="contents">
-  
+
+    <div class="alert-div"><div class="float text">Alert</div><div class="float_right"><img ng-src="/youyou/img/alert.svg"></div></div>
+    <div class="hr_1"></div>
+    <div class="switch-div"><div class="float text">Switch to YOUYOU</div><div class="float_right" style="margin-right:10px;"><img ng-click="switchYouyou()" ng-src="/youyou/img/switch.svg"></div></div>
+    <div class="hr_2"></div>
   </div>
 </div>
 </body>

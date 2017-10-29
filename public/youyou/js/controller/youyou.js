@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module('MobileAngularUiExamples').controller('MainController', function($rootScope, $scope) {
+angular.module('YouyouWebapp').controller('MainController', function($rootScope, $scope) {
   $scope.swiped = function(direction) {
     alert('Swiped ' + direction);
 

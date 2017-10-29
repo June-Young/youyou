@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('TestController', function ($scope) {
+angular.module('YouyouWebapp').controller('TestController', function ($scope) {
 
   $scope.name = "Select Files to Upload";
   $scope.images = [];
