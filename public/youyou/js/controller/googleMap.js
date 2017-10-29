@@ -1,4 +1,4 @@
-angular.module('MobileAngularUiExamples').controller('GoogleMapController', function ($scope, $location) {
+angular.module('YouyouWebapp').controller('GoogleMapController', function ($scope, $location) {
 
   function initialize() {
     //route flag
