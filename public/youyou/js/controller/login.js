@@ -50,7 +50,7 @@ app.controller('login', function ($scope, $location) {
   });
 });
 
-angular.module('MobileAngularUiExamples').controller('nickname', function ($scope, $location) {
+app.controller('nickname', function ($scope, $location) {
 
   $scope.clickSubmit = function () {
     if ($scope.edit) {
@@ -67,7 +67,7 @@ angular.module('MobileAngularUiExamples').controller('nickname', function ($scop
   }
 });
 
-angular.module('MobileAngularUiExamples').controller('LanguageController', function ($scope, $location) {
+app.controller('LanguageController', function ($scope, $location) {
 
   $scope.clickedEnglish = function () {
     var myid = sessionStorage.getItem("myid");
@@ -78,7 +78,7 @@ angular.module('MobileAngularUiExamples').controller('LanguageController', funct
     $location.path("country")
   }
 });
-angular.module('MobileAngularUiExamples').controller('CountryController', function ($scope, $location) {
+app.controller('CountryController', function ($scope, $location) {
   $scope.selected = function () {
     // console.log($scope.countrySelect);
     var selected = $scope.countrySelect;
@@ -287,7 +287,7 @@ angular.module('MobileAngularUiExamples').controller('CountryController', functi
   ]
 });
 
-angular.module('MobileAngularUiExamples').controller('LogoutController', function ($scope, $location) {
+app.controller('LogoutController', function ($scope, $location) {
 
   var unsubscirbe = firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -297,7 +297,7 @@ angular.module('MobileAngularUiExamples').controller('LogoutController', functio
   });
   unsubscirbe();
 });
-angular.module('MobileAngularUiExamples').controller('WelcomeController', function ($scope, $location) {
+app.controller('WelcomeController', function ($scope, $location) {
   setTimeout(function () {
     $scope.$apply(function () {
       $location.path("home")
@@ -305,7 +305,7 @@ angular.module('MobileAngularUiExamples').controller('WelcomeController', functi
   }, 2000);
 });
 
-angular.module('MobileAngularUiExamples').directive('watcher', [function () {
+app.directive('watcher', [function () {
   return {
     restrict: 'A',
     link: function (scope, elem, attrs) {
