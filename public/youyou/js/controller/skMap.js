@@ -3,6 +3,9 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
   function initialize() {
     //route flag
     $scope.posCount = 0;
+    // floating button status
+    $scope.floatingLocationStatus = false;
+    $scope.floatingRouteStatus = false;
 
     $scope.map = new Tmap.Map({div: "map_div", width: '100%', height: '100%'});
     $scope.markerLayer = new Tmap.Layer.Markers();
@@ -16,14 +19,12 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
 
   function initializeWithShare(startX, startY) {
     // ?type=share&sx=14152221.255693141&sy=4496551.406476195
-    // makeMarker(new Tmap.LonLat(startX, startY));
-    shareParam1();
+    makeMarker(new Tmap.LonLat(startX, startY));
   }
 
   function initializeWithRoute(startX, startY, endX, endY) {
     // ?type=route&sx=14152221.255693141&sy=4496551.406476195&ex=14135016.577353&ey=4518074.1072027
-    // getRouteWithLocations(new Tmap.LonLat(startX, startY), new Tmap.LonLat(endX, endY));
-    shareParam2();
+    getRouteWithLocations(new Tmap.LonLat(startX, startY), new Tmap.LonLat(endX, endY));
   }
 
   function getParameters() {
@@ -96,14 +97,25 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     if ($scope.posCount == 0) {
       $scope.startLonLat = lonlat;
       $scope.posCount = 1;
+      $scope.$apply(function () {
+        $scope.floatingLocationStatus = true;
+      });
+      $scope.floatingLocationPosition = 10;
     } else if ($scope.posCount == 1) {
       $scope.endLonLat = lonlat;
+      $scope.$apply(function () {
+        $scope.floatingRouteStatus = true;
+      });
+
       getRouteWithLocations($scope.startLonLat, $scope.endLonLat);
       $scope.posCount = 0;
     }
 
     console.log("makeMarker : " + lonlat.toString + " , " + $scope.posCount);
+    newMarker(lonlat);
+  }
 
+  function newMarker(lonlat) {
     var size = new Tmap.Size(24, 38);
     var offset = new Tmap.Pixel(-(size.w / 2), -(size.h / 2));
     /*
@@ -223,19 +235,6 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     }
   }
 
-  function shareParam1() {
-    $location.path("chattingroom").search({type: "share", sx: 14152221.255693141, sy: 4496551.406476195});
-  }
-
-  function shareParam2() {
-    $location.path("chattingroom").search({
-      type: "route",
-      sx: 14152221.255693141,
-      sy: 4496551.406476195,
-      ex: 14135016.577353,
-      ey: 4518074.1072027
-    });
-  }
 
   function popupTest(index, lonlat) {
     var popup = new Tmap.Popup("p1", lonlat, new Tmap.Size(100, 150),
@@ -258,11 +257,37 @@ angular.module('MobileAngularUiExamples').controller('SkMapController', function
     console.log("proxy Method Call : " + eventName);
   }
 
-  initialize();
-  $scope.touchClick = function () {
-    console.log("touchClick invoke");
-  };
+  $scope.shareRoute = function () {
+    console.log("start : " + $scope.startLonLat.toString() + " , end : " + $scope.endLonLat);
+    $location.path("chattingroom").search({
+      type: "route",
+      sx: $scope.startLonLat.lon,
+      sy: $scope.startLonLat.lat,
+      ex: $scope.endLonLat.lon,
+      ey: $scope.endLonLat.lat
+    });
+  }
+  $scope.shareLocation = function () {
+    console.log("start : " + $scope.startLonLat.toString());
+    $location.path("chattingroom").search({type: "share", sx: $scope.startLonLat.lon, sy: $scope.startLonLat.lat});
+  }
+  function setPositionWithMarker() {
+    newMarker($scope.myLonLat);
+    $scope.map.setCenter($scope.myLonLat, 16);
+  }
 
+  initialize();
+
+  $scope.touchClick = function (evt) {
+    console.log("touchClick invoke : " + evt);
+    if (evt == "location") {
+      $scope.shareLocation();
+    } else if (evt == "route") {
+      $scope.shareRoute();
+    } else if (evt == "myPosition") {
+      setPositionWithMarker();
+    }
+  };
 
 });
 

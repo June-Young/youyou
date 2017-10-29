@@ -55,4 +55,5 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/youyou-info', {templateUrl: '/youyou/pages/youyou-info.html', controller: 'YouyouInfoController', reloadOnSearch: false});
   $routeProvider.when('/agreement', {templateUrl: '/youyou/pages/agreement.html', controller: 'AgreementController', reloadOnSearch: false});
   $routeProvider.when('/settings', {templateUrl: '/youyou/pages/settings.html', controller: 'SettingsController', reloadOnSearch: false});
+  $routeProvider.when('/test', {templateUrl: '/youyou/pages/test.html', controller: 'TestController', reloadOnSearch: false});
 });
