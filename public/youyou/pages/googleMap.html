@@ -17,11 +17,29 @@
     z-index: 999;
   }
 
+  .floating_text{
+    position: fixed;
+    width: 60%;
+    height: 5%;
+    top: 2%;
+    left: 30%;
+    background-color: #0C9;
+    border-radius: 5%;
+    color: #000000;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 999;
+  }
+
   .my-float {
     margin-top: 22px;
   }
 </style>
 <div id="map"></div>
+<div class="floating_text">
+  <input type="text" ng-model="searchText" placeholder="search text">
+  <button ng-click="searchByText()">search</button>
+</div>
 <div>
   <div id="floatingLocation" ng-show="floatingLocationStatus" class="float" style="right: 30%;"><i class="fa my-float"  data-ng-click="touchClick('location')">위치공유</i></div>
   <div id="floatingRoute" data-ng-click="touchClick('route')" ng-show="floatingRouteStatus" class="float" style="right: 50%;"><i class="fa my-float" >루트공유</i></div>

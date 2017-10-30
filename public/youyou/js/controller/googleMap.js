@@ -1,7 +1,8 @@
-angular.module('MobileAngularUiExamples').controller('GoogleMapController', function ($scope, $location) {
+angular.module('YouyouWebapp').controller('GoogleMapController', function ($scope, $location) {
 
   function initialize() {
-    //route flag
+    //search text
+    $scope.searchText = "";
     $scope.posCount = 0;
     // floating button status
     $scope.floatingLocationStatus = false;
@@ -9,10 +10,14 @@ angular.module('MobileAngularUiExamples').controller('GoogleMapController', func
     $scope.uluru = {lat: 37.4286715, lng: 127.13100399999998};
     $scope.directionsService = new google.maps.DirectionsService;
     $scope.directionsDisplay = new google.maps.DirectionsRenderer;
+
     $scope.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 16,
       center: $scope.uluru
     });
+
+    $scope.infowindow = new google.maps.InfoWindow();
+    $scope.service = new google.maps.places.PlacesService($scope.map);
     $scope.directionsDisplay.setMap($scope.map);
     getCurrentLocation();
     setMapTouchEvent();
@@ -54,7 +59,7 @@ angular.module('MobileAngularUiExamples').controller('GoogleMapController', func
       " , ey : " + urlParams.ey + " , ");
 
     if (!urlParams.type) {
-      console.log("null");
+      // console.log("null");
     } else if (urlParams.type == "share") {
       initializeWithShare(urlParams.sx, urlParams.sy);
     } else if (urlParams.type == "route") {
@@ -137,6 +142,47 @@ angular.module('MobileAngularUiExamples').controller('GoogleMapController', func
     console.log("setPosition");
     newMarker($scope.myPostion);
     $scope.map.setCenter($scope.myPostion, 16);
+  }
+
+  $scope.searchByText = function () {
+    console.log("searchText " + $scope.searchText);
+
+    var query = {
+      location: $scope.myPostion,
+      radius: '500',
+      query: $scope.searchText
+    };
+
+    $scope.service.textSearch(query, callback);
+
+    function callback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          var place = results[i];
+          createMarker(results[i]);
+        }
+      }else{
+        console.log("status : " + status);
+      }
+    }
+  }
+
+  function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    console.log("Name : "+ place.name +" , placeLoc : " + placeLoc );
+
+
+    var image = '/youyou/img/like-b.svg';
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      position: place.geometry.location,
+      icon: image
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      $scope.infowindow.setContent(place.name);
+      $scope.infowindow.open($scope.map, this);
+    });
   }
 
   initialize();
