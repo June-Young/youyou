@@ -118,7 +118,11 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       }
 
       var text = $scope.input;
-      console.log("myid" + myid);
+
+      // Clear message text field and SEND button state.
+      $scope.$apply(function () {
+        $scope.input = '';
+      });
 
       var messageVal = {};
       messageVal[myid] = {
@@ -126,12 +130,7 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
         photourl: myPhotoURL || '/youyou/img/profile_placeholder.png',
         text: text
       };
-
       messagesRef.push(messageVal).then(function () {
-        // Clear message text field and SEND button state.
-        $scope.$apply(function () {
-          $scope.input = '';
-        });
 
         // unchecked 갱신
         firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);

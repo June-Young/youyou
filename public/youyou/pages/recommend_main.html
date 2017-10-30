@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #header {
+      width: 100%;
+      height: 23.3%;
+      position: absolute;
+      top: 3.8%;
+
+      background-color: #fcfcfc;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 0.7px;
+      z-index: 5;
+
+      background-color: #9b9b9b;
+      position: absolute;
+      top: 27.1%;
+    }
+
+    #contents {
+      width: 100%;
+      height: 63.9%;
+      position: absolute;
+      top: 27.1%;
+
+    }
+
+    #footer {
+      width: 100%;
+      height: 9.1%;
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 90.9%;
+    }
+
+    .footer_home {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 6.4%;
+    }
+
+    .footer_chats {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 31.3%;
+    }
+
+    .footer_youyoulist {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 56.2%;
+    }
+
+    .footer_profile {
+      width: 12.5%;
+      height: 77.6%;
+      padding: 5px;
+      position: absolute;
+      top: 12.1%;
+      left: 81.1%;
+    }
+
+    #seoul {
+      width: 39.8%;
+      height: 35%;
+      position: absolute;
+      top: 4.7%;
+      left: 7.3%;
+
+    }
+
+    #jeju {
+      width: 39.8%;
+      height: 35%;
+      position: absolute;
+      top: 4.7%;
+      left: 52.9%;
+    }
+
+    .imgs {
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+      border-radius: 7px;
+    }
+
+    .seoul_name {
+      position: absolute;
+      top: 75%;
+      left: 33.5%;
+      font-family: Roboto;
+      font-size: 150%;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .jeju_name {
+      position: absolute;
+      top: 75%;
+      left: 36%;
+      font-family: Roboto;
+      font-size: 150%;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .state_img {
+      width: 55px;
+      height: 55px;
+      margin-left: 25.2%;
+    }
+
+    .state_texts {
+      width: 30.4%;
+      height: 35.6%;
+      margin-left: 4.8%;
+    }
+
+    .degree {
+      font-family: Roboto;
+      font-size: 190%;
+      text-align: center;
+      margin-top: 5%;
+    }
+
+    .location {
+      font-family: Roboto;
+      font-size: 100%;
+      text-align: center;
+    }
+
+    .weather {
+      margin-top: 2.5%;
+    }
+
+    .hr-middle {
+      width: 91.6%;
+      height: 1px;
+      z-index: 5;
+      opacity: 0.5;
+
+      background-color: #9b9b9b;
+      position: absolute;
+      top: 57.7%;
+      left: 4.2%;
+    }
+
+    .detail_weather {
+      width: 85.3%;
+      position: absolute;
+      top: 64.4%;
+      left: 14.7%;
+    }
+
+    .highest {
+      margin-right: 8.8%;
+    }
+
+    .lowest {
+      margin-right: 8.8%;
+    }
+
+    .air_quality {
+      margin-right: 8.8%;
+    }
+
+    .tomorrow {
+    }
+
+    .detail_text {
+      font-family: Roboto;
+      font-size: 13px;
+      text-align: center;
+      color: #9b9b9b;
+    }
+
+    .detail_value {
+      font-family: Roboto;
+      font-size: 20px;
+      text-align: center;
+      color: #9b9b9b;
+    }
+    .tomorrowImg{
+      width:25px;
+      height:25px;
+      border:none;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header">
+    <div class="weather">
+      <div class="state_img float">
+        <img ng-model="todaySky" ng-src="{{todaySky}}">
+      </div>
+      <div class="state_texts float table">
+        <div class="degree" ng-model="temperatureCurrent">{{temperatureCurrent}}</div>
+        <div class="location" ng-model="myLocation">{{myLocation}}</div>
+      </div>
+      <div class="hr-middle"></div>
+      <div class="detail_weather">
+        <div class="float highest">
+          <div class="detail_text">Highest</div>
+          <div class="detail_value" ng-model="todayTemperatureMax">{{todayTemperatureMax}}</div>
+        </div>
+        <div class="float lowest">
+          <div class="detail_text">Lowest</div>
+          <div class="detail_value" ng-model="todayTemperatureMin">{{todayTemperatureMin}}</div>
+        </div>
+        <div class="float air_quality">
+          <div class="detail_text">Air quality</div>
+          <div class="detail_value" ng-model="dustGrade">{{dustGrade}}</div>
+        </div>
+        <div class="float tomorrow">
+          <div class="detail_text">Tomorrow</div>
+          <div class="detail_value" ng-model="tomorrowSky"><img class="tomorrowImg" ng-model="tomorrowSky" ng-src="{{tomorrowSky}}"></div>
+        </div>
+
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+  <div class="hr-top"></div>
+  <div id="contents">
+    <div id="seoul">
+      <img ng-src="/youyou/img/seoul.jpg" class="imgs">
+      <div class="seoul_name">SEOUL</div>
+    </div>
+    <div id="jeju">
+      <img ng-src="/youyou/img/jeju.jpg" class="imgs">
+      <div class="jeju_name">JEJU</div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="footer_home">
+      <img src="/youyou/img/home-y.svg" ng-click="clickedFooterHome()">
+    </div>
+    <div class="footer_chats" ng-click="clickedFooterChats()">
+      <img src="/youyou/img/chats.svg">
+    </div>
+    <div class="footer_youyoulist" ng-click="clickedFooterUUList()">
+      <img src="/youyou/img/uu-list.svg">
+    </div>
+    <div class="footer_profile">
+      <img src="/youyou/img/profile.svg" ng-click="clickedFooterProfile()">
+    </div>
+  </div>
+</div>
+</body>
+</html>

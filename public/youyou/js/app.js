@@ -34,7 +34,8 @@ app.config(function ($routeProvider) {
     reloadOnSearch: false
   });
   // $routeProvider.when('/', {templateUrl: '/home.html', reloadOnSearch: false, controller: 'MainController'});
-  $routeProvider.when('/login', {templateUrl: 'pages/login.html', controller: 'login', reloadOnSearch: false});
+  $routeProvider.when('/signin-account', {templateUrl: 'pages/signin.html', controller: 'SignInController', reloadOnSearch: false});
+  $routeProvider.when('/signup-account', {templateUrl: 'pages/signup.html', controller: 'SignUpController', reloadOnSearch: false});
   $routeProvider.when('/nickname', {templateUrl: 'pages/nickname.html', controller: 'nickname', reloadOnSearch: false});
   $routeProvider.when('/chattinglist', {templateUrl: 'pages/chatting-list.html', controller: 'chattinglist', reloadOnSearch: false});
   $routeProvider.when('/chattingroom', {templateUrl: 'pages/chatting-room.html', controller: 'chattingroom', reloadOnSearch: false});
@@ -56,4 +57,6 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/agreement', {templateUrl: 'pages/agreement.html', controller: 'AgreementController', reloadOnSearch: false});
   $routeProvider.when('/settings', {templateUrl: 'pages/settings.html', controller: 'SettingsController', reloadOnSearch: false});
   $routeProvider.when('/test', {templateUrl: 'pages/test.html', controller: 'TestController', reloadOnSearch: false});
+  $routeProvider.when('/login', {templateUrl: 'pages/login_main.html', controller: 'StartController', reloadOnSearch: false});
+  $routeProvider.when('/recommend-main', {templateUrl: 'pages/recommend_main.html', controller: 'RecommendMainController', reloadOnSearch: false});
 });
