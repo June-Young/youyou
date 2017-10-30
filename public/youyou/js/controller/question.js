@@ -77,7 +77,7 @@ app.controller('QuestionController', function ($scope, $location) {
   };
   let checkSignedInWithMessage = function () {
     // Return true if the user is signed in Firebase
-    if (auth.currentUser) {
+    if (currentUser) {
       return true;
     } else {
       return false;
@@ -93,9 +93,11 @@ app.controller('QuestionController', function ($scope, $location) {
     return date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
   };
 
-  currentUser = auth.currentUser;
+  // currentUser = auth.currentUser;
+  var currentUser = sessionStorage.getItem("myid");
   if (currentUser) {
-    myid = currentUser.uid;
+    // myid = currentUser.uid;
+    myid = currentUser;
   } else {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
     $location.path("login");

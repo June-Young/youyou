@@ -5,74 +5,176 @@
   <title>youyou</title>
   <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
   <style>
-    #container {
-      min-height: 100%;
+
+
+    #container .nickname-text {
+      width: 48.1%;
+      height: 6.7%;
+      font-family: Roboto;
+
+      position: absolute;
+      top: 12.8%;
+      left: 26.1%;
+
+      font-size: 200%;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    /*
+            #container .nickname-edit-box {
+                width: 72.8%;
+                height: 8.8%;
+                border-radius: 66px;
+                background-color: #ffffff;
+                box-shadow: 0 1px 2px 0 rgba(45, 45, 7, 0.1);
+
+                position: absolute;
+                top: 32.6%;
+                left: 13.6%;
+            }*/
+
+    #container .nickname-id-shadow {
+      width: 75%;
+      height: 10%;
+      position: absolute;
+      top: 32.3%;
+      left: 12.5%;
+
+    }
+
+    #container .nickname-pw-shadow {
+      width: 75%;
+      height: 10%;
+      position: absolute;
+      top: 42.3%;
+      left: 12.5%;
+    }
+
+    #container .nickname-submit-button {
+
+      border: none;
+      position: absolute;
+      top: 85.8%;
+      left: 13.6%;
       background-color: #ffffff;
+      opacity: 0.5;
     }
 
-    #logo {
-      width: 51.1%;
-      height:30.5%;
-      position: absolute;
-      top: 19.7%;
-      left: 24.4%;
-    }
-
-    #facebook {
-      background-color: #475993;
-      text-align: center;
-      position: absolute;
-      top: 72.4%;
-      left: 15%;
-    }
-
-    #google {
-      background-color: #f05353;
-      text-align: center;
-      position: absolute;
-      top: 85.4%;
-      left: 15%;
-    }
-
-    .login-logo-facebook {
-      font-size: 150%;
-      color: #ffffff;
-      position: absolute;
-      top: 24.7%;
-      left: 13.3%;
-    }
-
-    .login-logo-google {
-      font-size: 150%;
-      color: #ffffff;
-      position: absolute;
-      top: 24.7%;
-      left: 10.8%;
-    }
-
-    .login-text {
-      font-family: ProximaNovaSoft;
-      font-size: 100%;
+    #container .nickname-id-shadow p {
+      font-family: Roboto;
       font-weight: 500;
-      text-align: left;
-      color: #ffffff;
+      color: #1a395f;
+    }
+
+    #container .nickname-submit-button p {
+      font-family: Roboto;
+      font-weight: 500;
+      color: #1a395f;
+    }
+
+    .nickname-id-bottom-line {
+      width: 61.7%;
+      height: 3px;
+      border-radius: 0.8px;
+      background-color: #ffffff;
+      opacity: 0.5;
       position: absolute;
-      top: 34.1%;
-      left: 28.5%
+      top: 40%;
+      left: 19.2%;
+    }
+
+    .nickname-pw-bottom-line {
+      width: 61.7%;
+      height: 3px;
+      border-radius: 0.8px;
+      background-color: #ffffff;
+      opacity: 0.5;
+      position: absolute;
+      top: 50%;
+      left: 19.2%;
+    }
+
+    .editbox {
+      width: 100%;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      color: #ffffff;
+      border: none;
+      background-color: #78aef9;
+      opacity: 0.5;
+      font-size: 120%;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+    }
+
+    ::-webkit-input-placeholder { /* Chrome */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    :-moz-placeholder { /* Firefox 4 - 18 */
+      color: #ffffff;
+      opacity: 0.5;
+    }
+
+    #state_message {
+     text-align:center;
+      color:red;
+      width: 75%;
+      height: 10%;
+      position: absolute;
+      top: 52.3%;
+      left: 12.5%;
+    }
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #78aef9 inset !important;
     }
   </style>
 </head>
 <body>
+
 <div id="container">
-  <div id="logo"><img ng-src="/youyou/img/logo.svg"></div>
-  <div id="facebook" class="rectangle" ng-click="signInFacebook()">
-    <div class="float login-logo-facebook">f</div>
-    <div class="float login-text">Login with Facebook</div>
-  </div>
-  <div id="google" class="rectangle" ng-click="signInGoogle()">
-    <div class="float login-logo-google">G</div>
-    <div class="float login-text">Login with Google</div>
-  </div>
+
+  <form name="myForm">
+    <div class="nickname-text table"><p>Sign in</p></div>
+    <div id="insert-form" ng-model="contain">
+      <div class="nickname-id-shadow table">
+        <input type="text" ng-click="focusId={opacity:1}" ng-model="edit_id" class="editbox" placeholder="Enter your ID"
+               ng-style="focusId"
+               required>
+      </div>
+      <div ng-model="bottomline" class="nickname-id-bottom-line" ng-style="focusId">
+      </div>
+
+      <div class="nickname-pw-shadow table">
+        <input type="password" ng-click="focusPw={opacity:1}" ng-model="edit_pw" class="editbox"
+               placeholder="Enter your Password" ng-style="focusPw" watcher
+               required>
+      </div>
+      <div ng-model="bottomline" class="nickname-pw-bottom-line" ng-style="focusPw">
+      </div>
+    </div>
+    <div id="state_message" ng-model="status">{{state}}</div>
+    <div>
+      <input ng-model="submitBtn" id="smbtn" type="submit"
+             class="nickname-submit-button rectangle rectangle-font-size table" ng-click="clickSubmit()" value="OK">
+    </div>
+  </form>
 </div>
 
 </body>

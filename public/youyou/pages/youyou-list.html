@@ -104,7 +104,7 @@
 
     .nickname {
       float: left;
-      font-family: ProximaNovaSoft;
+      font-family: Roboto;
       font-size: 110%;
       font-weight: bold;
       text-align: left;
@@ -146,7 +146,7 @@
     }
 
     .rate {
-      font-family: ProximaNovaSoft;
+      font-family: Roboto;
       font-weight: bold;
       /*text-align: right;*/
       color: #78aef9;
@@ -219,11 +219,13 @@
         <div id="message" style="margin-top:10px;/*position:relative;*/">
 
           <div>
-            <div class="roomlist-container"
+<!--            <div class="roomlist-container"
                  data-ng-click='backStyle={"background-color":"#fee050","box-shadow": "10 15px #666"};fontStyle={"color":"#ffffff"};clickRoom(record.key)'
-                 ng-style="backStyle">
-              <!--   data-ng-click='clickRoom({{record.key}})'
                  ng-style="backStyle">-->
+            <div class="roomlist-container"
+                 data-ng-click='clickRoom(record.key)'
+                 ng-style="backStyle">
+
               <div>
                 <div class="imgSection">
                   <div class="photoUrl">

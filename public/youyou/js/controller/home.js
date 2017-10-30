@@ -52,9 +52,10 @@ app.controller('HomeController', function ($scope, $location) {
       });
   };
 
-  var user = firebase.auth().currentUser;
+  // var user = firebase.auth().currentUser;
+  var user = sessionStorage.getItem("myid");
   if (user) {
-    const uid = user.uid;
+    const uid = user;
     firebase.database().ref('users/' + uid).once('value').then(function (userDetailSnapshot) {
       var displayName = userDetailSnapshot.val() && userDetailSnapshot.val().displayName || 'Unknown';
       $scope.$apply(function () {

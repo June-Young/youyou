@@ -8,7 +8,7 @@
         #language {
             width: 46.1%;
             height: 5.8%;
-            font-family: ProximaNovaSoft;
+            font-family: Roboto;
             font-size: 250%;
             font-weight: bold;
             text-align: center;
@@ -31,14 +31,14 @@
 
         .selected-text {
 
-            font-family: ProximaNovaSoft;
+            font-family: Roboto;
             font-weight: 500;
             color: #ffffff;
 
         }
 
         .unselected-text {
-            font-family: ProximaNovaSoft;
+            font-family: Roboto;
             font-weight: 500;
             color: #000000;
         }
@@ -62,11 +62,11 @@
 
 <div id="container">
     <div id="language">Language</div>
-    <div id="english" ng-click="backStyle={'background-color':'#fee050'}; fontStyle={'color':'#ffffff'}; clickedEnglish()" ng-style="backStyle" class="rectangle  rectangle-font-size unselected-button table"><p ng-style="fontStyle" class="unselected-text">
+    <div id="english" ng-click="english={'background-color':'#fee050'}; englishFontStyle={'color':'#ffffff'}; clickedEnglish()" ng-style="english" class="rectangle  rectangle-font-size unselected-button table"><p ng-style="englishFontStyle" class="unselected-text">
         English</p></div>
-    <div id="japanese" class="rectangle rectangle-font-size unselected-button table"><p class="unselected-text">
+    <div id="japanese" ng-click="japanese={'background-color':'#fee050'}; japaneseFontStyle={'color':'#ffffff'}; clickedJapanese()" ng-style="japanese" class="rectangle rectangle-font-size unselected-button table"><p ng-style="japaneseFontStyle" class="unselected-text">
         Japanese</p></div>
-    <div id="chinese" class="rectangle rectangle-font-size unselected-button table"><p class="unselected-text">
+    <div id="chinese" ng-click="chinese={'background-color':'#fee050'}; chineseFontStyle={'color':'#ffffff'}; clickedChinese()" ng-style="chinese" class="rectangle rectangle-font-size unselected-button table"><p ng-style="chineseFontStyle" class="unselected-text">
         Chinses</p></div>
 </div>
 
