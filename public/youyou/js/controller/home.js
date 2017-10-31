@@ -3,7 +3,7 @@ var app = angular.module('YouyouWebapp');
 
 app.controller('HomeController', function ($scope, $location) {
   $scope.recommendClick = function () {
-    console.log("recommend click");
+    $location.path("recommend-main");
   };
 
   $scope.questionClick = function () {

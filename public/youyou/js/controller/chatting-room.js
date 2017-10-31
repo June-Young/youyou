@@ -113,39 +113,39 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     $scope.sendMessage = function () {
 
       if (checkSignedInWithMessage()) {
-        console.log("Login")
-      } else {
-        console.log("not log in");
-      }
+        
+        var text = $scope.input;
 
-      var text = $scope.input;
-      console.log("myid" + myid);
-
-      var messageVal = {};
-      messageVal[myid] = {
-        name: myDisplayName || 'Anonymous',
-        photourl: myPhotoURL || '/youyou/img/profile_placeholder.png',
-        text: text
-      };
-
-      messagesRef.push(messageVal).then(function () {
         // Clear message text field and SEND button state.
-        $scope.$apply(function () {
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
           $scope.input = '';
+        } else {
+          $scope.$apply(function () {
+            $scope.input = '';
+          });
+        }
+
+        var messageVal = {};
+        messageVal[myid] = {
+          name: myDisplayName || 'Anonymous',
+          photourl: myPhotoURL || '/youyou/img/profile_placeholder.png',
+          text: text
+        };
+        messagesRef.push(messageVal).then(function () {
+
+          // unchecked 갱신
+          firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);
+          firebase.database().ref("rooms/" + roomName + "/lastMessage").set(text);
+          firebase.database().ref("uncheked/" + target + '/' + roomName).once('value').then(function (count) {
+            firebase.database().ref("uncheked/" + target + '/' + roomName).set(count.val() + 1);
+          });
+
+          setScrollTop();
+
+        }).catch(function (error) {
+          console.error('Error writing new message to Firebase Database', error);
         });
-
-        // unchecked 갱신
-        firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);
-        firebase.database().ref("rooms/" + roomName + "/lastMessage").set(text);
-        firebase.database().ref("uncheked/" + target + '/' + roomName).once('value').then(function (count) {
-          firebase.database().ref("uncheked/" + target + '/' + roomName).set(count.val() + 1);
-        });
-
-        setScrollTop();
-
-      }).catch(function (error) {
-        console.error('Error writing new message to Firebase Database', error);
-      });
+      }
     };
 
     $scope.goback = function () {
