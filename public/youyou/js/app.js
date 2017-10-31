@@ -55,9 +55,9 @@ app.config(function ($routeProvider) {
     controller: 'chattingroom',
     reloadOnSearch: false
   });
-  $routeProvider.when('/skMap', {
-    templateUrl: 'pages/skMap.html',
-    controller: 'SkMapController',
+  $routeProvider.when('/googleMap', {
+    templateUrl: 'pages/googleMap.html',
+    controller: 'GoogleMapController',
     reloadOnSearch: false
   });
   $routeProvider.when('/home_weather', {

@@ -32,7 +32,7 @@
       top: 85px;
       bottom: 100px;
       overflow: scroll;
-      padding-bottom:20px;
+      padding-bottom: 20px;
     }
 
     #container #sender {
@@ -189,8 +189,34 @@
       border-bottom: 5px solid transparent;
       border-left: 5px solid #78aef9;
     }
-    .margin-15{
-      margin-left:15px;
+
+    .margin-15 {
+      margin-left: 15px;
+    }
+
+    a:link {
+      color: #ffffff
+    }
+
+    a:visited {
+      color: #ffffff
+    }
+
+    a:hover {
+      color: #ffffff
+    }
+
+    a:active {
+      color: #ffffff
+    }
+
+    a:link {
+      color: #ffffff
+    }
+
+    .disabled {
+      pointer-events: none;
+      cursor: default;
     }
   </style>
 </head>
@@ -219,7 +245,9 @@
               <div class="my-message">
                 <div class="triangle_my"></div>
                 <p class="ninepatch-my">
+                  <!--<a class="disabled" href='/googleMap/' id="message-link">-->
                   {{record.text}}
+                  <!--</a>-->
                 </p>
               </div>
             </div>
@@ -250,8 +278,7 @@
         <div class="float margin-15">
           <img ng-src="/youyou/img/album.svg" ui-turn-on="modal1">
         </div>
-        <!--<div class="float margin-15" ng-click="map()">-->
-        <div class="float margin-15">
+        <div class="float margin-15" ng-click="map()">
           <img ng-src="/youyou/img/map.svg">
         </div>
       </div>

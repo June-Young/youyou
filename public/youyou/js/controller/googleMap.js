@@ -2,6 +2,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
 
   function initialize() {
     //search text
+    $scope.isReserving = true;
     $scope.searchText = "";
     $scope.posCount = 0;
     // floating button status
@@ -76,6 +77,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
   }
 
   function processLocation(position) {
+    $scope.isReserving = false;
     $scope.myPostion = {lat: position.coords.latitude, lng: position.coords.longitude};
     console.log("myLocation = " + $scope.myPostion.lng + ' , ' + $scope.myPostion.lat);
     $scope.map.setCenter($scope.myPostion);
@@ -88,15 +90,23 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
     if ($scope.posCount == 0) {
       $scope.startLonLat = lonlat;
       $scope.posCount = 1;
-      $scope.$apply(function () {
+      if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
         $scope.floatingLocationStatus = true;
-      });
+      } else {
+        $scope.$apply(function () {
+          $scope.floatingLocationStatus = true;
+        });
+      }
       $scope.floatingLocationPosition = 10;
     } else if ($scope.posCount == 1) {
       $scope.endLonLat = lonlat;
-      $scope.$apply(function () {
+      if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
         $scope.floatingRouteStatus = true;
-      });
+      } else {
+        $scope.$apply(function () {
+          $scope.floatingRouteStatus = true;
+        });
+      }
       calculateAndDisplayRoute($scope.startLonLat, $scope.endLonLat);
       $scope.posCount = 0;
     }
@@ -125,17 +135,18 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
 
   $scope.shareRoute = function () {
     console.log("start : " + $scope.startLonLat.toString() + " , end : " + $scope.endLonLat);
-    // $location.path("chattingroom").search({
-    //   type: "route",
-    //   sx: $scope.startLonLat.lon,
-    //   sy: $scope.startLonLat.lat,
-    //   ex: $scope.endLonLat.lon,
-    //   ey: $scope.endLonLat.lat
-    // });
+
+    $location.path("chattingroom").search({
+      type: 'route',
+      sx: $scope.startLonLat.lng(),
+      sy: $scope.startLonLat.lat(),
+      ex: $scope.endLonLat.lng(),
+      ey: $scope.endLonLat.lat()
+    });
   }
   $scope.shareLocation = function () {
     console.log("start : " + $scope.startLonLat.toString());
-    // $location.path("chattingroom").search({type: "share", sx: $scope.startLonLat.lon, sy: $scope.startLonLat.lat});
+    $location.path("chattingroom").search({type: "share", sx: $scope.startLonLat.lng(), sy: $scope.startLonLat.lat()});
   }
 
   function setPositionWithMarker() {
@@ -161,7 +172,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
           var place = results[i];
           createMarker(results[i]);
         }
-      }else{
+      } else {
         console.log("status : " + status);
       }
     }
@@ -169,7 +180,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
 
   function createMarker(place) {
     var placeLoc = place.geometry.location;
-    console.log("Name : "+ place.name +" , placeLoc : " + placeLoc );
+    console.log("Name : " + place.name + " , placeLoc : " + placeLoc);
 
 
     var image = '/youyou/img/like-b.svg';
@@ -179,7 +190,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
       icon: image
     });
 
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, 'click', function () {
       $scope.infowindow.setContent(place.name);
       $scope.infowindow.open($scope.map, this);
     });

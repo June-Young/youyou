@@ -1,7 +1,7 @@
 var app = angular.module('YouyouWebapp');
 
 
-app.controller('chattingroom', function ($scope, $location, $routeParams) {
+app.controller('chattingroom', function ($scope, $location, $compile, $routeParams) {
 
     var roomName = sessionStorage.getItem("roomName");
     var myDisplayName = '';
@@ -45,30 +45,84 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     };
     // modal to image upload end
 
-    $scope.map = function () {
+    $scope.map = function (type) {
 
-      $location.path("skMap");
-      console.log("map clicked");
-    };
-    var mapChecker = function () {
-      console.log('mapChecker');
-      console.log($routeParams.type);
-      console.log($routeParams.sx);
-      console.log($routeParams.sy);
-    };
-    mapChecker();
-
-    var data = [];
-    addImage =function(photourl, imageUri, ownership){
-/*
-      if (imageUri.startsWith('gs://')) {
-        imgElement.src = FriendlyChat.LOADING_IMAGE_URL; // Display a loading image first.
-        this.storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
-          imgElement.src = metadata.downloadURLs[0];
+      if (type === 'share') {
+        $location.path("googleMap").search({type: 'share', sx: 37.213132, sy: 127.324234234});
+      } else if (type === 'route') {
+        $location.path("googleMap").search({
+          type: 'share',
+          sx: 37.213132,
+          sy: 127.324234234,
+          ex: 38.213132,
+          ey: 127.324234235
         });
       } else {
-        imgElement.src = imageUri;
-      }*/
+        $location.path("googleMap");
+      }
+    };
+
+
+    var send = function (message) {
+
+      console.log(message);
+      console.log('myid' + myid);
+      var messageVal = {};
+      messageVal[myid] = {
+        name: myDisplayName || 'Anonymous',
+        photourl: myPhotoURL || '/youyou/img/profile_placeholder.png',
+        text: message
+      };
+      messagesRef.push(messageVal).then(function () {
+
+        // unchecked 갱신
+        firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);
+        firebase.database().ref("rooms/" + roomName + "/lastMessage").set(message);
+        firebase.database().ref("uncheked/" + target + '/' + roomName).once('value').then(function (count) {
+          firebase.database().ref("uncheked/" + target + '/' + roomName).set(count.val() + 1);
+        });
+
+        setScrollTop();
+
+      }).catch(function (error) {
+        console.error('Error writing new message to Firebase Database', error);
+      });
+    };
+
+    var mapChecker = function () {
+      var type = $routeParams.type;
+      if (type === 'share') {
+
+        var sx = $routeParams.sx;
+        var sy = $routeParams.sy;
+        var message = 'map:///' + type + '|' + sx + '|' + sy;
+        console.log(message);
+        send(message);
+      } else if (type === 'route') {
+        var sx = $routeParams.sx;
+        var sy = $routeParams.sy;
+        var ex = $routeParams.ex;
+        var ey = $routeParams.ey;
+        var message = 'map:///' + type + '|' + sx + '|' + sy + '|' + ex + '|' + ey;
+        console.log(message);
+        send(message);
+      } else {
+
+      }
+    };
+
+
+    var data = [];
+    addImage = function (photourl, imageUri, ownership) {
+      /*
+            if (imageUri.startsWith('gs://')) {
+              imgElement.src = FriendlyChat.LOADING_IMAGE_URL; // Display a loading image first.
+              this.storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
+                imgElement.src = metadata.downloadURLs[0];
+              });
+            } else {
+              imgElement.src = imageUri;
+            }*/
     };
     addText = function (photourl, text, ownership) {
       if (text) {
@@ -105,16 +159,20 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
           var message = snapshot.key;
           var messageVal = snapshot.val();
           var ownership = false;
+          var photo = messageVal['photourl'];
           var imageUri = messageVal['imageuri'];
+          var text = messageVal['text'];
           if (myid === message) {
             ownership = true;
           } else {
             ownership = false;
           }
           if (imageUri) {
-            addImage(messageVal['photourl'], imageUri, ownership);
+            addImage(photo, imageUri, ownership);
+          } else if (text.startsWith('map:///')) {
+            // addText(photo, text, ownership);
           } else {
-            addText(messageVal['photourl'], messageVal['text'], ownership);
+            addText(photo, text, ownership);
           }
         });
       };
@@ -197,14 +255,12 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       }
     };
 
-
     firebase.messaging().onMessage(function (payload) {
       console.log('onMessage : ' + payload);
     });
     // var user = firebase.auth().currentUser;
     var user = sessionStorage.getItem("myid");
     if (user) {
-
       firebase.database().ref("users/" + user).once('value').then(function (userInfo) {
         var userVal = userInfo.val();
         if (userVal) {
@@ -229,5 +285,6 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
       $location.path("login");
     }
+    mapChecker();
   }
 );
