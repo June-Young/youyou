@@ -1,4 +1,5 @@
 var app = angular.module('YouyouWebapp');
+// var app = angular.module('YouyouWebapp');
 
 
 app.controller('RecommendMainController', function ($scope, $location, $http) {
@@ -19,6 +20,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
 
   $scope.tomorrowSky = '/youyou/img/sunny.svg';
   $scope.todaySky = '/youyou/img/sunny.svg';
+
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -48,7 +50,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
     $http(req).then(function (response) {
 
       console.info(response);
-      $scope.myLocation=response.data.weather.summary[0].grid.city + ','+response.data.weather.summary[0].grid.county;
+      $scope.myLocation = response.data.weather.summary[0].grid.city + ',' + response.data.weather.summary[0].grid.county;
       // $scope.humidity = response.data;
 
       var today = weatherTextToImg(response.data.weather.summary[0].today.sky.code);
@@ -66,8 +68,8 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
         $scope.todaySky = '/youyou/img/sunny.svg';
       }
 
-      $scope.todayTemperatureMax = Math.round(response.data.weather.summary[0].today.temperature.tmax)+'℃';
-      $scope.todayTemperatureMin = Math.round(response.data.weather.summary[0].today.temperature.tmin)+'℃';
+      $scope.todayTemperatureMax = Math.round(response.data.weather.summary[0].today.temperature.tmax) + '℃';
+      $scope.todayTemperatureMin = Math.round(response.data.weather.summary[0].today.temperature.tmin) + '℃';
 
       var tomorrow = weatherTextToImg(response.data.weather.summary[0].tomorrow.sky.code);
       if (tomorrow === 'sunny') {
@@ -119,7 +121,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
 
       console.info(response);
       // $scope.humidity = response.data;
-      $scope.temperatureCurrent =  Math.round(response.data.weather.minutely[0].temperature.tc)+'℃';
+      $scope.temperatureCurrent = Math.round(response.data.weather.minutely[0].temperature.tc) + '℃';
       // $scope.weatherInfo = response.data;
     }, function () {
       console.info("hello");
@@ -142,14 +144,14 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
 
       console.info(response.data.weather.dust[0].pm10.value);
       console.info(response.data.weather.dust[0]);
-      var dustValue=response.data.weather.dust[0].pm10.value;
-      var dustState='';
-      if(dustValue > 0 && dustValue <= 30){
-        dustState='GOOD';
-      }else if(dustValue > 30 && dustValue <= 80){
-        dustState='NORMAL';
-      }else if(dustValue > 80 && dustValue <= 300){
-        dustState='POOR';
+      var dustValue = response.data.weather.dust[0].pm10.value;
+      var dustState = '';
+      if (dustValue > 0 && dustValue <= 30) {
+        dustState = 'GOOD';
+      } else if (dustValue > 30 && dustValue <= 80) {
+        dustState = 'NORMAL';
+      } else if (dustValue > 80 && dustValue <= 300) {
+        dustState = 'POOR';
       }
       $scope.dustGrade = dustState
 
@@ -160,4 +162,18 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
   }
 
   getLocation();
+});
+
+app.controller('RecommendContentsController', function ($scope, $location, $http) {
+/*
+  $scope.swiped = function(direction) {
+    alert('Swiped ' + direction);
+
+  };
+  $scope.loading = false;
+*/
+
+});
+app.controller('RecommendDetailController', function ($scope, $location, $http) {
+
 });

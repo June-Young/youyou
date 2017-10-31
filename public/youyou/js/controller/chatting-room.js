@@ -58,6 +58,17 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     mapChecker();
 
     var data = [];
+    addImage =function(photourl, imageUri, ownership){
+/*
+      if (imageUri.startsWith('gs://')) {
+        imgElement.src = FriendlyChat.LOADING_IMAGE_URL; // Display a loading image first.
+        this.storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
+          imgElement.src = metadata.downloadURLs[0];
+        });
+      } else {
+        imgElement.src = imageUri;
+      }*/
+    };
     addText = function (photourl, text, ownership) {
       if (text) {
         var obj = {
@@ -93,12 +104,17 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
           var message = snapshot.key;
           var messageVal = snapshot.val();
           var ownership = false;
+          var imageUri = messageVal['imageuri'];
           if (myid === message) {
             ownership = true;
           } else {
             ownership = false;
           }
-          addText(messageVal['photourl'], messageVal['text'], ownership);
+          if (imageUri) {
+            addImage(messageVal['photourl'], imageUri, ownership);
+          } else {
+            addText(messageVal['photourl'], messageVal['text'], ownership);
+          }
         });
       };
       messagesRef.on('child_added', setMessage);
@@ -112,7 +128,7 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     $scope.sendMessage = function () {
 
       if (checkSignedInWithMessage()) {
-        
+
         var text = $scope.input;
 
         // Clear message text field and SEND button state.

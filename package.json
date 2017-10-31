@@ -80,5 +80,8 @@
     "temp": "0.8.3",
     "wait-on": "1.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-carousel": "^1.1.0",
+    "angular-ui-carousel": "^0.1.10"
+  }
 }

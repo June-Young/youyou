@@ -13,7 +13,53 @@ app.controller('StartController', function ($scope, $location) {
   $scope.signUp = function () {
     $location.path("signup-account");
   }
+ /* $scope.signInGoogle = function () {
 
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function () {
+      console.log('signin google');
+    });
+
+
+  };
+  $scope.signInFacebook = function () {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithRedirect(provider).then(function () {
+      console.log('signin google');
+    });
+  };
+
+
+
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+
+      var uid = user.uid;
+      var userRef = firebase.database().ref('users/' + uid);
+      console.log("login. " + uid);
+      //정보 가져오거나 넣거나해야지
+
+      userRef.once('value').then(function (data) {
+        var info = data.val();
+        if (info) {
+          sessionStorage.setItem("myid", uid);
+          $scope.$apply(function () {
+            $location.path("home");
+          });
+
+          //가입된 유저
+        } else {
+          //신규유저.
+          sessionStorage.setItem("myid", uid);
+          userRef.set({displayName: user.displayName, photoURL: user.photoURL});
+          $scope.$apply(function () {
+            $location.path("nickname");
+          });
+        }
+      });
+    }
+  });*/
 });
 
 app.controller('SignUpController', function ($scope, $location) {
@@ -74,51 +120,6 @@ app.controller('SignInController', function ($scope, $location) {
     });
   };
 
-
-  /*
-    $scope.signInGoogle = function () {
-
-
-      var provider = new firebase.auth.GoogleAuthProvider();
-          firebase.auth().signInWithRedirect(provider).then(function () {
-            console.log('signin google');
-          });
-
-
-    };
-    $scope.signInFacebook = function () {
-       var provider = new firebase.auth.FacebookAuthProvider();
-       firebase.auth().signInWithRedirect(provider).then(function () {
-         console.log('signin google');
-       });
-    };
-  */
-
-
-  /*firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-
-      var uid = user.uid;
-      var userRef = firebase.database().ref('users/' + uid);
-      console.log("login. " + uid);
-      //정보 가져오거나 넣거나해야지
-
-      userRef.once('value').then(function (data) {
-        var info = data.val();
-        if (info) {
-          sessionStorage.setItem("myid", uid);
-          pageChange("home");
-
-          //가입된 유저
-        } else {
-          //신규유저.
-          sessionStorage.setItem("myid", uid);
-          userRef.set({displayName: user.displayName, photoURL: user.photoURL});
-          pageChange("nickname");
-        }
-      });
-    }
-  });*/
 });
 
 app.controller('nickname', function ($scope, $location) {
@@ -377,6 +378,13 @@ app.controller('CountryController', function ($scope, $location) {
 app.controller('LogoutController', function ($scope, $location) {
 
   sessionStorage.removeItem("myid");
+  var unsubscirbe = firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      firebase.auth().signOut();
+    } else {
+    }
+  });
+  unsubscirbe();
 
 });
 app.controller('WelcomeController', function ($scope, $location) {
