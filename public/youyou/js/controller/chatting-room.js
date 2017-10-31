@@ -10,7 +10,7 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
     var target = '';
     var myid = '';
 
-// modal to image upload start
+    // modal to image upload start
     $scope.name = "Select Files to Upload";
     $scope.images = [];
     $scope.display = $scope.images[$scope.images.length - 1];
@@ -29,6 +29,7 @@ app.controller('chattingroom', function ($scope, $location, $routeParams) {
       $scope.images = [];
     };
     $scope.upload = function (obj) {
+      console.log("chatting-room upload");
       var elem = obj.target || obj.srcElement;
       for (i = 0; i < elem.files.length; i++) {
         var file = elem.files[i];
