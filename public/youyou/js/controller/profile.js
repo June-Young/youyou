@@ -57,36 +57,68 @@ app.controller('AgreementController', function ($scope) {
   };
 });
 app.controller('SettingsController', function ($scope, $location) {
+  var status = '';
+  var uid = sessionStorage.getItem("myid");
+  firebase.database().ref('youyou/' + uid).once('value').then(function (youyouData) {
+    if (youyouData.val()) {
+      status = 'YOUYOU';
+      if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+        $scope.switchText = 'Switch to Traveler'
+      } else {
+        $scope.$apply(function () {
+          $scope.switchText = 'Switch to Traveler'
+        });
+      }
+
+    } else {
+      status = 'TRAVELER';
+      if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+        $scope.switchText = 'Switch to YOUYOU'
+      } else {
+        $scope.$apply(function () {
+          $scope.switchText = 'Switch to YOUYOU'
+        });
+      }
+    }
+  });
 
   $scope.switchYouyou = function () {
     //유저 정보 읽는다
     //youyou에 넣는다
-    // var currentUser = firebase.auth().currentUser;
-    var currentUser = sessionStorage.getItem("myid");
-    if (currentUser) {
-      var uid = currentUser;
+    if (status === 'YOUYOU') {
+      if (uid) {
+        firebase.database().ref('youyou/' + uid).remove();
 
-      firebase.database().ref('users/' + uid).once('value').then(function (userData) {
-        var userVal = userData.val();
-
-        var name = userVal.displayName;
-        var photo = userVal.photoURL;
-
-        var obj = {likes: 0, response: 0, nickname: name, photoURL: photo};
-        firebase.database().ref('youyou/' + currentUser).set(obj);
-        $scope.$apply(function () {
-          console.log("switch success");
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
           $location.path("home");
+        } else {
+          $scope.$apply(function () {
+            $location.path("home");
+          });
+        }
+      } else {
+        console.log("로그인 정보가 없습니다..");
+        $scope.$apply(function () {
+          $location.path("login");
         });
-      });
-    } else {
-      console.log("로그인 정보가 없습니다..");
-      $scope.$apply(function () {
-        $location.path("login");
-      });
+      }
+    } else if (status === 'TRAVELER') {
+      if (uid) {
+        firebase.database().ref('youyou/' + uid).set({likes: 0, response: 0});
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+          $location.path("home");
+        }else {
+          $scope.$apply(function () {
+            $location.path("home");
+          });
+        }
+      } else {
+        console.log("로그인 정보가 없습니다..");
+        $scope.$apply(function () {
+          $location.path("login");
+        });
+      }
     }
-
-
   };
   $scope.goback = function () {
     history.back();
