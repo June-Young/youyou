@@ -2,6 +2,7 @@ var app = angular.module('YouyouWebapp');
 
 
 app.controller('YouyouListController', function ($scope, $location) {
+  var database  = firebase.database();
   $scope.clickedFooterHome = function () {
     $location.path("home");
   };
@@ -52,20 +53,25 @@ app.controller('YouyouListController', function ($scope, $location) {
 
   var getYouyouList = function () {
     // 방 정보 가져오기 시작
-    var youyouList = firebase.database().ref('youyou/');
+    var youyouList = database.ref('youyou/');
     // Make sure we remove all previous listeners.
     youyouList.once('value').then(function (users) {
 
       users.forEach(function (snapshot) {
         var obj = snapshot.val();
         var key = snapshot.key;
-        if (obj) {
-          var nickname = obj.nickname || 'Anonymous';
-          var photoURL = obj.photoURL || 'ERROR';
-          var response = obj.response || 0;
-          var likes = obj.likes || 0;
 
-          setData(key, nickname, photoURL, response, likes);
+        if (obj) {
+          database.ref('users/'+key).once('value').then(function(detail){
+            var userVal = detail.val();
+
+            var nickname = userVal.displayName || 'Anonymous';
+            var photoURL = userVal.photoURL || 'ERROR';
+            var response = obj.response || 0;
+            var likes = obj.likes || 0;
+            setData(key, nickname, photoURL, response, likes);
+          });
+
         } else {
           console.error("유유 데이터를 불러오는데 실패했습니다.");
         }
@@ -79,17 +85,25 @@ app.controller('YouyouListController', function ($scope, $location) {
 
 app.controller('YouyouProfileController', function ($scope, $location) {
   var targetId = sessionStorage.getItem("youyou_profile");
-  var youyouList = firebase.database().ref('youyou/' + targetId);
+  var youyouData = firebase.database().ref('youyou/' + targetId);
+  var usersData = firebase.database().ref('users/' + targetId);
   var myid = sessionStorage.getItem("myid");
   // Make sure we remove all previous listeners.
-  youyouList.once('value').then(function (users) {
-
-    var username = (users.val() && users.val().nickname) || 'Anonymous';
+  usersData.once('value').then(function (users) {
+    var username = (users.val() && users.val().displayName) || 'Anonymous';
+    var profilePhoto = (users.val() && users.val().photoURL) || '/youyou/img/profile_placeholder.png';
     console.log(username);
     $scope.$apply(function () {
       $scope.nickname = username;
-
+      $scope.profile = profilePhoto;
     });
+  });
+  youyouData.once('value').then(function (uuData) {
+    if(uuData.val()){
+
+    }else{
+
+    }
   });
   $scope.chatting = function () {
     //대화시작

@@ -314,10 +314,9 @@ app.controller('chattingroom', function ($scope, $location, $compile, $routePara
 
 
   // var user = firebase.auth().currentUser;
-  var user = sessionStorage.getItem("myid");
-  if (user) {
-    myid = user;
-    firebase.database().ref("users/" + user).once('value').then(function (userInfo) {
+  myid = sessionStorage.getItem("myid");
+  if (myid) {
+    firebase.database().ref("users/" + myid).once('value').then(function (userInfo) {
       var userVal = userInfo.val();
       console.log('userval' + userVal);
       if (userVal) {
@@ -334,7 +333,6 @@ app.controller('chattingroom', function ($scope, $location, $compile, $routePara
       firebase.database().ref("uncheked/" + myid + '/' + roomName).set(0);
     } else {
       $scope.$apply(function () {
-        myid = user;
         roomNameParser(myid);
         loadMessage();
       });

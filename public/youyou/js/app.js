@@ -157,4 +157,10 @@ app.config(function ($routeProvider) {
     controller: 'RecommendContentsController',
     reloadOnSearch: false
   });
+  $routeProvider.when('/profile-change', {
+    templateUrl: 'pages/profile_change.html',
+    controller: 'ProfileChangeController',
+    reloadOnSearch: false
+  });
+
 });

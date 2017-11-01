@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 25px;
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #container #header {
+      width: 100%;
+      height: 60px;
+
+      background-color: #fcfcfc;
+      position: absolute;
+      top: 25px;
+    }
+
+    .combined-shape {
+      width: 6.1%;
+      height: 41.8%;
+      font-weight: bold;
+      border-radius: 1.5px;
+      color: #1a395f;
+      font-size: 100%;
+      position: absolute;
+      top: 29.1%;
+      left: 4.1%;
+    }
+
+    .hr-top {
+      width: 100%;
+      height: 1px;
+      z-index: 5;
+
+      background-color: #d8d8d8;
+      position: absolute;
+      top: 85px;
+    }
+
+    #contents {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+      position: absolute;
+      top: 85px;
+    }
+
+    .profile_image {
+
+      width: 70px;
+      height: 70px;
+
+      position: absolute;
+      top: 4.7%;
+      left: 41.4%;
+    }
+
+    .profile {
+      width: 100%;
+      height: 100%;
+    }
+
+    .profile_change_btn {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 65%;
+      left: 55%;
+    }
+
+    .img {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header" class="table">
+
+    <div class="combined-shape" ng-click="goback()">
+      <img src="/youyou/img/back.svg">
+    </div>
+  </div>
+  <div class="hr-top"></div>
+  <div id="contents">
+    <div class="profile_image">
+      <div class="profile" ui-turn-on="modal1"><img class="img" ng-src={{profileImage}}></div>
+      <div class="profile_change_btn" ui-turn-on="modal1"><img ng-src="/youyou/img/change_profile.svg"></div>
+    </div>
+  </div>
+</div>
+<div ui-content-for="modals">
+  <div ng-include="'/youyou/pages/imageLoadModal.html'"></div>
+</div>
+</body>
+</html>
