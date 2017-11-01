@@ -96,7 +96,6 @@ app.controller('ProfileChangeController', function ($scope, $location) {
 
   var myid = sessionStorage.getItem("myid");
   var storage = firebase.storage();
-  $scope.name = "Select Files to Upload";
   $scope.images = [];
   $scope.display = $scope.images[$scope.images.length - 1];
 
@@ -105,12 +104,43 @@ app.controller('ProfileChangeController', function ($scope, $location) {
 
       if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
         $scope.profileImage = userInfo.val().photoURL;
+        $scope.nickname = userInfo.val().displayName;
+        $scope.myid = myid;
       } else {
         $scope.$apply(function () {
           $scope.profileImage = userInfo.val().photoURL;
+          $scope.nickname = userInfo.val().displayName;
+          $scope.myid = myid;
         });
       }
     });
+
+    firebase.database().ref("youyou/" + myid).once('value').then(function (userInfo) {
+      var val = userInfo.val();
+      if (val) {
+        $scope.status = 'Youyou';
+        if (val.backgroundURL) {
+          if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+            $scope.backgroundImg = userInfo.val().backgroundURL;
+          } else {
+            $scope.$apply(function () {
+              $scope.backgroundImg = userInfo.val().backgroundURL;
+            });
+          }
+        } else {
+          if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+            $scope.backgroundImg = '/youyou/img/default-background.jpg';
+          } else {
+            $scope.$apply(function () {
+              $scope.backgroundImg = '/youyou/img/default-background.jpg';
+            });
+          }
+        }
+      } else {
+        $scope.status = 'Traveler';
+      }
+    });
+
 
   } else {
     console.error("인가되지 않은 유저입니다. 로그인 해주세요.");
@@ -140,10 +170,40 @@ app.controller('ProfileChangeController', function ($scope, $location) {
           });
         }
         firebase.database().ref("users/" + myid).update(photoURL);
+
       });
     }
+    $scope.display = '';
+    $scope.images = [];
   };
 
+  $scope.backgroundChangeImage = function () {
+    var path = myid + '/' + 'youyou/' + myid + '.jpg';
+    var storageRef = storage.ref(path);
+
+    console.log("share Image");
+    for (var index = 0; index < $scope.images.length; index++) {
+      var img = $scope.images[index];
+      var image = img.split(',');
+
+      storageRef.putString(image[1], 'base64').then(function (snapshot) {
+        var imageUri = snapshot.downloadURL;
+        console.log('success upload image' + imageUri);
+        var photoURL = {backgroundURL: imageUri};
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+          $scope.backgroundImg = imageUri;
+        } else {
+          $scope.$apply(function () {
+            $scope.backgroundImg = imageUri;
+          });
+        }
+        firebase.database().ref("youyou/" + myid).update(photoURL);
+
+      });
+    }
+    $scope.display = '';
+    $scope.images = [];
+  };
 
   $scope.setImage = function (ix) {
     $scope.display = $scope.images[ix];

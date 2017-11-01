@@ -98,11 +98,27 @@ app.controller('YouyouProfileController', function ($scope, $location) {
       $scope.profile = profilePhoto;
     });
   });
-  youyouData.once('value').then(function (uuData) {
-    if(uuData.val()){
-
-    }else{
-
+  youyouData.once('value').then(function (userInfo) {
+    var val = userInfo.val();
+    if (val) {
+      if (val.backgroundURL) {
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+          $scope.backgroundImg = userInfo.val().backgroundURL;
+        } else {
+          $scope.$apply(function () {
+            $scope.backgroundImg = userInfo.val().backgroundURL;
+          });
+        }
+      } else {
+        if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+          $scope.backgroundImg = '/youyou/img/default-background.jpg';
+        } else {
+          $scope.$apply(function () {
+            $scope.backgroundImg = '/youyou/img/default-background.jpg';
+          });
+        }
+      }
+    } else {
     }
   });
   $scope.chatting = function () {
