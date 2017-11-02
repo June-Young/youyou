@@ -129,6 +129,14 @@
       width: 100%;
       height: 100%;
     }
+    .img{
+      width:100%;
+      height:100%;
+      border-radius: 100%;
+    }
+    .back{
+      width:100%;
+    }
   </style>
 </head>
 <body>
@@ -147,7 +155,7 @@
   <div class="hr-top"></div>
 
   <div id="contents">
-    <div class="profile_image"><img src="/youyou/img/profile_placeholder.png"></div>
+    <div class="profile_image"><img class="img" ng-src="{{profile}}"></div>
     <div class="buttons">
       <div class="chats" ng-click="chatting()">
         <img class="icon" src="/youyou/img/chats.svg">
@@ -160,7 +168,7 @@
       </div>
     </div>
   </div>
-  <div id="photo"></div>
+  <div id="photo"><img class='back' ng-src="{{backgroundImg}}"></div>
 </div>
 
 

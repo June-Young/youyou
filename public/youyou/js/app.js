@@ -161,4 +161,9 @@ app.config(function ($routeProvider) {
     templateUrl: 'pages/youyouPolicy.html',
     reloadOnSearch: false
   });
+  $routeProvider.when('/profile-change', {
+    templateUrl: 'pages/profile_change.html',
+    controller: 'ProfileChangeController',
+    reloadOnSearch: false
+  });
 });

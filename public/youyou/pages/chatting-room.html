@@ -235,7 +235,6 @@
   </div>
   <div class="hr-top"></div>
   <div id="messages">
-
     <div>
       <div ng-repeat="record in records">
         <div id="message" style="margin-top:10px;/*position:relative;*/">
@@ -244,10 +243,9 @@
             <div ng-switch-when="true">
               <div class="my-message">
                 <div class="triangle_my"></div>
-                <p class="ninepatch-my">
-                  <!--<a class="disabled" href='/googleMap/' id="message-link">-->
+                <p class="ninepatch-my" id="{{record.map}}" ng-click="clickMap($event)">
+                  <img ng-src="{{record.imageuri}}" style="display:block;width:100%;height:10%;">
                   {{record.text}}
-                  <!--</a>-->
                 </p>
               </div>
             </div>
@@ -255,7 +253,10 @@
               <div class="target-message">
                 <img ng-src="{{record.photourl}}" class="float target-profile">
                 <div class="triangle_target"></div>
-                <p class="ninepatch-target">{{record.text}}</p>
+                <p class="ninepatch-target">
+                  <img ng-src="{{record.imageuri}}" style="display:block;width:100%;height:10%;">
+                  {{record.text}}
+                </p>
                 <!--15글자..-->
               </div>
             </div>
