@@ -157,4 +157,8 @@ app.config(function ($routeProvider) {
     controller: 'RecommendContentsController',
     reloadOnSearch: false
   });
+  $routeProvider.when('/policy', {
+    templateUrl: 'pages/youyouPolicy.html',
+    reloadOnSearch: false
+  });
 });
