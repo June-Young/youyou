@@ -137,6 +137,11 @@ app.config(function ($routeProvider) {
     reloadOnSearch: false
   });
   $routeProvider.when('/test', {templateUrl: 'pages/test.html', controller: 'TestController', reloadOnSearch: false});
+  $routeProvider.when('/', {
+    templateUrl: 'pages/login_main.html',
+    controller: 'StartController',
+    reloadOnSearch: false
+  });
   $routeProvider.when('/login', {
     templateUrl: 'pages/login_main.html',
     controller: 'StartController',
@@ -166,4 +171,5 @@ app.config(function ($routeProvider) {
     controller: 'ProfileChangeController',
     reloadOnSearch: false
   });
+
 });
