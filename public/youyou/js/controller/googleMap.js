@@ -8,7 +8,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
     // floating button status
     $scope.floatingLocationStatus = false;
     $scope.floatingRouteStatus = false;
-    $scope.uluru = {lat: 37.4286715, lng: 127.13100399999998};
+    $scope.uluru = {lat: 37.498014271137265, lng: 127.02761650085449};
     $scope.directionsService = new google.maps.DirectionsService;
     $scope.directionsDisplay = new google.maps.DirectionsRenderer;
 
@@ -26,7 +26,7 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
   }
 
   function calculateAndDisplayRoute(start, end) {
-    console.log("start : " + start + " , " + "end : " + end);
+    // console.log("start : " + start + " , " + "end : " + end);
     $scope.directionsService.route({
       origin: start,
       destination: end,
@@ -35,29 +35,40 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
       if (status === 'OK') {
         $scope.directionsDisplay.setDirections(response);
       } else {
-        console.log("calculate FAIL : " + status);
+        // console.log("calculate FAIL : " + status);
       }
     });
   }
 
   function initializeWithShare(lat, lng) {
-    // ?type=share&sx=37.213132&sy=127.324234234
-    makeMarker({lat: lat, lng: lng});
+    // ?type=share&sx=37.43772510919332&sy=127.12713718414307
+    // 37., 127.
+    // console.log("lat = " + Number(lat) + " ,lng " + Number(lng));
+    makeMarker({lat: Number(lat), lng: Number(lng)});
+    $scope.map.setCenter({lat: Number(lat), lng: Number(lng)}, 16);
+    $scope.startLonLat = {lat: Number(lat), lng: Number(lng)};
+    showPositionShareButton();
   }
 
   function initializeWithRoute(startLat, startLng, endLat, endLng) {
     // ?type=route&sx=37.213132&sy=127.324234234&ex=37.1123123&ey=127.5647488
-    calculateAndDisplayRoute({lat: startLat, lng: startLng}, {lat: endLat, lng: endLng});
+    // ?type=route&sx=37.213132&sy=127.324234234&ex=37.1123123&ey=127.5647488
+    // route|127.13230848312378|37.43053485291865|127.13127851486206|37.43082452114461
+    calculateAndDisplayRoute({lat: Number(startLat), lng: Number(startLng)}, {
+      lat: Number(endLat),
+      lng: Number(endLng)
+    });
+    $scope.map.setCenter({lat: Number(startLat), lng: Number(startLng)}, 16);
   }
 
   function getParameters() {
     var urlParams = $location.search();
 
-    console.log("getParameters => type :  " + urlParams.type +
-      " , sx : " + urlParams.sx + " , " +
-      " , sy : " + urlParams.sy + " , " +
-      " , ex : " + urlParams.ex + " , " +
-      " , ey : " + urlParams.ey + " , ");
+    // console.log("getParameters => type :  " + urlParams.type +
+    //   " , sx : " + urlParams.sx + " , " +
+    //   " , sy : " + urlParams.sy + " , " +
+    //   " , ex : " + urlParams.ex + " , " +
+    //   " , ey : " + urlParams.ey + " , ");
 
     if (!urlParams.type) {
       // console.log("null");
@@ -79,25 +90,27 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
   function processLocation(position) {
     $scope.isReserving = false;
     $scope.myPostion = {lat: position.coords.latitude, lng: position.coords.longitude};
-    console.log("myLocation = " + $scope.myPostion.lng + ' , ' + $scope.myPostion.lat);
-    $scope.map.setCenter($scope.myPostion);
-    newMarker($scope.myPostion);
+    // console.log("myPosition = " + $scope.myPostion);
+  }
+
+  function showPositionShareButton() {
+    $scope.posCount = 1;
+    if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+      $scope.floatingLocationStatus = true;
+    } else {
+      $scope.$apply(function () {
+        $scope.floatingLocationStatus = true;
+      });
+    }
   }
 
   function makeMarker(lonlat) {
 
-    console.log("makeMarker : " + lonlat + " " + lonlat.toString() + " = " + $scope.posCount);
+    // console.log("makeMarker : " + lonlat);
+
     if ($scope.posCount == 0) {
       $scope.startLonLat = lonlat;
-      $scope.posCount = 1;
-      if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
-        $scope.floatingLocationStatus = true;
-      } else {
-        $scope.$apply(function () {
-          $scope.floatingLocationStatus = true;
-        });
-      }
-      $scope.floatingLocationPosition = 10;
+      showPositionShareButton();
     } else if ($scope.posCount == 1) {
       $scope.endLonLat = lonlat;
       if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
@@ -128,35 +141,36 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
 
   function setMapTouchEvent() {
     $scope.map.addListener('click', function (e) {
-      console.log("onclick => " + e.latLng);
-      makeMarker(e.latLng);
+      // console.log("onclick => " + e.latLng);
+      makeMarker({lat: e.latLng.lat() , lng : e.latLng.lng()});
     });
   }
 
   $scope.shareRoute = function () {
-    console.log("start : " + $scope.startLonLat.toString() + " , end : " + $scope.endLonLat);
-
+    // console.log("start : " + $scope.startLonLat.lat + " , " + $scope.startLonLat.lng + " , end : " + $scope.endLonLat);
     $location.path("chattingroom").search({
       type: 'route',
-      sx: $scope.startLonLat.lng(),
-      sy: $scope.startLonLat.lat(),
-      ex: $scope.endLonLat.lng(),
-      ey: $scope.endLonLat.lat()
+      sx: $scope.startLonLat.lat,
+      sy: $scope.startLonLat.lng,
+      ex: $scope.endLonLat.lat,
+      ey: $scope.endLonLat.lng
     });
   }
   $scope.shareLocation = function () {
-    console.log("start : " + $scope.startLonLat.toString());
-    $location.path("chattingroom").search({type: "share", sx: $scope.startLonLat.lng(), sy: $scope.startLonLat.lat()});
+    // console.log("start : " + $scope.startLonLat.lat + " , " + $scope.startLonLat.lng);
+    $location.path("chattingroom").search({type: "share", sx: $scope.startLonLat.lat, sy: $scope.startLonLat.lng});
   }
 
-  function setPositionWithMarker() {
-    console.log("setPosition");
+  function setMyPositionWithMarker() {
+    // console.log("setPosition");
     newMarker($scope.myPostion);
     $scope.map.setCenter($scope.myPostion, 16);
+    $scope.startLonLat = $scope.myPostion;
+    showPositionShareButton();
   }
 
   $scope.searchByText = function () {
-    console.log("searchText " + $scope.searchText);
+    // console.log("searchText " + $scope.searchText);
 
     var query = {
       location: $scope.myPostion,
@@ -173,15 +187,14 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
           createMarker(results[i]);
         }
       } else {
-        console.log("status : " + status);
+        // console.log("status : " + status);
       }
     }
   }
 
   function createMarker(place) {
     var placeLoc = place.geometry.location;
-    console.log("Name : " + place.name + " , placeLoc : " + placeLoc);
-
+    // console.log("Name : " + place.name + " , placeLoc : " + placeLoc);
 
     var image = '/youyou/img/like-b.svg';
     var marker = new google.maps.Marker({
@@ -199,13 +212,13 @@ angular.module('YouyouWebapp').controller('GoogleMapController', function ($scop
   initialize();
 
   $scope.touchClick = function (evt) {
-    console.log("touchClick invoke : " + evt);
+    // console.log("touchClick invoke : " + evt);
     if (evt == "location") {
       $scope.shareLocation();
     } else if (evt == "route") {
       $scope.shareRoute();
     } else if (evt == "myPosition") {
-      setPositionWithMarker();
+      setMyPositionWithMarker();
     }
   };
 });

@@ -137,6 +137,11 @@ app.config(function ($routeProvider) {
     reloadOnSearch: false
   });
   $routeProvider.when('/test', {templateUrl: 'pages/test.html', controller: 'TestController', reloadOnSearch: false});
+  $routeProvider.when('/', {
+    templateUrl: 'pages/login_main.html',
+    controller: 'StartController',
+    reloadOnSearch: false
+  });
   $routeProvider.when('/login', {
     templateUrl: 'pages/login_main.html',
     controller: 'StartController',
@@ -160,6 +165,10 @@ app.config(function ($routeProvider) {
   $routeProvider.when('/recommend-seoul', {
     templateUrl: 'pages/recommend_seoul.html',
     controller: 'RecommendSeoulController',
+    reloadOnSearch: false
+  });
+  $routeProvider.when('/policy', {
+    templateUrl: 'pages/youyouPolicy.html',
     reloadOnSearch: false
   });
   $routeProvider.when('/profile-change', {
