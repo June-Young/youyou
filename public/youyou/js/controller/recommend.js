@@ -23,14 +23,19 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
 
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      var options = { enableHighAccuracy: true };
+      navigator.geolocation.getCurrentPosition(showPosition,locationError,options);
     } else {
       // x.innerHTML = "Geolocation is not supported by this browser.";
+      console.log("ERROR : Geolocation is not supported by this browser")
     }
+  }
+  function locationError(error) {
+    console.log("ERROR : " + error)
   }
 
   function showPosition(position) {
-
+    console.log("latitude : " + position.coords.latitude + " , longtitude : " + position.coords.longitude);
     getWeatherInfo(position.coords.longitude, position.coords.latitude);
     getDustInfo(position.coords.longitude, position.coords.latitude);
     getCurrentWeather(position.coords.longitude, position.coords.latitude);
@@ -86,7 +91,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
         $scope.tomorrowSky = '/youyou/img/sunny.svg';
       }
     }, function () {
-      console.info("hello");
+      console.info("exception");
     });
   }
 
@@ -124,7 +129,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
       $scope.temperatureCurrent = Math.round(response.data.weather.minutely[0].temperature.tc) + '℃';
       // $scope.weatherInfo = response.data;
     }, function () {
-      console.info("hello");
+      console.info("exception");
     });
   }
 
@@ -157,7 +162,7 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
 
       // 0~30: 좋음, 31~80: 보통, 81~120: 약간나쁨, 121~200: 나쁨, 201~300: 매우나쁨
     }, function () {
-      console.info("hello");
+      console.info("exception");
     });
   }
 
