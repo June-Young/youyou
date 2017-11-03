@@ -31,8 +31,21 @@
 			"youyou":{
 				".read":true,
 				".write":true
-			}
+			},
+        "seoul_attract":{
+          ".read":true,
+				".write":true
+        },
+        "seoul_culture":{
+          ".read":true,
+				".write":true
+        },
+        "seoul_shopping":{
+          ".read":true,
+				".write":true
+        }
 	}
 }
+
 
 

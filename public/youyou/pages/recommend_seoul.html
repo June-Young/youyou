@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #header {
+      width: 100%;
+      height: 40%;
+      position: absolute;
+      top: 3.8%;
+    }
+    .title {
+      position: absolute;
+      top: 6%;
+      left: 40%;
+      font-family: Roboto;
+      font-weight: 500;
+      font-size: 200%;
+      text-align: center;
+      color: #ffffff;
+    }
+    #contents {
+      height:56.2%;
+      position: absolute;
+      top: 43.8%;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    .img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+
+    .contents {
+      width: 100px;
+      height: 140px;
+      float: left;
+      margin-left:10px;
+      margin-right:10px;
+    }
+
+    .imgs {
+      overflow-x: auto;
+      width: 92%;
+      margin-left:10px;
+      margin-right:10px;
+    }
+
+    .wrapper {
+      overflow: hidden;
+      width: 3400px;
+    }
+    .text_name{
+      font-family: Roboto;
+      font-size: 14px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      word-wrap:normal;
+      color: #000000;
+    }
+    .text_detail{
+      font-family: Roboto;
+      text-align: center;
+      font-size: 8px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      word-wrap:normal;
+      color: #9b9b9b;
+    }
+
+    .text_align_center{
+      text-align: center;
+    }
+    .head_text{
+      font-family: Roboto;
+      font-size: 12px;
+      text-align: left;
+      color: #9b9b9b;
+      margin-left:10px
+    }
+    .head{
+      width:100%;
+      float:none;
+      height:50px;
+      margin-top:20px;
+    }
+    .contents_top{
+      margin-left:20px;
+      margin-bottom:10px;
+      font-family: Roboto;
+      font-size: 16px;
+      text-align: left;
+      color: #000000;
+    }
+    .contents_contain{
+      height:180px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header">
+    <img ng-src="{{backImg}}">
+    <div class="title">{{city}}</div>
+  </div>
+
+  <div id="contents">
+
+
+    <div class="head">
+      <div class="float head_text">Tourist Attractions</div>
+      <div class="float head_text">Caltural Facilities</div>
+      <div class="float head_text">Shopping</div>
+    </div>
+
+  <!--  <div class="contents_contain">
+      <div class="contents_top">Tourist Attractions</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in attractions">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.title}}</div>
+            <div class="text_align_center text_detail">{{record.addr}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Caltural Facilities</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in records">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.name}}</div>
+            <div class="text_align_center text_detail">{{record.detail}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Shopping</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in records">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.name}}</div>
+            <div class="text_align_center text_detail">{{record.detail}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+-->
+    <div class="contents_contain">
+      <div class="contents_top">Tourist Attractions</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="http://tong.visitkorea.or.kr/cms/resource/72/2363672_image2_1.jpg">
+            <div class="text_align_center text_name">Bukchon Hanok Village (북촌한옥마을)</div>
+            <div class="text_align_center text_detail">37, Gyedong-gil, Jongno-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="http://tong.visitkorea.or.kr/cms/resource/40/1568040_image2_1.jpg">
+            <div class="text_align_center text_name">Gyeongbokgung Palace (경복궁)</div>
+            <div class="text_align_center text_detail">161, Sajik-ro, Jongno-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="http://tong.visitkorea.or.kr/cms/resource/03/1987703_image2_1.jpg">
+            <div class="text_align_center text_name">Myeong-dong (명동)</div>
+            <div class="text_align_center text_detail">Myeongdong-gil, Jung-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="http://tong.visitkorea.or.kr/cms/resource/62/2363662_image2_1.jpg">
+            <div class="text_align_center text_name">Insa-dong (인사동)</div>
+            <div class="text_align_center text_detail">62, Insadong-gil, Jongno-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="http://tong.visitkorea.or.kr/cms/resource/30/2477030_image2_1.jpg">
+            <div class="text_align_center text_name">Namsan Seoul Tower (남산서울타워)</div>
+            <div class="text_align_center text_detail">105, Namsangongwon-gil, Yongsan-gu, Seoul</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Caltural Facilities</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fbukchon_museum_old_fragrance.jpg?alt=media&token=3959de73-90a8-433b-9525-bde7745e7056">
+            <div class="text_align_center text_name">Bukchon Museum Old Fragrance (북촌생활사박물관)</div>
+            <div class="text_align_center text_detail">37, Gyedong-gil, Jongno-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fcheonggyecheon_museum.jpg?alt=media&token=50ccfeb4-8441-40e3-aa0a-7003febee0ba">
+            <div class="text_align_center text_name">Cheonggyecheon Museum (청계천박물관)</div>
+            <div class="text_align_center text_detail">530, Cheonggyecheon-ro, Seongdong-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fewha_womans_university_museum.jpg?alt=media&token=a43caba8-544f-4202-80d1-5c9a8c7d184c">
+            <div class="text_align_center text_name">Ewha Womans University Museum (이화여자대학교박물관)</div>
+            <div class="text_align_center text_detail">52, Ewhayeodae-gil, Seodaemun-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2F63_art.jpg?alt=media&token=7c8d8e1e-ff02-4585-ba4c-a0260684b58f">
+            <div class="text_align_center text_name">63 Art (63 아트)</div>
+            <div class="text_align_center text_detail">50, 63-ro, Yeongdeungpo-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fchungmu_art_center.jpg?alt=media&token=9877f2a5-c7e5-425b-b3df-a9d62342d6bf">
+            <div class="text_align_center text_name">Chungmu Art Center (충무아트센터)</div>
+            <div class="text_align_center text_detail">387, Toegye-ro, Jung-gu, Seoul</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Shopping</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Flotte_world_shopping_mall.jpg?alt=media&token=e3472759-7bbc-4194-ac1a-39fd3a2f2a74">
+            <div class="text_align_center text_name">Lotte World Shopping Mall (롯데월드 쇼핑몰)</div>
+            <div class="text_align_center text_detail">240, Olympic-ro, Songpa-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fgwangjang_market.jpg?alt=media&token=13374d67-ade8-432f-8046-d5bfd3f918f3">
+            <div class="text_align_center text_name">Gwangjang Market (광장시장)</div>
+            <div class="text_align_center text_detail">88, Changgyeonggung-ro, Jongno-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fnamdaemun_market.PNG?alt=media&token=d0036ae3-5281-4b3c-bc73-aabebe0be2b1">
+            <div class="text_align_center text_name">Namdaemun Market (남대문시장)</div>
+            <div class="text_align_center text_detail">21, Namdaemunsijang 4-gil, Jung-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fa_land_myeongdong_branch.jpg?alt=media&token=47cc1af5-c4a1-4881-a01c-f6c9696aca90">
+            <div class="text_align_center text_name">A-land - Myeongdong Branch) (에이랜드 (ÅLAND) 명동본점)</div>
+            <div class="text_align_center text_detail">30, Myeongdong 6-gil, Jung-gu, Seoul</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/seoul%2Fshinsegae_department_store_main_branch.jpg?alt=media&token=8b17d01a-514d-4da8-93a8-43aa5743672f">
+            <div class="text_align_center text_name">Shinsegae Department Store - Main Branch (신세계백화점 (본점))</div>
+            <div class="text_align_center text_detail">63, Sogong-ro, Jung-gu, Seoul</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

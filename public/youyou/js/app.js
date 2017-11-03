@@ -152,9 +152,14 @@ app.config(function ($routeProvider) {
     controller: 'RecommendListController',
     reloadOnSearch: false
   });
-  $routeProvider.when('/recommend-contents', {
-    templateUrl: 'pages/recommend_contents.html',
-    controller: 'RecommendContentsController',
+  $routeProvider.when('/recommend-jeju', {
+    templateUrl: 'pages/recommend_jeju.html',
+    controller: 'RecommendJejuController',
+    reloadOnSearch: false
+  });
+  $routeProvider.when('/recommend-seoul', {
+    templateUrl: 'pages/recommend_seoul.html',
+    controller: 'RecommendSeoulController',
     reloadOnSearch: false
   });
   $routeProvider.when('/profile-change', {
@@ -162,5 +167,4 @@ app.config(function ($routeProvider) {
     controller: 'ProfileChangeController',
     reloadOnSearch: false
   });
-
 });

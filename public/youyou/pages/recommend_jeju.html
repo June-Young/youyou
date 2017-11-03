@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Youyou</title>
+  <link rel="stylesheet" type="text/css" href="/youyou/css/common.css">
+
+  <style>
+    #container {
+      min-height: 100%;
+      background-color: #ffffff;
+    }
+
+    #container #top {
+      width: 100%;
+      height: 3.8%;
+
+      position: absolute;
+      background-color: #78aef9;
+    }
+
+    #header {
+      width: 100%;
+      height: 40%;
+      position: absolute;
+      top: 3.8%;
+    }
+    .title {
+      position: absolute;
+      top: 6%;
+      left: 40%;
+      font-family: Roboto;
+      font-weight: 500;
+      font-size: 200%;
+      text-align: center;
+      color: #ffffff;
+    }
+    #contents {
+      height:56.2%;
+      position: absolute;
+      top: 43.8%;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    .img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+
+    .contents {
+      width: 100px;
+      height: 140px;
+      float: left;
+      margin-left:10px;
+      margin-right:10px;
+    }
+
+    .imgs {
+      overflow-x: auto;
+      width: 92%;
+      margin-left:10px;
+      margin-right:10px;
+    }
+
+    .wrapper {
+      overflow: hidden;
+      width: 3400px;
+    }
+    .text_name{
+      font-family: Roboto;
+      font-size: 14px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      word-wrap:normal;
+      color: #000000;
+    }
+    .text_detail{
+      font-family: Roboto;
+      text-align: center;
+      font-size: 8px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      word-wrap:normal;
+      color: #9b9b9b;
+    }
+
+    .text_align_center{
+      text-align: center;
+    }
+    .head_text{
+      font-family: Roboto;
+      font-size: 12px;
+      text-align: left;
+      color: #9b9b9b;
+      margin-left:10px
+    }
+    .head{
+      width:100%;
+      float:none;
+      height:50px;
+      margin-top:20px;
+    }
+    .contents_top{
+      margin-left:20px;
+      margin-bottom:10px;
+      font-family: Roboto;
+      font-size: 16px;
+      text-align: left;
+      color: #000000;
+    }
+    .contents_contain{
+      height:180px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div id="top">
+  </div>
+  <div id="header">
+    <img ng-src="{{backImg}}">
+    <div class="title">{{city}}</div>
+  </div>
+
+  <div id="contents">
+
+
+    <div class="head">
+      <div class="float head_text">Tourist Attractions</div>
+      <div class="float head_text">Caltural Facilities</div>
+      <div class="float head_text">Shopping</div>
+    </div>
+
+  <!--  <div class="contents_contain">
+      <div class="contents_top">Tourist Attractions</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in attractions">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.title}}</div>
+            <div class="text_align_center text_detail">{{record.addr}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Caltural Facilities</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in records">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.name}}</div>
+            <div class="text_align_center text_detail">{{record.detail}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Shopping</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents" ng-repeat="record in records">
+            <img class="img" ng-src="{{record.img}}">
+            <div class="text_align_center text_name">{{record.name}}</div>
+            <div class="text_align_center text_detail">{{record.detail}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+-->
+    <div class="contents_contain">
+      <div class="contents_top">Tourist Attractions</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Finnisfree_jeju_house.jpg?alt=media&token=6c9d5419-40cc-42bf-9f59-93fef1c80c01">
+            <div class="text_align_center text_name">Innisfree Jeju House  (이니스프리 제주하우스)</div>
+            <div class="text_align_center text_detail">425, Sinhwayeoksa-ro, Andeok-myeon, Seogwipo-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fhyeopjae_beach.jpg?alt=media&token=c0164e4a-f4c1-4d8f-88dd-a5f0ec15e7ff">
+            <div class="text_align_center text_name">Hyeopjae Beach (협재해변)</div>
+            <div class="text_align_center text_detail">329-10, Hallim-ro, Jeju-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fbaengnokdam_lake.jpg?alt=media&token=e02454a8-7796-48c1-b526-8de040be9344">
+            <div class="text_align_center text_name">Baengnokdam Lake (한라산 백록담)</div>
+            <div class="text_align_center text_detail">Topyeong-dong, Seogwipo-si, Jejudo</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fyongnuni_oreum.jpg?alt=media&token=06d26204-2f32-4962-adf5-dbfbc83a4014">
+            <div class="text_align_center text_name">Yongnuni Oreum (용눈이오름)</div>
+            <div class="text_align_center text_detail">Jongdallon-gil, Jeju-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fmanjanggul_cave.jpg?alt=media&token=11789174-e6f1-441d-b1c8-bd6eac44cc4a">
+            <div class="text_align_center text_name">Manjanggul Cave [UNESCO World Heritage] (만장굴 [유네스코 세계자연유산])</div>
+            <div class="text_align_center text_detail">182, Manjanggul-gil, Jeju-si, Jeju-do</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Caltural Facilities</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Flee_jung-seob_gallery.jpg?alt=media&token=ff479b83-6349-4d54-8d77-e08bd0933112">
+            <div class="text_align_center text_name">Lee Jung-seob Gallery (이중섭 미술관)</div>
+            <div class="text_align_center text_detail">27-3, Ijungseop-ro, Seogwipo-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fhello_kitty_island.jpg?alt=media&token=98dd7e08-bee5-443b-9318-7e0f9cc0544b">
+            <div class="text_align_center text_name">Hello Kitty Island (헬로키티아일랜드)</div>
+            <div class="text_align_center text_detail">340, Hanchang-ro, Andeok-myeon, Seogwipo-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fjeju_museum_of_art.jpg?alt=media&token=47c50281-e575-4fe8-87b1-5c1664128b6b">
+            <div class="text_align_center text_name">Jeju Museum of Art (제주도립미술관)</div>
+            <div class="text_align_center text_detail">2894-78, 1100-ro, Jeju-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fteddy_bear_museum.jpg?alt=media&token=7da22e76-95e5-461f-b928-4f40722de5ae">
+            <div class="text_align_center text_name">Teddy Bear Museum (제주 테디베어뮤지엄)</div>
+            <div class="text_align_center text_detail">31, Jungmungwangwang-ro110beon-gil, Seogwipo-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fjeju_folklore%26natura_history_museum.jpg?alt=media&token=6ab22bda-245d-45ff-895f-125a68a08c65">
+            <div class="text_align_center text_name">Jeju Folklore & Natural History Museum (제주도민속자연사박물관)</div>
+            <div class="text_align_center text_detail">40, Samseong-ro, Jeju-si, Jeju-do</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents_contain">
+      <div class="contents_top">Shopping</div>
+      <div class="imgs">
+        <div class="wrapper">
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fjeju_dongmun_traditional_market.jpg?alt=media&token=c1ad56dc-8e2b-44ac-aa47-faeebb0076c6">
+            <div class="text_align_center text_name">Jeju Dongmun Traditional Market (동문재래시장)</div>
+            <div class="text_align_center text_detail">20, Gwandeok-ro 14-gil, Jeju-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fjeju_local_produce_display_and_sales%20_market.jpg?alt=media&token=577086bd-915e-4d6c-aaf1-aa201a439dfa">
+            <div class="text_align_center text_name">Jeju Local Produce Display and Sales Market (제주 특산품전시판매장)</div>
+            <div class="text_align_center text_detail">473, Yeonsam-ro, Jeju-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fjeju_tourism_organization_duty_freeshop.jpg?alt=media&token=ad5ff25e-7732-4709-a375-287371e0b1bc">
+            <div class="text_align_center text_name">Jeju Tourism Organization Duty Free Shop (제주관광공사 지정면세점)</div>
+            <div class="text_align_center text_detail">1F, International Convention Center Jeju, 2700, Jungmun-dong, Seogwipo-si Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Fseogwipo_maeil_olle_market.jpg?alt=media&token=b4179fe6-77a4-484e-805b-379e7fe15d7c">
+            <div class="text_align_center text_name">Seogwipo Maeil Olle Market (서귀포매일 올레시장)</div>
+            <div class="text_align_center text_detail">22, Jungjeong-ro73beon-gil, Seogwipo-si, Jeju-do</div>
+          </div>
+          <div class="contents">
+            <img class="img" ng-src="https://firebasestorage.googleapis.com/v0/b/youyou-2e8cf.appspot.com/o/jeju%2Finnisfree_jeju_house.jpg?alt=media&token=6c9d5419-40cc-42bf-9f59-93fef1c80c01">
+            <div class="text_align_center text_name">Innisfree Jeju House (이니스프리 제주 하우스)</div>
+            <div class="text_align_center text_detail">425, Sinhwayeoksa-ro, Andeok-myeon, Seogwipo-si, Jeju-do</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

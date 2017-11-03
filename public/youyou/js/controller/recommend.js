@@ -17,7 +17,12 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
     $location.path("profile");
   };
 
-
+  $scope.clickSeoul = function () {
+    $location.path("recommend-seoul");
+  };
+  $scope.clickJeju = function () {
+    $location.path("recommend-jeju");
+  };
   $scope.tomorrowSky = '/youyou/img/sunny.svg';
   $scope.todaySky = '/youyou/img/sunny.svg';
 
@@ -164,15 +169,75 @@ app.controller('RecommendMainController', function ($scope, $location, $http) {
   getLocation();
 });
 
-app.controller('RecommendContentsController', function ($scope, $location, $http) {
-/*
-  $scope.swiped = function(direction) {
-    alert('Swiped ' + direction);
+app.controller('RecommendSeoulController', function ($scope, $location) {
+  var data=[];
+  $scope.city = 'SEOUL';
+  $scope.backImg = '/youyou/img/seoul.jpg';
+ /* if(place && place === 'seoul'){
+    $scope.city = 'SEOUL';
+    $scope.backImg = '/youyou/img/seoul.jpg';
+    firebase.database().ref('seoul_attract').once('value').then(function (attractions) {
+      attractions.val().forEach(function (snapshot) {
+        var img;
+        if(snapshot.image){
+          img=snapshot.image;
+        }else{
+          img=snapshot.firstimage;
+        }
+        var obj = {
+          title: snapshot.title,
+          img: snapshot.firstimage,
+          addr: snapshot.addr1,
+        };
+        data.push(obj);
+      });
+    });
+    console.log(data);
 
-  };
-  $scope.loading = false;
-*/
+    if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+      $scope.attractions = data;
+    } else {
+      $scope.$apply(function () {
+        $scope.attractions = data;
+      });
+    }
 
+  }*/
+});
+app.controller('RecommendJejuController', function ($scope, $location) {
+  var data=[];
+  $scope.city = 'JEJU';
+  $scope.backImg = '/youyou/img/jeju.jpg';
+  /* if(place && place === 'seoul'){
+     $scope.city = 'SEOUL';
+     $scope.backImg = '/youyou/img/seoul.jpg';
+     firebase.database().ref('seoul_attract').once('value').then(function (attractions) {
+       attractions.val().forEach(function (snapshot) {
+         var img;
+         if(snapshot.image){
+           img=snapshot.image;
+         }else{
+           img=snapshot.firstimage;
+         }
+         var obj = {
+           title: snapshot.title,
+           img: snapshot.firstimage,
+           addr: snapshot.addr1,
+         };
+         data.push(obj);
+       });
+     });
+     console.log(data);
+
+     if ($scope.$$phase == '$apply' || $scope.$$phase == '$digest') {
+       $scope.attractions = data;
+     } else {
+       $scope.$apply(function () {
+         $scope.attractions = data;
+       });
+     }
+
+   }*/
 });
 app.controller('RecommendDetailController', function ($scope, $location, $http) {
 

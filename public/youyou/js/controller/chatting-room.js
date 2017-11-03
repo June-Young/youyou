@@ -62,30 +62,33 @@ app.controller('chattingroom', function ($scope, $location, $compile, $routePara
     var fullLink = event.target.id;
     console.log(event.target.id);
 
-    var protocol = fullLink.split(":///");
-    console.log(protocol);
-    var data = protocol[1].split("|");
-    var type = data[0];
-    if (type === 'share') {
-      if (data.length === 3) {
-        $location.path("googleMap").search({type: type, sx: data[1], sy: data[2]});
+    if (fullLink) {
+
+      var protocol = fullLink.split(":///");
+      console.log(protocol);
+      var data = protocol[1].split("|");
+      var type = data[0];
+      if (type === 'share') {
+        if (data.length === 3) {
+          $location.path("googleMap").search({type: type, sx: data[1], sy: data[2]});
+        } else {
+          console.error("파라미터가 부족합니다." + data.length);
+        }
+      } else if (type === 'route') {
+        if (data.length === 5) {
+          $location.path("googleMap").search({
+            type: type,
+            sx: data[1],
+            sy: data[2],
+            ex: data[3],
+            ey: data[4]
+          });
+        } else {
+          console.error("파라미터가 부족합니다." + data.length);
+        }
       } else {
-        console.error("파라미터가 부족합니다." + data.length);
+        $location.path("googleMap");
       }
-    } else if (type === 'route') {
-      if (data.length === 5) {
-        $location.path("googleMap").search({
-          type: type,
-          sx: data[1],
-          sy: data[2],
-          ex: data[3],
-          ey: data[4]
-        });
-      } else {
-        console.error("파라미터가 부족합니다." + data.length);
-      }
-    } else {
-      $location.path("googleMap");
     }
   };
   $scope.map = function () {
